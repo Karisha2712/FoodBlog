@@ -1,10 +1,10 @@
 ## Roles in project
 ### Unauthorised user
 - Search posts by filters
-- Search blogers by nickname
+- Search bloggers by nickname
 - Sign in
 - Sign up
-### Bloger
+### Blogger
 - Edit personal information
 - Make new post
 - Delete his own post
@@ -13,14 +13,14 @@
 - Delete his own comment
 - Delete any comment under his own post
 - Search posts by filters
-- Search blogers by nickname
+- Search bloggers by nickname
 - Log out
 ### Admin
 - Block/Unblock user
 - Delete any post
 - Delete any comment
 - Search posts by filters
-- Search blogers by nickname
+- Search bloggers by nickname
 - Log out
 
 ## DataBase Scheme
