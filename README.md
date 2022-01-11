@@ -28,3 +28,7 @@
 - Search posts by filters
 - Search blogers by nickname
 - Log out
+
+
+#DataBase Scheme
+![img](dbscheme.png)
