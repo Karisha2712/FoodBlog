@@ -1,6 +1,6 @@
 package edu.radyuk.foodblog.entity;
 
-public class AbstractEntity {
+public abstract class AbstractEntity {
     private long entityId;
 
     protected AbstractEntity() {
