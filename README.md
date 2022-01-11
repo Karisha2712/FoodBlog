@@ -1,14 +1,10 @@
-# Roles in project
-
-## Unauthorised user
-
+## Roles in project
+### Unauthorised user
 - Search posts by filters
 - Search blogers by nickname
 - Sign in
 - Sign up
-
-## Bloger
-
+### Bloger
 - Edit personal information
 - Make new post
 - Delete his own post
@@ -19,16 +15,12 @@
 - Search posts by filters
 - Search blogers by nickname
 - Log out
-
-## Admin
-
+### Admin
 - Block/Unblock user
 - Delete any post
 - Delete any comment
 - Search posts by filters
 - Search blogers by nickname
 - Log out
-
-
-#DataBase Scheme
+## DataBase Scheme
 ![img](dbscheme.png)
