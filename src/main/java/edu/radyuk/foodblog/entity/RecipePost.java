@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 public class RecipePost extends AbstractEntity {
     private String recipeText;
     private String picturePath;
-    private Double rating;
-    private long userId;
-    private LocalDateTime date;
+    private Double postRating;
+    private LocalDateTime postDate;
     private RecipePostCategory recipePostCategory;
+    private long userId;
 
     public RecipePost() {
     }
@@ -29,12 +29,12 @@ public class RecipePost extends AbstractEntity {
         this.picturePath = picturePath;
     }
 
-    public Double getRating() {
-        return rating;
+    public Double getPostRating() {
+        return postRating;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setPostRating(Double postRating) {
+        this.postRating = postRating;
     }
 
     public long getUserId() {
@@ -45,12 +45,12 @@ public class RecipePost extends AbstractEntity {
         this.userId = userId;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getPostDate() {
+        return postDate;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setPostDate(LocalDateTime postDate) {
+        this.postDate = postDate;
     }
 
     public RecipePostCategory getRecipePostCategory() {
@@ -71,8 +71,8 @@ public class RecipePost extends AbstractEntity {
                 && recipePostCategory == that.recipePostCategory
                 && recipeText.equals(that.recipeText)
                 && picturePath.equals(that.picturePath)
-                && rating.equals(that.rating)
-                && date.equals(that.date);
+                && postRating.equals(that.postRating)
+                && postDate.equals(that.postDate);
     }
 
     @Override
@@ -81,9 +81,9 @@ public class RecipePost extends AbstractEntity {
         result += result * 31 + super.hashCode();
         result += result * 31 + recipeText.hashCode();
         result += result * 31 + picturePath.hashCode();
-        result += result * 31 + Double.hashCode(rating);
+        result += result * 31 + Double.hashCode(postRating);
         result += result * 31 + Long.hashCode(userId);
-        result += result * 31 + date.hashCode();
+        result += result * 31 + postDate.hashCode();
         result += result * 31 + recipePostCategory.hashCode();
         return result;
     }
@@ -93,9 +93,9 @@ public class RecipePost extends AbstractEntity {
         final StringBuilder sb = new StringBuilder("RecipePost{");
         sb.append("recipeText='").append(recipeText).append('\'');
         sb.append(", picturePath='").append(picturePath).append('\'');
-        sb.append(", rating=").append(rating);
+        sb.append(", rating=").append(postRating);
         sb.append(", userId=").append(userId);
-        sb.append(", date=").append(date);
+        sb.append(", date=").append(postDate);
         sb.append(", recipePostCategory=").append(recipePostCategory);
         sb.append('}');
         return sb.toString();
