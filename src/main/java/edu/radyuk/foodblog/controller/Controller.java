@@ -1,5 +1,7 @@
 package edu.radyuk.foodblog.controller;
 
+import edu.radyuk.foodblog.controller.command.*;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +28,24 @@ public class Controller extends HttpServlet {
 
     private void processCommand(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-
+        String commandName = req.getParameter(RequestParameter.COMMAND);
+        ClientCommand clientCommand = CommandFactory.getInstance().getCommand(commandName);
+        CommandResponse commandResponse = clientCommand.execute(req);
+        RoutingType routingType = commandResponse.getRoutingType();
+        String resultPage = commandResponse.getResultPage();
+        switch (routingType) {
+            case FORWARD: {
+                req.getRequestDispatcher(resultPage).forward(req, res);
+            }
+            break;
+            case REDIRECT: {
+                res.sendRedirect(req.getContextPath() + resultPage);
+            }
+            break;
+            default: {
+                logger.log(Level.ERROR, "Invalid routing type");
+            }
+        }
     }
 
 }

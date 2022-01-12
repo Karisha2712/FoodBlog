@@ -2,23 +2,21 @@ package edu.radyuk.foodblog.controller.command;
 
 import java.util.EnumMap;
 
-public class CommandFactory {
+public final class CommandFactory {
     private static final CommandFactory instance = new CommandFactory();
-
-    private EnumMap<CommandType, AbstractCommand> commands;
+    private EnumMap<CommandType, ClientCommand> commands;
 
     private CommandFactory() {
         commands = new EnumMap<>(CommandType.class);
         // commands.put(INVALID, new InvalidCommand());
     }
 
-    public AbstractCommand getCommand(String command) {
+    public ClientCommand getCommand(String command) {
         CommandType commandType = CommandType.getCommandType(command);
         return commands.get(commandType);
     }
 
-
-    public CommandFactory getInstance() {
+    public static CommandFactory getInstance() {
         return instance;
     }
 }
