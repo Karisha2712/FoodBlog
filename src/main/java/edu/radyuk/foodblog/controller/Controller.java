@@ -44,6 +44,7 @@ public class Controller extends HttpServlet {
             break;
             default: {
                 logger.log(Level.ERROR, "Invalid routing type");
+                //TODO add redirection to error page
             }
         }
     }

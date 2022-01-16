@@ -12,7 +12,7 @@ public enum CommandType {
         }
         CommandType type;
         try {
-            type = CommandType.valueOf(command);
+            type = CommandType.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException e) {
             type = INVALID;
         }

@@ -1,0 +1,22 @@
+header {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9vw;
+}
+
+.bg-dark {
+    background-color: #000000!important;
+    height: 10vh;
+}
+
+#home {
+    margin-left: 9vw;
+}
+
+#categories, #recipes {
+    margin-left: 8vw;
+}
+
+#sign-in {
+    margin-left: 44vw;
+}
+

@@ -1,0 +1,8 @@
+#sticky-footer {
+    background: #000000;
+    height: 10vh;
+}
+
+#copyright {
+    color: rgba(255,255,255,.55);
+}

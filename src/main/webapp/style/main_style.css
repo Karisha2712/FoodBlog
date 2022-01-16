@@ -1,0 +1,34 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9vw;
+}
+
+.btn-primary {
+    width: 11vw;
+    height: 3.2vw;
+    background-color: black;
+    border-radius: 1.6vw;
+    border: none;
+    margin-top: 2.4vw;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: black;
+    border: black solid .06vw;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 3.4vw;
+    margin-top: .8vw;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.page-content {
+    margin-top: 4.3vw;
+    margin-left: 9vw;
+    margin-bottom: 8vw;
+}
+
