@@ -64,8 +64,8 @@ public class BloggerInfo {
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result += result * 31 + city.hashCode();
+        int result;
+        result = city.hashCode();
         result += result * 31 + country.hashCode();
         result += result * 31 + avatarPath.hashCode();
         result += result * 31 + personalInfo.hashCode();

@@ -5,6 +5,7 @@ import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.exception.DaoException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BloggerInfoDaoImpl implements BloggerInfoDao {
     @Override
@@ -14,8 +15,8 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
     }
 
     @Override
-    public BloggerInfo findEntityById(long id) throws DaoException {
-        return null;
+    public Optional<BloggerInfo> findEntityById(long id) throws DaoException {
+        return Optional.empty();
         //TODO
     }
 

@@ -5,6 +5,7 @@ import edu.radyuk.foodblog.entity.Comment;
 import edu.radyuk.foodblog.exception.DaoException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CommentDaoImpl implements CommentDao {
     @Override
@@ -14,8 +15,8 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public Comment findEntityById(long id) throws DaoException {
-        return null;
+    public Optional<Comment> findEntityById(long id) throws DaoException {
+        return Optional.empty();
         //TODO
     }
 

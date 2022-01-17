@@ -77,8 +77,8 @@ public class RecipePost extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result += result * 31 + super.hashCode();
+        int result;
+        result = super.hashCode();
         result += result * 31 + recipeText.hashCode();
         result += result * 31 + picturePath.hashCode();
         result += result * 31 + Double.hashCode(postRating);

@@ -65,8 +65,8 @@ public class User extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result += result * 31 + super.hashCode();
+        int result;
+        result = super.hashCode();
         result += result * 31 + login.hashCode();
         result += result * 31 + email.hashCode();
         result += result * 31 + passwordHash.hashCode();

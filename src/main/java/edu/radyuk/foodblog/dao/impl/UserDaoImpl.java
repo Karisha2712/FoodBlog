@@ -5,6 +5,7 @@ import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.exception.DaoException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
 
@@ -15,8 +16,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findEntityById(long id) throws DaoException {
-        return null;
+    public Optional<User> findEntityById(long id) throws DaoException {
+        return Optional.empty();
         //TODO
     }
 
