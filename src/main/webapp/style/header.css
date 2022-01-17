@@ -4,19 +4,31 @@ header {
 }
 
 .bg-dark {
-    background-color: #000000!important;
+    background-color: #000000 !important;
     height: 10vh;
 }
 
 #home {
-    margin-left: 9vw;
+    margin-left: 8vw;
+
 }
 
-#categories, #recipes {
-    margin-left: 8vw;
+.header-item {
+    margin-left: 6vw;
 }
 
 #sign-in {
-    margin-left: 44vw;
+    margin-left: 40vw;
+}
+
+.dropdown-menu {
+    margin-left: 6vw;
+    height: 3vw;
+    background-color: rgba(255, 255, 255, .75);;
+}
+
+.dropdown-item {
+    color: rgba(255, 255, 255, .75);
+    font-size: .9vw;
 }
 

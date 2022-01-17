@@ -43,10 +43,6 @@ public final class ConnectionPool {
         logger.log(Level.INFO, "ConnectionPool was created successfully ");
     }
 
-    private static class Holder {
-        private static final ConnectionPool instance = new ConnectionPool();
-    }
-
     public static ConnectionPool getInstance() {
         return Holder.instance;
     }
@@ -101,5 +97,9 @@ public final class ConnectionPool {
             logger.log(Level.WARN, "Invalid pool-size property format, default size is used ", e);
         }
         return poolSize;
+    }
+
+    private static class Holder {
+        private static final ConnectionPool instance = new ConnectionPool();
     }
 }

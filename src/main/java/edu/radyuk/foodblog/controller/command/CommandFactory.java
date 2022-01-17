@@ -16,12 +16,12 @@ public final class CommandFactory {
         commands.put(HOME_PAGE, new HomePageCommand());
     }
 
+    public static CommandFactory getInstance() {
+        return instance;
+    }
+
     public ClientCommand getCommand(String command) {
         CommandType commandType = CommandType.getCommandType(command);
         return commands.get(commandType);
-    }
-
-    public static CommandFactory getInstance() {
-        return instance;
     }
 }

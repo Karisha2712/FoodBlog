@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
+<fmt:setBundle basename="page" var="rb"/>
+
 <!DOCTYPE html>
-<html lang=en>
+<html lang="${sessionScope.locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +16,10 @@
     <link href="style/home_page.css" rel="stylesheet">
     <link href="style/footer.css" rel="stylesheet">
     <link href="style/main_style.css" rel="stylesheet">
-    <title>Home page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <title><fmt:message key="page.name.home" bundle="${rb}"/></title>
 </head>
 
 <jsp:include page="template/header.jsp"/>
@@ -21,10 +27,13 @@
 <body>
 
 <div class="form-floating mb-3">
-    <input type="text" class="search" id="floatingInput" placeholder="Search...">
+    <input type="text" class="search" id="floatingInput" placeholder=<fmt:message key="input.search.placeholder"
+                                                                                  bundle="${rb}"/>>
 </div>
 
-<h1 class="page-title">FOOD BLOG</h1>
+<h1 class="page-title">
+    <fmt:message key="home.title" bundle="${rb}"/>
+</h1>
 
 <div class="page-content d-flex flex-row">
 
@@ -34,10 +43,10 @@
 
     <div class="CTA-block d-flex flex-column">
         <div class="main-text">
-            Delicious recipes from all over the world
+            <fmt:message key="home.main_text" bundle="${rb}"/>
         </div>
         <button class="btn-primary">
-            View the recipes
+            <fmt:message key="home.button.view_recipes" bundle="${rb}"/>
         </button>
     </div>
 

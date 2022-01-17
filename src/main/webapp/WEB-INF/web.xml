@@ -14,4 +14,8 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>edu.radyuk.foodblog.controller.HttpSessionListenerImpl</listener-class>
+    </listener>
+
 </web-app>
