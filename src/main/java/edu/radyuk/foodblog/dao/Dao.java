@@ -1,11 +1,10 @@
 package edu.radyuk.foodblog.dao;
 
-import edu.radyuk.foodblog.entity.AbstractEntity;
 import edu.radyuk.foodblog.exception.DaoException;
 
 import java.util.List;
 
-public interface AbstractDao<T extends AbstractEntity> {
+public interface Dao<T> {
 
     List<T> findAll() throws DaoException;
 
