@@ -1,0 +1,28 @@
+.page-main-title {
+    text-align: center;
+    margin-top: 3vw;
+    margin-bottom: 1vw;
+    color: #000;
+    font-size: 16vw;
+}
+
+.page-content {
+    align-items: center;
+}
+
+.page-title {
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sub-text {
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 2vw;
+}
+
+.btn-primary {
+    margin-bottom: 5.2vw!important;
+    width: 14vw;
+}

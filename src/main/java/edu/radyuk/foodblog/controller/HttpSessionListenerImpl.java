@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 public class HttpSessionListenerImpl implements HttpSessionListener {
-    private static final String DEFAULT_LOCALE = "en";
+    private static final String DEFAULT_LOCALE = "ru";
 
     @Override
     public void sessionCreated(HttpSessionEvent sessionEvent) {

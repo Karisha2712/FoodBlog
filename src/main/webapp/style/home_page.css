@@ -8,7 +8,21 @@
     margin-top: 2vw;
     margin-bottom: 0;
 }
+.btn-primary {
+    margin-top: 2.4vw;
+    width: 11vw;
+}
 
+.page-title {
+    margin-top: .8vw;
+    margin-bottom: 0;
+}
+
+.page-content {
+    margin-top: 4.3vw;
+    margin-left: 9vw;
+    margin-bottom: 8vw;
+}
 .home-page-pic {
     width: 25vw;
     margin-right: 1.6vw;

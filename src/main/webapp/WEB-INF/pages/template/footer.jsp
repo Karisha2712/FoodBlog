@@ -3,6 +3,6 @@
 
 <footer id="sticky-footer" class="flex-shrink-0 py-4">
     <div id="copyright" class="container text-center">
-        &copy; YummyFood
+        &copy; YummyFood, 2022
     </div>
 </footer>

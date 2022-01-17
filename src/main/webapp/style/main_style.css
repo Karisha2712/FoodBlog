@@ -4,12 +4,10 @@ body {
 }
 
 .btn-primary {
-    width: 11vw;
     height: 3.2vw;
     background-color: black;
     border-radius: 1.6vw;
     border: none;
-    margin-top: 2.4vw;
 }
 
 .btn-primary:hover {
@@ -19,16 +17,9 @@ body {
 }
 
 .page-title {
+    text-transform: uppercase;
     text-align: center;
     font-size: 3.4vw;
-    margin-top: .8vw;
     font-weight: 500;
-    margin-bottom: 0;
-}
-
-.page-content {
-    margin-top: 4.3vw;
-    margin-left: 9vw;
-    margin-bottom: 8vw;
 }
 
