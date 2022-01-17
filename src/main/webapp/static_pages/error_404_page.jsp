@@ -13,7 +13,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="../style/header.css" rel="stylesheet">
-    <link href="../style/error_404_page.css" rel="stylesheet">
+    <link href="../style/error_page.css" rel="stylesheet">
     <link href="../style/footer.css" rel="stylesheet">
     <link href="../style/main_style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -30,13 +30,13 @@
         404
     </h1>
     <h1 class="page-title">
-        <fmt:message key="error404.main.message" bundle="${rb}"/>
+        <fmt:message key="error.main.message" bundle="${rb}"/>
     </h1>
     <div class="sub-text">
         <fmt:message key="error404.sub.message" bundle="${rb}"/>
     </div>
     <button class="btn-primary">
-        <fmt:message key="error404.button.backHome" bundle="${rb}"/>
+        <fmt:message key="error.button.backHome" bundle="${rb}"/>
     </button>
 
 </div>

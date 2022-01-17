@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_404_PAGE;
+import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
@@ -46,8 +46,7 @@ public class Controller extends HttpServlet {
             }
             default: {
                 logger.log(Level.ERROR, "Invalid routing type");
-                res.sendRedirect(ERROR_404_PAGE);
-                //TODO change redirection to error 500 page
+                res.sendRedirect(ERROR_500_PAGE);
             }
         }
     }
