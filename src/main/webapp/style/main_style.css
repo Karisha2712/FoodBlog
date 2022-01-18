@@ -4,6 +4,7 @@ body {
 }
 
 .btn-primary {
+    width: 11vw;
     height: 3.2vw;
     background-color: black;
     border-radius: 1.6vw;
@@ -23,3 +24,22 @@ body {
     font-weight: 500;
 }
 
+.form-check-input:checked {
+    border-color: rgba(189, 189, 189, 0.55);
+    background-color: black !important;
+}
+
+.form-check-input:checked:focus {
+    border-color: rgba(189, 189, 189, 0.55);
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(189, 189, 189, 0.55)
+}
+
+.form-check-input:focus {
+    border-color: rgba(189, 189, 189, 0.55);
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(189, 189, 189, 0.55)
+}
+
+.form-check-input:active {
+    border-color: rgba(189, 189, 189, 0.55);
+    background-color: #c7c7c7;
+}

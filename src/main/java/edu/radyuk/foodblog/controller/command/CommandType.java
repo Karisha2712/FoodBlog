@@ -3,6 +3,7 @@ package edu.radyuk.foodblog.controller.command;
 public enum CommandType {
     INVALID,
     HOME_PAGE,
+    SIGN_IN_PAGE,
     LOGIN,
     LOGOUT;
 

@@ -1,0 +1,53 @@
+.sign-up-pic {
+    width: 46.3vw;
+}
+
+.page-title {
+    text-align: left;
+}
+
+.sign-in-link {
+    color: black;
+}
+
+.sign-in-link:hover {
+    color: rgba(0, 0, 0, .75);
+}
+
+.sign-up-block {
+    justify-content: center;
+    margin-left: 4.8vw;
+
+}
+
+.page-title {
+    margin-bottom: 0;
+}
+
+.sub-text {
+    margin-top: 0;
+    margin-bottom: 1vw;
+}
+
+#sign-in {
+    display: none;
+}
+
+.page-content {
+    margin: 0;
+}
+
+.field {
+    margin-top: 1.5vw;
+    height: 3.2vw;
+    width: 25vw;
+    padding: 1vw;
+    border: #000 .06vw solid;
+    border-radius: 9vw;
+    margin-bottom: 0;
+}
+
+.form-check {
+    margin-top: .5vw;
+    margin-bottom: 1vw;
+}

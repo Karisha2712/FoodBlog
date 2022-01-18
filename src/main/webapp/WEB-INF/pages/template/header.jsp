@@ -26,16 +26,17 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link header-item dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <fmt:message key="header.EnLang" bundle="${rb}"/>
+                        <fmt:message key="header.en_lang" bundle="${rb}"/>
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">
-                            <fmt:message key="header.RuLang" bundle="${rb}"/>
+                            <fmt:message key="header.ru_lang" bundle="${rb}"/>
                         </a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="sign-in" href="#">
+                    <a class="nav-link" id="sign-in"
+                       href="${pageContext.request.contextPath}/controller?command=sign_in_page">
                         <fmt:message key="header.sign" bundle="${rb}"/>
                     </a>
                 </li>
