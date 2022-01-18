@@ -6,23 +6,25 @@ import java.io.IOException;
 
 public class EncodingFilter implements Filter {
     private static final String DEFAULT_ENCODING = "UTF-8";
+    private static final String REQUEST_ENCODING_PARAM = "encoding";
     private String encoding;
 
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
-        encoding = fConfig.getInitParameter("encoding");
+        encoding = fConfig.getInitParameter(REQUEST_ENCODING_PARAM);
         if (encoding == null) {
             encoding = DEFAULT_ENCODING;
         }
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
-        String codeRequest = request.getCharacterEncoding();
-        if (encoding != null && !encoding.equalsIgnoreCase(codeRequest)) {
-            request.setCharacterEncoding(encoding);
-            response.setCharacterEncoding(encoding);
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+                         FilterChain filterChain) throws IOException, ServletException {
+        String requestEncoding = servletRequest.getCharacterEncoding();
+        if (encoding != null && !encoding.equalsIgnoreCase(requestEncoding)) {
+            servletRequest.setCharacterEncoding(encoding);
+            servletResponse.setCharacterEncoding(encoding);
         }
-        chain.doFilter(request, response);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 }
