@@ -8,11 +8,23 @@
         <servlet-name>Controller</servlet-name>
         <servlet-class>edu.radyuk.foodblog.controller.Controller</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>edu.radyuk.foodblog.controller.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
 
     <listener>
         <listener-class>edu.radyuk.foodblog.controller.HttpSessionListenerImpl</listener-class>
