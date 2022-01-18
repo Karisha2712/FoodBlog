@@ -38,8 +38,6 @@
     <button class="btn-primary">
         <fmt:message key="error.button.backHome" bundle="${rb}"/>
     </button>
-
-</div>
 </div>
 </body>
 

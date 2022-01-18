@@ -25,7 +25,6 @@
 <jsp:include page="template/header.jsp"/>
 
 <body>
-
 <div class="form-floating mb-3">
     <input type="text" class="search" id="floatingInput" placeholder=<fmt:message key="input.search.placeholder"
                                                                                   bundle="${rb}"/>>
@@ -49,8 +48,6 @@
             <fmt:message key="home.button.view_recipes" bundle="${rb}"/>
         </button>
     </div>
-
-</div>
 </div>
 </body>
 

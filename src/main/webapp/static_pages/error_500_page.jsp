@@ -40,7 +40,6 @@
     </button>
 
 </div>
-</div>
 </body>
 
 <jsp:include page="../WEB-INF/pages/template/footer.jsp"/>

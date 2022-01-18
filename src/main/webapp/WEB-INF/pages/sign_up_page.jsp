@@ -40,20 +40,18 @@
             </b></a>
         </div>
         <div class="form-floating mb-3 d-flex flex-column">
-            <input type="text" class="field" id="floatingInput" placeholder=<fmt:message key="input.login.placeholder"
-                                                                                         bundle="${rb}"/>>
-            <input type="email" class="field" id="floatingEmail" placeholder=<fmt:message key="input.email.placeholder"
-                                                                                          bundle="${rb}"/>>
-            <input type="password" class="field" id="floatingPassword" placeholder=<fmt:message
-                    key="input.password.placeholder" bundle="${rb}"/>>
+            <input type="text" class="field" id="floatingInput"
+                   placeholder=<fmt:message key="input.login.placeholder" bundle="${rb}"/>>
+            <input type="email" class="field" id="floatingEmail"
+                   placeholder=<fmt:message key="input.email.placeholder" bundle="${rb}"/>>
+            <input type="password" class="field" id="floatingPassword"
+                   placeholder=<fmt:message key="input.password.placeholder" bundle="${rb}"/>>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                     <fmt:message key="sign_up.choose_role" bundle="${rb}"/>
                 </label>
             </div>
-
-
             <button class="btn-primary">
                 <fmt:message key="sign_up.button" bundle="${rb}"/>
             </button>
