@@ -9,7 +9,8 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home" aria-current="page" href="#">
+                    <a class="nav-link active" id="home" aria-current="page"
+                       href="${pageContext.request.contextPath}/controller?command=go_to_home_page">
                         <fmt:message key="header.home" bundle="${rb}"/>
                     </a>
                 </li>
@@ -36,7 +37,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="sign-in"
-                       href="${pageContext.request.contextPath}/controller?command=sign_in_page">
+                       href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page">
                         <fmt:message key="header.sign" bundle="${rb}"/>
                     </a>
                 </li>

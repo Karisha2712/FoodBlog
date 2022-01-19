@@ -40,4 +40,9 @@
         <location>/static_pages/error_404_page.jsp</location>
     </error-page>
 
+    <error-page>
+        <error-code>500</error-code>
+        <location>/static_pages/error_500_page.jsp</location>
+    </error-page>
+
 </web-app>

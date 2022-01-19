@@ -65,7 +65,6 @@ public class RecipePost extends AbstractEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         RecipePost that = (RecipePost) o;
         return userId == that.userId
                 && recipePostCategory == that.recipePostCategory
@@ -77,8 +76,7 @@ public class RecipePost extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result;
-        result = super.hashCode();
+        int result = 1;
         result += result * 31 + recipeText.hashCode();
         result += result * 31 + picturePath.hashCode();
         result += result * 31 + Double.hashCode(postRating);

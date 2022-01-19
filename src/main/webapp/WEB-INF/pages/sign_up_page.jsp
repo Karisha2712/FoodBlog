@@ -35,11 +35,12 @@
         </h1>
         <div class="sub-text">
             <fmt:message key="sign_up.text" bundle="${rb}"/>
-            <a class="sign-in-link" href="#"><b>
+            <a class="sign-in-link" href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page"><b>
                 <fmt:message key="sign_in.button" bundle="${rb}"/>
             </b></a>
         </div>
-        <div class="form-floating mb-3 d-flex flex-column">
+        <form class="form-floating mb-3 d-flex flex-column"
+              action="${pageContext.request.contextPath}/controller?command=sign_up" method="post">
             <input type="text" class="field" id="floatingInput"
                    placeholder=<fmt:message key="input.login.placeholder" bundle="${rb}"/>>
             <input type="email" class="field" id="floatingEmail"
@@ -52,10 +53,10 @@
                     <fmt:message key="sign_up.choose_role" bundle="${rb}"/>
                 </label>
             </div>
-            <button class="btn-primary">
+            <button type="submit" class="btn-primary">
                 <fmt:message key="sign_up.button" bundle="${rb}"/>
             </button>
-        </div>
+        </form>
     </div>
 </div>
 </body>

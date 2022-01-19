@@ -35,7 +35,7 @@
         </h1>
         <div class="sub-text">
             <fmt:message key="sign_in.text" bundle="${rb}"/>
-            <a class="sign-in-link" href="#"><b>
+            <a class="sign-in-link" href="${pageContext.request.contextPath}/controller?command=go_to_sign_up_page"><b>
                 <fmt:message key="sign_up.button" bundle="${rb}"/>
             </b></a>
         </div>

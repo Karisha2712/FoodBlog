@@ -5,12 +5,12 @@ import edu.radyuk.foodblog.controller.command.CommandResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static edu.radyuk.foodblog.controller.command.PagePath.SIGN_IN_PAGE;
+import static edu.radyuk.foodblog.controller.command.PagePath.SIGN_UP_PAGE;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
 
-public class SignInPageCommand implements ClientCommand {
+public class GoToSignUpPageCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {
-        return new CommandResponse(SIGN_IN_PAGE, FORWARD);
+        return new CommandResponse(SIGN_UP_PAGE, FORWARD);
     }
 }

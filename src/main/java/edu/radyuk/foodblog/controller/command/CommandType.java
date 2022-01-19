@@ -2,10 +2,11 @@ package edu.radyuk.foodblog.controller.command;
 
 public enum CommandType {
     INVALID,
-    HOME_PAGE,
-    SIGN_IN_PAGE,
-    LOGIN,
-    LOGOUT;
+    GO_TO_HOME_PAGE,
+    GO_TO_SIGN_IN_PAGE,
+    GO_TO_SIGN_UP_PAGE,
+    SIGN_IN,
+    SIGN_UP;
 
     public static CommandType getCommandType(String command) {
         if (command == null) {

@@ -47,7 +47,6 @@ public class Comment extends AbstractEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         Comment comment = (Comment) o;
         return userId == comment.userId
                 && postId == comment.postId
@@ -57,8 +56,7 @@ public class Comment extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result;
-        result = super.hashCode();
+        int result = 1;
         result += result * 31 + commentText.hashCode();
         result += result * 31 + commentDate.hashCode();
         result += result * 31 + Long.hashCode(userId);

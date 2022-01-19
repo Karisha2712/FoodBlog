@@ -1,8 +1,6 @@
 package edu.radyuk.foodblog.controller.command;
 
-import edu.radyuk.foodblog.controller.command.impl.HomePageCommand;
-import edu.radyuk.foodblog.controller.command.impl.InvalidCommand;
-import edu.radyuk.foodblog.controller.command.impl.SignInPageCommand;
+import edu.radyuk.foodblog.controller.command.impl.*;
 
 import java.util.EnumMap;
 
@@ -15,8 +13,10 @@ public final class CommandFactory {
     private CommandFactory() {
         commands = new EnumMap<>(CommandType.class);
         commands.put(INVALID, new InvalidCommand());
-        commands.put(HOME_PAGE, new HomePageCommand());
-        commands.put(SIGN_IN_PAGE, new SignInPageCommand());
+        commands.put(GO_TO_HOME_PAGE, new GoToHomePageCommand());
+        commands.put(GO_TO_SIGN_IN_PAGE, new GoToSignInPageCommand());
+        commands.put(GO_TO_SIGN_UP_PAGE, new GoToSignUpPageCommand());
+        commands.put(SIGN_IN, new SignInCommand());
     }
 
     public static CommandFactory getInstance() {

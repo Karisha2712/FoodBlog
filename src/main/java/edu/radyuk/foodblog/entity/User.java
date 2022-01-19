@@ -54,7 +54,6 @@ public class User extends AbstractEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         User user = (User) o;
         return login.equals(user.login)
                 && email.equals(user.email)
@@ -65,8 +64,7 @@ public class User extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result;
-        result = super.hashCode();
+        int result = 1;
         result += result * 31 + login.hashCode();
         result += result * 31 + email.hashCode();
         result += result * 31 + passwordHash.hashCode();
