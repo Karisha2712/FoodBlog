@@ -11,7 +11,10 @@ public class DaoFactory {
     private final BloggerInfoDao bloggerInfoDao = new BloggerInfoDaoImpl();
     private final RecipePostDao recipePostDao = new RecipePostDaoImpl();
 
-    public DaoFactory getInstance() {
+    private DaoFactory() {
+    }
+
+    public static DaoFactory getInstance() {
         return Holder.instance;
     }
 
@@ -34,4 +37,5 @@ public class DaoFactory {
     private static class Holder {
         private static final DaoFactory instance = new DaoFactory();
     }
+
 }
