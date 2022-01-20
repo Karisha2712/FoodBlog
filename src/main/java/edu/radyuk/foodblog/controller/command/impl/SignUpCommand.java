@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_SIGNUP_FORM_INPUT;
+import static edu.radyuk.foodblog.controller.command.MessageKey.*;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.SIGN_UP_ERROR;
 
 public class SignUpCommand implements ClientCommand {
@@ -27,8 +27,9 @@ public class SignUpCommand implements ClientCommand {
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
         String email = request.getParameter(RequestParameter.EMAIL);
-        UserService userService = ServiceFactory.getInstance().getUserService();
         UserRole userRole = isAdmin ? UserRole.ADMIN : UserRole.BLOGGER;
+
+        UserService userService = ServiceFactory.getInstance().getUserService();
         HttpSession session = request.getSession();
 
         if (!FormValidator.areSignUpParametersValid(login, email, password)) {
@@ -37,11 +38,46 @@ public class SignUpCommand implements ClientCommand {
             return new CommandResponse(PagePath.SIGN_UP_PAGE_REDIRECT, RoutingType.REDIRECT);
         }
 
+        boolean isEmailAvailable = false;
+        boolean isLoginAvailable = false;
+        try {
+            isEmailAvailable = userService.isEmailAvailable(email);
+            isLoginAvailable = userService.isLoginAvailable(login);
+        } catch (ServiceException e) {
+            logger.log(Level.ERROR, e);
+            //TODO send redirect to error page
+        }
+
+        if (!isEmailAvailable) {
+            logger.log(Level.WARN, "Unavailable email");
+            session.setAttribute(SIGN_UP_ERROR, UNAVAILABLE_EMAIL);
+            return new CommandResponse(PagePath.SIGN_UP_PAGE_REDIRECT, RoutingType.REDIRECT);
+        }
+
+        if (!isLoginAvailable) {
+            logger.log(Level.WARN, "Unavailable login");
+            session.setAttribute(SIGN_UP_ERROR, UNAVAILABLE_LOGIN);
+            return new CommandResponse(PagePath.SIGN_UP_PAGE_REDIRECT, RoutingType.REDIRECT);
+        }
+
+        try {
+            if (!userService.isLoginAvailable(email)) {
+                logger.log(Level.WARN, "Unavailable login");
+                session.setAttribute(SIGN_UP_ERROR, UNAVAILABLE_LOGIN);
+                return new CommandResponse(PagePath.SIGN_UP_PAGE_REDIRECT, RoutingType.REDIRECT);
+            }
+        } catch (ServiceException e) {
+            logger.log(Level.ERROR, e);
+            //TODO send redirect to error page
+        }
+
+
         User user;
         try {
             user = userService.signUp(login, password, email, userRole, UserStatus.ACTIVE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            //TODO send redirect to error page
         }
         return new CommandResponse(PagePath.HOME_PAGE, RoutingType.FORWARD);
         //TODO change page
