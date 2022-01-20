@@ -17,6 +17,7 @@ public final class CommandFactory {
         commands.put(GO_TO_SIGN_IN_PAGE, new GoToSignInPageCommand());
         commands.put(GO_TO_SIGN_UP_PAGE, new GoToSignUpPageCommand());
         commands.put(SIGN_IN, new SignInCommand());
+        commands.put(SIGN_UP, new SignUpCommand());
     }
 
     public static CommandFactory getInstance() {

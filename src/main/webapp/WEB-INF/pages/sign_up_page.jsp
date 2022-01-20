@@ -41,19 +41,22 @@
         </div>
         <form class="form-floating mb-3 d-flex flex-column"
               action="${pageContext.request.contextPath}/controller?command=sign_up" method="post">
-            <input type="text" class="field" id="floatingInput"
-                   placeholder=<fmt:message key="input.login.placeholder" bundle="${rb}"/>>
-            <input type="email" class="field" id="floatingEmail"
-                   placeholder=<fmt:message key="input.email.placeholder" bundle="${rb}"/>>
-            <input type="password" class="field" id="floatingPassword"
-                   placeholder=<fmt:message key="input.password.placeholder" bundle="${rb}"/>>
+            <input type="text" class="field" name="login" id="login"
+                   placeholder=
+                   <fmt:message key="input.login.placeholder" bundle="${rb}"/> required>
+            <input type="email" class="field" id="email" name="email"
+                   placeholder=
+                   <fmt:message key="input.email.placeholder" bundle="${rb}"/> required>
+            <input type="password" class="field" id="password" name="password"
+                   placeholder=
+                   <fmt:message key="input.password.placeholder" bundle="${rb}"/> required>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="is_admin" name="is_admin">
+                <label class="form-check-label" for="is_admin">
                     <fmt:message key="sign_up.choose_role" bundle="${rb}"/>
                 </label>
             </div>
-            <button type="submit" class="btn-primary">
+            <button type="submit" class="btn-primary" id="sign_up_btn">
                 <fmt:message key="sign_up.button" bundle="${rb}"/>
             </button>
         </form>
@@ -62,5 +65,5 @@
 </body>
 
 <jsp:include page="template/footer.jsp"/>
-
+<script src="script/signup.js"></script>
 </html>
