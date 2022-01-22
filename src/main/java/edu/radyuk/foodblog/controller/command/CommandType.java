@@ -5,6 +5,8 @@ public enum CommandType {
     GO_TO_HOME_PAGE,
     GO_TO_SIGN_IN_PAGE,
     GO_TO_SIGN_UP_PAGE,
+    GO_TO_ABOUT_PAGE,
+    GO_TO_RECIPES_PAGE,
     SIGN_IN,
     SIGN_UP;
 

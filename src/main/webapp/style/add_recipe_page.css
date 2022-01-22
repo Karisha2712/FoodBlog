@@ -1,0 +1,32 @@
+.text-area {
+    padding: 1vw !important;
+    margin-top: 1.5vw;
+    border-color: black;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: black;
+    font-size: .9vw;
+    text-align: start;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active,
+.btn-secondary:focus {
+    background-color: #fff;
+    color: black;
+    font-size: .9vw;
+    text-align: start;
+}
+
+.dropdown-menu {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    height: auto;
+}
+
+.dropdown-item {
+    color: black;
+}

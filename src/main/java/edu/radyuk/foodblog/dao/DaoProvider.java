@@ -5,16 +5,16 @@ import edu.radyuk.foodblog.dao.impl.CommentDaoImpl;
 import edu.radyuk.foodblog.dao.impl.RecipePostDaoImpl;
 import edu.radyuk.foodblog.dao.impl.UserDaoImpl;
 
-public class DaoFactory {
+public class DaoProvider {
     private final CommentDao commentDao = new CommentDaoImpl();
     private final UserDao userDao = new UserDaoImpl();
     private final BloggerInfoDao bloggerInfoDao = new BloggerInfoDaoImpl();
     private final RecipePostDao recipePostDao = new RecipePostDaoImpl();
 
-    private DaoFactory() {
+    private DaoProvider() {
     }
 
-    public static DaoFactory getInstance() {
+    public static DaoProvider getInstance() {
         return Holder.instance;
     }
 
@@ -35,7 +35,7 @@ public class DaoFactory {
     }
 
     private static class Holder {
-        private static final DaoFactory instance = new DaoFactory();
+        private static final DaoProvider instance = new DaoProvider();
     }
 
 }

@@ -1,0 +1,61 @@
+.profile-info {
+    margin-left: 10.1vw;
+    margin-top: 6vw;
+}
+
+.blogger-avatar {
+    width: 52vw;
+}
+
+.blogger-info {
+    width: 25vw;
+    margin-top: 0;
+    margin-left: 1.5vw;
+}
+
+.blogger-name {
+    line-height: 3.2vw;
+    font-size: 3.4vw;
+    font-weight: 600;
+    color: black;
+}
+
+.blogger-city {
+    margin-top: 1.5vw;
+}
+
+.blogger-city,
+.blogger-country {
+    font-size: 1.5vw;
+}
+
+.personal-info {
+    margin-top: .5vw;
+    font-size: 1vw;
+}
+
+.edit-info {
+    font-size: 1vw;
+    font-weight: 700;
+    margin-top: 1.5vw;
+    font-size: 1vw;
+    color: black;
+}
+
+.edit-info:hover {
+    color: rgba(0, 0, 0, .75);
+}
+
+.page-title {
+    margin-top: 0;
+    margin-left: 42vw;
+}
+
+.page-head {
+    margin-top: 8vw;
+    align-items: center;
+}
+
+.btn-primary {
+    margin-left: 19vw;
+}

@@ -1,0 +1,90 @@
+.search {
+    height: 3.2vw;
+    width: 18vw;
+    padding-left: 1vw;
+    border: rgb(83, 76, 76) .06vw solid;
+    border-radius: 9vw;
+    margin-left: 70vw;
+    margin-top: 2vw;
+    margin-bottom: 0;
+}
+
+.page-title {
+    margin-top: .8vw;
+    margin-bottom: 0;
+}
+
+.page-content {
+    margin-top: 4.3vw;
+    justify-content: center;
+}
+
+.recipe {
+    width: 25vw;
+
+}
+
+.recipe:not(last-child) {
+    margin-right: 1.5vw;
+}
+
+.post-author {
+    align-items: center;
+}
+
+.avatar {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+}
+
+.author-name {
+    font-size: 1.2vw;
+    font-weight: 500;
+    margin-left: .7vw;
+}
+
+.rating-with-category {
+    margin-top: .8vw;
+}
+
+.category {
+    width: 7.5vw;
+    font-size: 1vw;
+    text-align: center;
+    border-radius: 1vw;
+}
+
+.recipe-img {
+    margin-top: .5vw;
+    width: 25vw;
+}
+
+.dish-name {
+    margin-top: .5vw;
+    font-size: 1.2vw;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.recipe-text {
+    font-size: 1vw;
+}
+
+.view-full-recipe {
+    margin-top: 1.5vw;
+    font-size: 1vw;
+    color: black;
+}
+
+.view-full-recipe:hover {
+    color: rgba(0, 0, 0, .75);
+}
+
+.stars {
+    margin-left: 1vw;
+}
+
+#sticky-footer {
+    margin-top: 8vw;
+}

@@ -13,39 +13,50 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="style/header.css" rel="stylesheet">
-    <link href="style/home_page.css" rel="stylesheet">
     <link href="style/footer.css" rel="stylesheet">
     <link href="style/main_style.css" rel="stylesheet">
+    <link href="style/about_us_page.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-    <title><fmt:message key="page.name.home" bundle="${rb}"/></title>
+    <title><fmt:message key="page.name.about_us" bundle="${rb}"/></title>
 </head>
 
 <jsp:include page="template/header.jsp"/>
 
 <body>
 
-<h1 class="page-title">
-    <fmt:message key="home.title" bundle="${rb}"/>
-</h1>
+<h1 class="page-title"><fmt:message key="about_us.title" bundle="${rb}"/></h1>
 
 <div class="page-content d-flex flex-row">
 
-    <img class="home-page-pic" src="images/main_page_1.png" alt="...">
+    <img class="about-page-pic" src="images/about_us_1.png" alt="...">
 
-    <img class="home-page-pic" src="images/main_page_2.png" alt="...">
+    <img class="about-page-pic" src="images/about_us_2.png" alt="...">
 
     <div class="CTA-block d-flex flex-column">
         <div class="main-text">
-            <fmt:message key="home.main_text" bundle="${rb}"/>
+            <fmt:message key="about_us.first_text" bundle="${rb}"/>
         </div>
-        <button class="btn-primary">
-            <fmt:message key="home.button.view_recipes" bundle="${rb}"/>
-        </button>
     </div>
+
 </div>
+
+<div class="page-content d-flex flex-row">
+
+    <div class="CTA-block d-flex flex-column">
+        <div class="main-text">
+            <fmt:message key="about_us.second_text" bundle="${rb}"/></div>
+    </div>
+
+    <img class="about-page-pic" src="images/about_us_3.png" alt="...">
+
+    <img class="about-page-pic" src="images/about_us_4.png" alt="...">
+
+</div>
+
 </body>
+
 
 <jsp:include page="template/footer.jsp"/>
 

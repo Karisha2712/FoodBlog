@@ -43,3 +43,53 @@ body {
     border-color: rgba(189, 189, 189, 0.55);
     background-color: #c7c7c7;
 }
+
+.page-link {
+    color: black;
+    border-radius: .3vw;
+}
+
+.page-item {
+    margin-left: 1vw;
+}
+
+.page-link:hover {
+    color: rgba(189, 189, 189, 0.55);
+    background-color: black;
+}
+
+.page-item.active .page-link {
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+nav > .pagination {
+    justify-content: center;
+    margin-top: 4vw;
+}
+
+/* rating */
+
+
+:root {
+    --star-size: 1.5vw;
+    --star-color: rgb(221, 220, 220);
+    --star-background: #fc0;
+}
+
+.stars {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Times;
+    line-height: 1;
+}
+
+.stars::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

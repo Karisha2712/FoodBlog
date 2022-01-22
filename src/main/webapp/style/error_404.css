@@ -1,7 +1,6 @@
 .page-main-title {
-    text-align: center;
-    margin-top: 3vw;
-    margin-bottom: 1vw;
+    margin-top: 0;
+    margin-bottom: 0;
     color: #000;
     font-size: 16vw;
 }
@@ -23,6 +22,6 @@
 }
 
 .btn-primary {
-    margin-bottom: 5.2vw !important;
-    width: 15vw !important;
+    margin-bottom: 4.5vw !important;
+    width: 14vw;
 }

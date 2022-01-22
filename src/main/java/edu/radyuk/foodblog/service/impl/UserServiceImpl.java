@@ -1,6 +1,6 @@
 package edu.radyuk.foodblog.service.impl;
 
-import edu.radyuk.foodblog.dao.DaoFactory;
+import edu.radyuk.foodblog.dao.DaoProvider;
 import edu.radyuk.foodblog.dao.UserDao;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.entity.UserRole;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
         user.setUserStatus(status);
         String passwordHash = DigestUtils.sha256Hex(password);
         user.setPasswordHash(passwordHash);
-        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
         long id;
         try {
             id = userDao.insert(user);
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isLoginAvailable(String login) throws ServiceException {
-        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
         try {
             return userDao.findUserByLogin(login).isEmpty();
         } catch (DaoException e) {
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isEmailAvailable(String email) throws ServiceException {
-        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
         try {
             return userDao.findUserByEmail(email).isEmpty();
         } catch (DaoException e) {

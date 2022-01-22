@@ -15,12 +15,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link header-item" href="#">
+                    <a class="nav-link header-item"
+                       href="${pageContext.request.contextPath}/controller?command=go_to_recipes_page">
                         <fmt:message key="header.recipe" bundle="${rb}"/>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link header-item" href="#">
+                    <a class="nav-link header-item"
+                       href="${pageContext.request.contextPath}/controller?command=go_to_about_page">
                         <fmt:message key="header.about" bundle="${rb}"/>
                     </a>
                 </li>
