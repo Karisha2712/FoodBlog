@@ -7,6 +7,9 @@ public enum CommandType {
     GO_TO_SIGN_UP_PAGE,
     GO_TO_ABOUT_PAGE,
     GO_TO_RECIPES_PAGE,
+    VIEW_FULL_RECIPE,
+    EDIT_BLOGGER_INFO,
+    GO_TO_ADD_NEW_POST,
     SIGN_IN,
     SIGN_UP;
 

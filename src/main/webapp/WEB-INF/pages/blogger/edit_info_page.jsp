@@ -13,41 +13,47 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="style/header.css" rel="stylesheet">
-    <link href="style/home_page.css" rel="stylesheet">
     <link href="style/footer.css" rel="stylesheet">
     <link href="style/main_style.css" rel="stylesheet">
+    <link href="style/sign_up_page.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-    <title><fmt:message key="page.name.home" bundle="${rb}"/></title>
+    <title><fmt:message key="page.name.edit_info" bundle="${rb}"/></title>
 </head>
 
-<jsp:include page="template/header.jsp"/>
+<jsp:include page="../template/header.jsp"/>
 
 <body>
 
-<h1 class="page-title">
-    <fmt:message key="home.title" bundle="${rb}"/>
-</h1>
-
 <div class="page-content d-flex flex-row">
 
-    <img class="home-page-pic" src="images/main_page_1.png" alt="...">
+    <img class="sign-up-pic" src="images/about_me_1.png" alt="...">
 
-    <img class="home-page-pic" src="images/main_page_2.png" alt="...">
+    <div class="sign-up-block d-flex flex-column">
+        <h1 class="page-title">
+            <fmt:message key="edit_info.title" bundle="${rb}"/>
+        </h1>
+        <div class="form-floating mb-3 d-flex flex-column">
+            <input type="text" class="field" id="age"
+                   placeholder= <fmt:message key="edit_info.age" bundle="${rb}"/>>
+            <input type="text" class="field" id="city"
+                   placeholder= <fmt:message key="edit_info.city" bundle="${rb}"/>>
+            <input type="text" class="field" id="country"
+                   placeholder= <fmt:message key="edit_info.country" bundle="${rb}"/>>
+            <input type="text" class="field" id="info-text"
+                   placeholder= <fmt:message key="edit_info.info_text" bundle="${rb}"/>>
 
-    <form class="CTA-block d-flex flex-column"
-          action="${pageContext.request.contextPath}/controller?command=go_to_recipes_page" method="post">
-        <div class="main-text">
-            <fmt:message key="home.main_text" bundle="${rb}"/>
         </div>
-        <button class="btn-primary" type="submit">
-            <fmt:message key="home.button.view_recipes" bundle="${rb}"/>
+
+        <button class="btn-primary" style="margin-top: 2vw;">
+            <fmt:message key="edit_info.save_button" bundle="${rb}"/>
         </button>
-    </form>
+    </div>
 </div>
+
 </body>
 
-<jsp:include page="template/footer.jsp"/>
+<jsp:include page="../template/footer.jsp"/>
 
 </html>

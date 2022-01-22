@@ -16,21 +16,44 @@
     <link href="style/footer.css" rel="stylesheet">
     <link href="style/main_style.css" rel="stylesheet">
     <link href="style/recipes_page.css" rel="stylesheet">
+    <link href="style/profile_page.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-    <title><fmt:message key="page.name.recipes" bundle="${rb}"/></title>
+    <title><fmt:message key="page.name.home" bundle="${rb}"/></title>
 </head>
 
-<jsp:include page="template/header.jsp"/>
+<jsp:include page="../template/header.jsp"/>
 
 <body>
-<div class="form-floating mb-3">
-    <input type="text" class="search" id="floatingInput" placeholder=<fmt:message key="input.search.placeholder"
-                                                                                  bundle="${rb}"/>>
+
+<div class="profile-info d-flex flex-row">
+    <img class="blogger-avatar" src="images/default_avatar_big.png">
+    <div class="blogger-info d-flex flex-column">
+        <div class="blogger-name">BloggerName</div>
+        <div class="blogger-city">City</div>
+        <div class="blogger-country">Country</div>
+        <div class="personal-info">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </div>
+        <a href="${pageContext.request.contextPath}/controller?command=edit_blogger_info" class="edit-info">
+            <fmt:message key="profile.edit.info" bundle="${rb}"/>
+        </a>
+    </div>
 </div>
 
-<h1 class="page-title"><fmt:message key="recipes.title" bundle="${rb}"/></h1>
+<form class="page-head d-flex flex-row"
+      action="${pageContext.request.contextPath}/controller?command=go_to_add_new_post" method="post">
+    <span class="page-title">
+        <fmt:message key="recipes.title" bundle="${rb}"/>
+    </span>
+    <button class="btn-primary">
+        <fmt:message key="profile.new.recipe" bundle="${rb}"/>
+    </button>
+</form>
 
 <div class="page-content d-flex flex-row">
     <div class="recipe d-flex flex-column">
@@ -62,7 +85,7 @@
             </div>
 
         </div>
-        <a href="${pageContext.request.contextPath}/controller?command=view_full_recipe" class="view-full-recipe">
+        <a href="#" class="view-full-recipe">
             <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
         </a>
     </div>
@@ -96,7 +119,7 @@
             </div>
 
         </div>
-        <a href="${pageContext.request.contextPath}/controller?command=view_full_recipe" class="view-full-recipe" class="view-full-recipe">
+        <a href="#" class="view-full-recipe">
             <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
         </a>
     </div>
@@ -130,11 +153,10 @@
             </div>
 
         </div>
-        <a href="${pageContext.request.contextPath}/controller?command=view_full_recipe" class="view-full-recipe" class="view-full-recipe">
+        <a href="#" class="view-full-recipe">
             <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
         </a>
     </div>
-
 
 </div>
 
@@ -148,9 +170,9 @@
     </ul>
 </nav>
 
-
 </body>
 
-<jsp:include page="template/footer.jsp"/>
+
+<jsp:include page="../template/footer.jsp"/>
 
 </html>

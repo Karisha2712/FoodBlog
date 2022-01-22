@@ -62,7 +62,7 @@ public class SignUpCommand implements ClientCommand {
             session.setAttribute(SIGN_UP_ERROR, UNAVAILABLE_LOGIN);
             return new CommandResponse(PagePath.SIGN_UP_PAGE_REDIRECT, RoutingType.REDIRECT);
         }
-
+        //TODO set session attributes
         User user;
         try {
             user = userService.signUp(login, password, email, userRole, UserStatus.ACTIVE);
@@ -70,7 +70,6 @@ public class SignUpCommand implements ClientCommand {
             logger.log(Level.ERROR, e);
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
         }
-        return new CommandResponse(PagePath.HOME_PAGE, RoutingType.FORWARD);
-        //TODO change page
+        return new CommandResponse(PagePath.PROFILE_PAGE, RoutingType.FORWARD);
     }
 }

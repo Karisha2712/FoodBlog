@@ -1,6 +1,8 @@
 package edu.radyuk.foodblog.controller.command;
 
 import edu.radyuk.foodblog.controller.command.impl.*;
+import edu.radyuk.foodblog.controller.command.impl.blogger.GoToAddNewPostCommand;
+import edu.radyuk.foodblog.controller.command.impl.blogger.EditBloggerInfoCommand;
 
 import java.util.EnumMap;
 
@@ -18,6 +20,9 @@ public final class CommandFactory {
         commands.put(GO_TO_SIGN_UP_PAGE, new GoToSignUpPageCommand());
         commands.put(GO_TO_ABOUT_PAGE, new GoToAboutPageCommand());
         commands.put(GO_TO_RECIPES_PAGE, new GoToRecipesPageCommand());
+        commands.put(VIEW_FULL_RECIPE, new ViewFullRecipeCommand());
+        commands.put(EDIT_BLOGGER_INFO, new EditBloggerInfoCommand());
+        commands.put(GO_TO_ADD_NEW_POST, new GoToAddNewPostCommand());
         commands.put(SIGN_IN, new SignInCommand());
         commands.put(SIGN_UP, new SignUpCommand());
     }
