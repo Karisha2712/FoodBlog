@@ -75,10 +75,10 @@
         </div>
 
         <button class="btn-primary" style="margin-top: 2vw;">
-            <fmt:message key="add_recipe.button" bundle="${rb}"/
+            <fmt:message key="add_recipe.button" bundle="${rb}"/>
         </button>
     </div>
-
+</div>
 </body>
 
 <jsp:include page="../template/footer.jsp"/>

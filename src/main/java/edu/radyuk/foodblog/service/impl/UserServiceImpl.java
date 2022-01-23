@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Optional;
+
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger();
 
@@ -36,6 +38,17 @@ public class UserServiceImpl implements UserService {
         }
         user.setEntityId(id);
         return user;
+    }
+
+    @Override
+    public Optional<User> signIn(String password, String email, UserRole role) throws ServiceException {
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
+        try {
+            return userDao.findUserByEmail(email);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
     }
 
     @Override

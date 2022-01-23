@@ -1,6 +1,8 @@
 package edu.radyuk.foodblog.entity;
 
-public class User extends AbstractEntity {
+import java.io.Serializable;
+
+public class User extends AbstractEntity implements Serializable {
     private String login;
     private String email;
     private String passwordHash;

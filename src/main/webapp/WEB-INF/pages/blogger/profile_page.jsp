@@ -50,7 +50,7 @@
     <span class="page-title">
         <fmt:message key="recipes.title" bundle="${rb}"/>
     </span>
-    <button class="btn-primary">
+    <button class="btn-primary" type="submit">
         <fmt:message key="profile.new.recipe" bundle="${rb}"/>
     </button>
 </form>

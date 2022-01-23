@@ -5,8 +5,12 @@ import edu.radyuk.foodblog.entity.UserRole;
 import edu.radyuk.foodblog.entity.UserStatus;
 import edu.radyuk.foodblog.exception.ServiceException;
 
+import java.util.Optional;
+
 public interface UserService {
     User signUp(String login, String password, String email, UserRole role, UserStatus status) throws ServiceException;
+
+    Optional<User> signIn(String password, String email, UserRole role) throws ServiceException;
 
     boolean isLoginAvailable(String login) throws ServiceException;
 
