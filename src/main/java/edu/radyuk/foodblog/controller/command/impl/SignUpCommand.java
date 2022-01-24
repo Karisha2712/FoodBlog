@@ -8,7 +8,7 @@ import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.service.UserService;
 import edu.radyuk.foodblog.validator.FormValidator;
-import edu.radyuk.foodblog.validator.impl.FormValidatorImpl;
+import edu.radyuk.foodblog.validator.ValidatorProvider;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,7 +33,7 @@ public class SignUpCommand implements ClientCommand {
 
         UserService userService = ServiceProvider.getInstance().getUserService();
         HttpSession session = request.getSession();
-        FormValidator validator = new FormValidatorImpl();
+        FormValidator validator = ValidatorProvider.getInstance().getFormValidator();
 
         if (!validator.areSignUpParametersValid(login, email, password)) {
             logger.log(Level.WARN, "Invalid form input");

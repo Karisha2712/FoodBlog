@@ -5,7 +5,7 @@ import edu.radyuk.foodblog.dao.impl.CommentDaoImpl;
 import edu.radyuk.foodblog.dao.impl.RecipePostDaoImpl;
 import edu.radyuk.foodblog.dao.impl.UserDaoImpl;
 
-public class DaoProvider {
+public final class DaoProvider {
     private final CommentDao commentDao = new CommentDaoImpl();
     private final UserDao userDao = new UserDaoImpl();
     private final BloggerInfoDao bloggerInfoDao = new BloggerInfoDaoImpl();
