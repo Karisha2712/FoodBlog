@@ -1,6 +1,8 @@
 package edu.radyuk.foodblog.entity;
 
-public enum UserRole {
+import java.io.Serializable;
+
+public enum UserRole implements Serializable {
     UNAUTHORISED,
     BLOGGER,
     ADMIN

@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserService {
     User signUp(String login, String password, String email, UserRole role, UserStatus status) throws ServiceException;
 
-    Optional<User> signIn(String password, String email, UserRole role) throws ServiceException;
+    Optional<User> retrieveUserIfExists(String password, String email) throws ServiceException;
 
     boolean isLoginAvailable(String login) throws ServiceException;
 

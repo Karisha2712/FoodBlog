@@ -41,10 +41,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> signIn(String password, String email, UserRole role) throws ServiceException {
+    public Optional<User> retrieveUserIfExists(String password, String email) throws ServiceException {
         UserDao userDao = DaoProvider.getInstance().getUserDao();
         try {
-            return userDao.findUserByEmail(email);
+            Optional<User> optionalUser = userDao.findUserByEmail(email);
+            if (optionalUser.isEmpty()) {
+                return Optional.empty();
+            }
+            User user = optionalUser.get();
+            String passwordHash = DigestUtils.sha256Hex(password);
+            if (!(passwordHash.equals(user.getPasswordHash()))) {
+                return Optional.empty();
+            }
+            return optionalUser;
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);

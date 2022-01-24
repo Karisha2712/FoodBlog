@@ -9,7 +9,9 @@ public final class FormValidatorImpl implements FormValidator {
     private static final String REGEXP_FOR_PASSWORD_VALIDATION = "(\\w){8,20}";
 
     public boolean areSignUpParametersValid(String login, String email, String password) {
-        return login.matches(REGEXP_FOR_LOGIN_VALIDATION)
+        boolean areValid = login != null && email != null && password != null;
+        return areValid &&
+                login.matches(REGEXP_FOR_LOGIN_VALIDATION)
                 && email.matches(REGEXP_FOR_EMAIL_VALIDATION)
                 && password.matches(REGEXP_FOR_PASSWORD_VALIDATION);
     }
