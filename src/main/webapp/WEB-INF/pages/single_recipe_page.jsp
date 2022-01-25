@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="page" var="rb"/>
@@ -62,46 +63,46 @@
             <fmt:message key="recipe.title.comment" bundle="${rb}"/>
         </div>
 
-        <div class="your-comment">
-            <div class="post-author d-flex flex-row">
-                <img class="avatar" src="images/default_avatar.png" alt="..."/>
-                <div class="author-name">
-                    <fmt:message key="recipe.comment.your_comment" bundle="${rb}"/>
+        <c:if test="${sessionScope.user != null}">
+            <div class="your-comment">
+                <div class="post-author d-flex flex-row">
+                    <img class="avatar" src="images/default_avatar.png" alt="..."/>
+                    <div class="author-name">
+                        <fmt:message key="recipe.comment.your_comment" bundle="${rb}"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-floating">
+                <div class="form-floating">
                 <textarea class="form-control" id="floatingTextarea2"
                           style="height: 100px"></textarea>
-            </div>
-            <div class="rating-range d-flex flex-column">
-                <label for="customRange" class="form-label">
-                    <fmt:message key="recipe.rating" bundle="${rb}"/>
-                </label>
-                <input type="range" class="form-range" min="1" max="5" step="1" id="customRange">
-            </div>
-            <button class="btn-primary">
-                <fmt:message key="recipe.comment.send" bundle="${rb}"/>
-            </button>
-        </div>
-
-        <div class="some-comment">
-            <div class="post-author d-flex flex-row">
-                <img class="avatar" src="images/default_avatar.png" alt="..."/>
-                <div class="author-name">
-                    AuthorName
                 </div>
+                <div class="rating-range d-flex flex-column">
+                    <label for="customRange" class="form-label">
+                        <fmt:message key="recipe.rating" bundle="${rb}"/>
+                    </label>
+                    <input type="range" class="form-range" min="1" max="5" step="1" id="customRange">
+                </div>
+                <button class="btn-primary">
+                    <fmt:message key="recipe.comment.send" bundle="${rb}"/>
+                </button>
             </div>
-            <div class="date">28.12.2021 18:31</div>
-            <div class="comment-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
+        </c:if>
+
+        <c:forEach items="${requestScope.comments}" var="comment">
+            <div class="some-comment">
+                <div class="post-author d-flex flex-row">
+                    <img class="avatar"
+                         src="${pageContext.request.contextPath}/picture?picture_path=${comment.userPicturePath}"
+                         alt="..."/>
+                    <div class="author-name">
+                            ${comment.userLogin}
+                    </div>
+                </div>
+                <div class="date">${comment.commentDate}</div>
+                <div class="comment-text"> ${comment.commentText}
+                </div>
+                <div class="stars" style="--rating: ${comment.mark};"></div>
             </div>
-            <div class="stars" style="--rating: 3.4;"></div>
-        </div>
+        </c:forEach>
 
     </div>
 </div>

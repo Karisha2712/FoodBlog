@@ -12,7 +12,9 @@ public final class RequestParameter {
     public static final String RECIPE_POST = "post";
 
     public static final String NO_POSTS = "no_posts";
+    public static final String NO_COMMENTS = "no_comments";
     public static final String RECIPE_POSTS = "recipe_posts";
+    public static final String COMMENTS = "comments";
 
     public static final String PICTURE_PATH = "picture_path";
 

@@ -14,11 +14,15 @@ header {
 }
 
 .header-item {
-    margin-left: 6vw;
+    margin-left: 4vw;
 }
 
 #sign-in {
-    margin-left: 40vw;
+    margin-left: 46vw;
+}
+
+#profile {
+    margin-left: 37vw;
 }
 
 .dropdown-menu {

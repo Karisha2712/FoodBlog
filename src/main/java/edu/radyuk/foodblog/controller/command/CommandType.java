@@ -10,6 +10,8 @@ public enum CommandType {
     VIEW_FULL_RECIPE,
     EDIT_BLOGGER_INFO,
     GO_TO_ADD_NEW_POST,
+    GO_TO_PROFILE_PAGE,
+    LOGOUT, //TODO
     SIGN_IN,
     SIGN_UP;
 

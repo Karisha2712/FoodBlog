@@ -33,6 +33,12 @@
 
 <h1 class="page-title"><fmt:message key="recipes.title" bundle="${rb}"/></h1>
 
+<c:if test="${requestScope.no_posts != null}">
+    <div class="page-title">
+        <fmt:message key="recipes.no_any_recipes" bundle="${rb}"/>
+    </div>
+</c:if>
+
 <div class="page-content d-flex flex-row">
 
     <c:forEach items="${requestScope.recipe_posts}" var="post">

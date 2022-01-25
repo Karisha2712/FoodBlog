@@ -28,6 +28,8 @@ public final class TableColumnName {
     public static final String BLOGGER_CITY = "city";
     public static final String PERSONAL_INFO = "personal_info";
 
+    public static final String MARK = "mark";
+
     private TableColumnName() {
     }
 }

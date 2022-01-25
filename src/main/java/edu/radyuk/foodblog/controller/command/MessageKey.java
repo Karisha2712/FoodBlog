@@ -6,6 +6,7 @@ public class MessageKey {
     public static final String UNAVAILABLE_LOGIN = "sign_up.error.unavailable_login";
     public static final String INVALID_SIGN_IN_FORM_INPUT = "sign_in_error.incorrect_data";
     public static final String EMPTY_POSTS_TABLE = "recipes.no_any_recipes";
+    public static final String NO_COMMENTS_FOR_POST = "comments.no_any_comments";
 
     private MessageKey() {
     }

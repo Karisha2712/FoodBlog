@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="page" var="rb"/>
@@ -37,12 +38,28 @@
                         </a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="sign-in"
-                       href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page">
-                        <fmt:message key="header.sign" bundle="${rb}"/>
-                    </a>
-                </li>
+                <c:if test="${sessionScope.user == null}">
+                    <li class="nav-item">
+                        <a class="nav-link" id="sign-in"
+                           href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page">
+                            <fmt:message key="header.sign" bundle="${rb}"/>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.user != null}">
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile"
+                           href="${pageContext.request.contextPath}/controller?command=go_to_profile_page">
+                                ${sessionScope.user.login}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link header-item" id="logout"
+                           href="${pageContext.request.contextPath}/controller?command=logout">
+                            <fmt:message key="profile.logout" bundle="${rb}"/>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>
