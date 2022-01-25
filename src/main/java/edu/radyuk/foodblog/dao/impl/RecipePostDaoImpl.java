@@ -39,7 +39,7 @@ public class RecipePostDaoImpl implements RecipePostDao {
 
     @Override
     public Optional<RecipePost> findEntityById(long id) throws DaoException {
-        return jdbcHelper.executeQueryForSingleObject(FIND_POST_BY_ID);
+        return jdbcHelper.executeQueryForSingleObject(FIND_POST_BY_ID, id);
     }
 
     @Override

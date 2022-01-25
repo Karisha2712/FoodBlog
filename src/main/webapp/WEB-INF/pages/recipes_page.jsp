@@ -38,7 +38,8 @@
     <c:forEach items="${requestScope.recipe_posts}" var="post">
         <div class="recipe d-flex flex-column">
             <div class="post-author d-flex flex-row">
-                <img class="avatar" src="images/default_avatar.png" alt="..."/>
+                <img class="avatar"
+                     src="${pageContext.request.contextPath}/picture?picture_path=${post.userPicturePath}" alt="..."/>
                 <div class="author-name">
                         ${post.userLogin}
                 </div>
@@ -47,7 +48,7 @@
                  src="${pageContext.request.contextPath}/picture?picture_path=${post.picturePath}"
                  alt="${post.dishName}">
             <div class="rating-with-category d-flex flex-row">
-                <div class="category" style="background-color: #7CE43C">
+                <div class="category" id="${post.recipePostCategory}">
                         ${post.recipePostCategory}
                 </div>
                 <div class="stars" style="--rating: ${post.postRating};"></div>
@@ -61,7 +62,8 @@
                 </div>
 
             </div>
-            <a href="${pageContext.request.contextPath}/controller?command=view_full_recipe" class="view-full-recipe">
+            <a href="${pageContext.request.contextPath}/controller?command=view_full_recipe&post_id=${post.postId}"
+               class="view-full-recipe">
                 <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
             </a>
         </div>

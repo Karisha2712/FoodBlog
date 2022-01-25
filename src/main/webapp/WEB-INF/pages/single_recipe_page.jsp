@@ -20,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-    <title><fmt:message key="page.name.home" bundle="${rb}"/></title>
+    <title>${requestScope.post.dishName}<</title>
 </head>
 
 <jsp:include page="template/header.jsp"/>
@@ -28,53 +28,29 @@
 <body>
 
 <div class="page-content d-flex flex-column">
-    <h1 class="page-title">Gazpacho soup</h1>
-    <div class="date">28.12.2021 18:31</div>
+    <h1 class="page-title">${requestScope.post.dishName}</h1>
+    <div class="date">${requestScope.post.postDate}</div>
     <div class="recipe-block d-flex flex-row">
-        <img class="recipe-img" src="images/recipe_2.png" alt="...">
+        <img class="recipe-img"
+             src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.picturePath}" alt="...">
         <div class="recipe-info d-flex flex-column">
             <div class="post-author d-flex flex-row">
-                <img class="avatar" src="images/default_avatar.png" alt="..."/>
+                <img class="avatar"
+                     src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.userPicturePath}"
+                     alt="..."/>
                 <div class="author-name">
-                    AuthorName
+                    ${requestScope.post.userLogin}
                 </div>
             </div>
-            <div class="stars" style="--rating: 3.4;"></div>
-            <div class="category" style="background-color: #7CE43C">
-                <fmt:message key="recipes.category.salad" bundle="${rb}"/>
+            <div class="stars" style="--rating: ${requestScope.post.postRating}"></div>
+            <div class="category" id="${requestScope.post.recipePostCategory}">
+                ${requestScope.post.recipePostCategory}
             </div>
             <div class="mini-title">
                 <fmt:message key="recipe.sub_title" bundle="${rb}"/>
             </div>
             <div class="recipe-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
+                ${requestScope.post.recipeText}
             </div>
         </div>
     </div>

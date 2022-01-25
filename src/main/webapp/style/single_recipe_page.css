@@ -94,3 +94,9 @@ textarea {
     margin-bottom: 0;
 }
 
+.recipe-text {
+    font-size: 1vw;
+    overflow: unset;
+    text-overflow: unset;
+    display: block;
+}
