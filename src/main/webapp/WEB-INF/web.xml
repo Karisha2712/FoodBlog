@@ -13,6 +13,15 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PictureServlet</servlet-name>
+        <servlet-class>edu.radyuk.foodblog.controller.PictureServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PictureServlet</servlet-name>
+        <url-pattern>/picture</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>edu.radyuk.foodblog.controller.filter.EncodingFilter</filter-class>
@@ -37,12 +46,12 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/static_pages/error_404_page.jsp</location>
+        <location>/error_pages/error_404_page.jsp</location>
     </error-page>
 
     <error-page>
         <error-code>500</error-code>
-        <location>/static_pages/error_500_page.jsp</location>
+        <location>/error_pages/error_500_page.jsp</location>
     </error-page>
 
 </web-app>

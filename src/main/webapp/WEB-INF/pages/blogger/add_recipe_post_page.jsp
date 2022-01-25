@@ -68,7 +68,7 @@
             <div class="form-floating">
                     <textarea class="form-control text-area"
                               placeholder=
-                              <fmt:message key="add_recipe.choose_file" bundle="${rb}"/> id=""
+                              <fmt:message key="add_recipe.recipe_text" bundle="${rb}"/> id=""
                               style="height: 6vw"></textarea>
             </div>
 

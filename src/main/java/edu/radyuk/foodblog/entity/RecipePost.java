@@ -7,10 +7,19 @@ public class RecipePost extends AbstractEntity {
     private String picturePath;
     private Double postRating;
     private LocalDateTime postDate;
+    private String dishName;
     private RecipePostCategory recipePostCategory;
     private long userId;
 
     public RecipePost() {
+    }
+
+    public String getDishName() {
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
     }
 
     public String getRecipeText() {

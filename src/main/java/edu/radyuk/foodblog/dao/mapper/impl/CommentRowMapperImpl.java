@@ -14,8 +14,8 @@ public class CommentRowMapperImpl implements RowMapper<Comment> {
         Comment comment = new Comment();
         comment.setEntityId(resultSet.getLong(TableColumnName.COMMENT_ID));
         comment.setCommentText(resultSet.getString(TableColumnName.COMMENT_TEXT));
-        comment.setPostId(resultSet.getLong(TableColumnName.POST_ID));
-        comment.setUserId(resultSet.getLong(TableColumnName.USER_ID));
+        comment.setPostId(resultSet.getLong(TableColumnName.POSTS_POST_ID));
+        comment.setUserId(resultSet.getLong(TableColumnName.USERS_USER_ID));
         LocalDateTime dateTime = resultSet.getTimestamp(TableColumnName.COMMENT_DATE).toLocalDateTime();
         comment.setCommentDate(dateTime);
         return comment;

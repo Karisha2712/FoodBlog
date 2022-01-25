@@ -1,6 +1,7 @@
 package edu.radyuk.foodblog.entity;
 
 public class BloggerInfo {
+    private int bloggerAge;
     private String avatarPath;
     private String country;
     private String city;
@@ -8,6 +9,14 @@ public class BloggerInfo {
     private long userId;
 
     public BloggerInfo() {
+    }
+
+    public int getBloggerAge() {
+        return bloggerAge;
+    }
+
+    public void setBloggerAge(int bloggerAge) {
+        this.bloggerAge = bloggerAge;
     }
 
     public String getAvatarPath() {

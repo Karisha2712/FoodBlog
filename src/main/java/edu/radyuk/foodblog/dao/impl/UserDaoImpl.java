@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_USER_BY_ID_QUERY = FIND_ALL_USERS_QUERY + " WHERE user_id = ?";
     private static final String FIND_USER_BY_LOGIN_QUERY = FIND_ALL_USERS_QUERY + " WHERE login = ?";
     private static final String FIND_USER_BY_EMAIL_QUERY = FIND_ALL_USERS_QUERY + " WHERE email = ?";
-    private static final String INSERT_NEW_USER = "INSERT into users " +
+    private static final String INSERT_NEW_USER = "INSERT INTO users " +
             "(login, email, hash, user_types_type_id, user_statuses_status_id) " +
             "VALUES(?, ?, ?, " +
             "(SELECT type_id FROM user_types WHERE type = ?), " +

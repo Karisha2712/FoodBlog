@@ -16,7 +16,7 @@ import java.util.concurrent.BlockingQueue;
 public final class ConnectionPool {
     private static final Logger logger = LogManager.getLogger();
     private static final int DEFAULT_POOL_SIZE = 4;
-    private static final String POOL_PROPERTIES_FILE = "properties/pool.properties";
+    private static final String POOL_PROPERTIES_FILE = "property/pool.properties";
     private static final String POOL_SIZE_PROPERTY = "pool.size";
     private BlockingQueue<ProxyConnection> availableConnections;
     private BlockingQueue<ProxyConnection> usedConnections;

@@ -15,11 +15,12 @@ public class RecipePostRowMapperImpl implements RowMapper<RecipePost> {
     public RecipePost mapRow(ResultSet resultSet) throws SQLException {
         RecipePost recipePost = new RecipePost();
         recipePost.setEntityId(resultSet.getLong(TableColumnName.POST_ID));
-        recipePost.setUserId(resultSet.getLong(TableColumnName.USER_ID));
+        recipePost.setUserId(resultSet.getLong(TableColumnName.USERS_USER_ID));
         recipePost.setRecipeText(resultSet.getString(TableColumnName.POST_TEXT));
         recipePost.setPicturePath(resultSet.getString(TableColumnName.POST_PICTURE));
         recipePost.setPostRating(resultSet.getDouble(TableColumnName.RATING));
-        String category = resultSet.getString(TableColumnName.CATEGORY.toUpperCase(Locale.ROOT));
+        recipePost.setDishName(resultSet.getString(TableColumnName.DISH_NAME));
+        String category = resultSet.getString(TableColumnName.CATEGORY).toUpperCase(Locale.ROOT);
         recipePost.setRecipePostCategory(RecipePostCategory.valueOf(category));
         LocalDateTime dateTime = resultSet.getTimestamp(TableColumnName.POST_DATE).toLocalDateTime();
         recipePost.setPostDate(dateTime);

@@ -9,12 +9,15 @@ public final class TableColumnName {
     public static final String TYPE = "type";
 
     public static final String POST_ID = "post_id";
+    public static final String USERS_USER_ID = "users_user_id";
+    public static final String DISH_NAME = "dish_name";
     public static final String POST_TEXT = "post_text";
     public static final String POST_PICTURE = "picture";
     public static final String POST_DATE = "date";
     public static final String RATING = "rating";
     public static final String CATEGORY = "category";
 
+    public static final String POSTS_POST_ID = "posts_post_id";
     public static final String COMMENT_ID = "comment_id";
     public static final String COMMENT_TEXT = "comment_text";
     public static final String COMMENT_DATE = "date";

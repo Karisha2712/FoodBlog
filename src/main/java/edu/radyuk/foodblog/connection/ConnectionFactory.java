@@ -14,7 +14,7 @@ import java.util.Properties;
 final class ConnectionFactory {
     private static final Logger logger = LogManager.getLogger();
     private static final ConnectionFactory instance = new ConnectionFactory();
-    private static final String DB_PROPERTIES = "properties/db.properties";
+    private static final String DB_PROPERTIES = "property/db.properties";
     private static final String DB_URL_PROPERTY = "url";
     private static final String DB_USER_PROPERTY = "user";
     private static final String DB_PASS_PROPERTY = "password";
