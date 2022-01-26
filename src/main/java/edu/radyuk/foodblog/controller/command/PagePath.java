@@ -16,6 +16,7 @@ public final class PagePath {
     public static final String PROFILE_PAGE_REDIRECT = "/controller?command=go_to_profile_page&user_id=";
     public static final String SIGN_UP_PAGE_REDIRECT = "/controller?command=go_to_sign_up_page";
     public static final String SIGN_IN_PAGE_REDIRECT = "/controller?command=go_to_sign_in_page";
+    public static final String VIEW_FULL_RECIPE_REDIRECT = "/controller?command=view_full_recipe&post_id=";
 
 
     private PagePath() {

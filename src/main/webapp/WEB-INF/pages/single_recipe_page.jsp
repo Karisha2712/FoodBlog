@@ -64,7 +64,9 @@
         </div>
 
         <c:if test="${sessionScope.user != null}">
-            <div class="your-comment">
+            <form class="your-comment"
+                  action="${pageContext.request.contextPath}/controller?command=comment&user_id=${sessionScope.user.entityId}&post_id=${requestScope.post.postId}"
+                  method="post">
                 <div class="post-author d-flex flex-row">
                     <img class="avatar" src="images/default_avatar.png" alt="..."/>
                     <div class="author-name">
@@ -72,19 +74,19 @@
                     </div>
                 </div>
                 <div class="form-floating">
-                <textarea class="form-control" id="floatingTextarea2"
+                <textarea class="form-control" id="comment_text" name="comment_text"
                           style="height: 100px"></textarea>
                 </div>
                 <div class="rating-range d-flex flex-column">
-                    <label for="customRange" class="form-label">
+                    <label for="mark" class="form-label">
                         <fmt:message key="recipe.rating" bundle="${rb}"/>
                     </label>
-                    <input type="range" class="form-range" min="1" max="5" step="1" id="customRange">
+                    <input type="range" class="form-range" min="0" max="5" step="1" id="mark" name="mark">
                 </div>
-                <button class="btn-primary">
+                <button class="btn-primary" type="submit">
                     <fmt:message key="recipe.comment.send" bundle="${rb}"/>
                 </button>
-            </div>
+            </form>
         </c:if>
 
         <c:forEach items="${requestScope.comments}" var="comment">

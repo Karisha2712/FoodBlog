@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public class CommentDaoImpl implements CommentDao {
     private static final String FIND_COMMENTS_BY_POST_ID_QUERY = "SELECT * FROM comments WHERE posts_post_id = ?";
+    private static final String INSERT_COMMENT_QUERY = "INSERT INTO comments (mark, comment_text, date, users_user_id, posts_post_id) " +
+            "VALUES(?, ?, ?, ?, ?)";
 
     private JdbcHelper<Comment> jdbcHelper;
 
@@ -32,9 +34,13 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public long insert(Comment entity) throws DaoException {
-        return 0;
-        //TODO
+    public long insert(Comment comment) throws DaoException {
+        return jdbcHelper.executeUpdate(INSERT_COMMENT_QUERY,
+                comment.getMark(),
+                comment.getCommentText(),
+                comment.getCommentDate(),
+                comment.getUserId(),
+                comment.getPostId());
     }
 
     @Override

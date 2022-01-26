@@ -16,6 +16,8 @@ public final class RequestParameter {
     public static final String NO_COMMENTS = "no_comments";
     public static final String RECIPE_POSTS = "recipe_posts";
     public static final String USER_RECIPE_POSTS = "user_recipe_posts";
+    public static final String COMMENT_TEXT = "comment_text";
+    public static final String MARK = "mark";
     public static final String COMMENTS = "comments";
 
     public static final String PICTURE_PATH = "picture_path";

@@ -1,13 +1,15 @@
 package edu.radyuk.foodblog.dao;
 
-import edu.radyuk.foodblog.dao.impl.*;
+import edu.radyuk.foodblog.dao.impl.BloggerInfoDaoImpl;
+import edu.radyuk.foodblog.dao.impl.CommentDaoImpl;
+import edu.radyuk.foodblog.dao.impl.RecipePostDaoImpl;
+import edu.radyuk.foodblog.dao.impl.UserDaoImpl;
 
 public final class DaoProvider {
     private final CommentDao commentDao = new CommentDaoImpl();
     private final UserDao userDao = new UserDaoImpl();
     private final BloggerInfoDao bloggerInfoDao = new BloggerInfoDaoImpl();
     private final RecipePostDao recipePostDao = new RecipePostDaoImpl();
-    private final MarkDao markDao = new MarkDaoImpl();
 
     private DaoProvider() {
     }
@@ -32,9 +34,6 @@ public final class DaoProvider {
         return recipePostDao;
     }
 
-    public MarkDao getMarkDao() {
-        return markDao;
-    }
 
     private static class Holder {
         private static final DaoProvider instance = new DaoProvider();

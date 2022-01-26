@@ -7,8 +7,17 @@ public class Comment extends AbstractEntity {
     private LocalDateTime commentDate;
     private long userId;
     private long postId;
+    private double mark;
 
     public Comment() {
+    }
+
+    public double getMark() {
+        return mark;
+    }
+
+    public void setMark(double mark) {
+        this.mark = mark;
     }
 
     public String getCommentText() {

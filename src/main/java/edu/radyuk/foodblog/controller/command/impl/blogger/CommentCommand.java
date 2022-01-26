@@ -2,13 +2,64 @@ package edu.radyuk.foodblog.controller.command.impl.blogger;
 
 import edu.radyuk.foodblog.controller.command.ClientCommand;
 import edu.radyuk.foodblog.controller.command.CommandResponse;
+import edu.radyuk.foodblog.controller.command.RequestParameter;
+import edu.radyuk.foodblog.controller.command.RoutingType;
+import edu.radyuk.foodblog.exception.ServiceException;
+import edu.radyuk.foodblog.service.CommentService;
+import edu.radyuk.foodblog.service.ServiceProvider;
+import edu.radyuk.foodblog.validator.IdValidator;
+import edu.radyuk.foodblog.validator.ValidatorProvider;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+
+import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
+import static edu.radyuk.foodblog.controller.command.PagePath.VIEW_FULL_RECIPE_REDIRECT;
 
 public class CommentCommand implements ClientCommand {
+    private static final Logger logger = LogManager.getLogger();
+
     @Override
     public CommandResponse execute(HttpServletRequest request) {
-        return null;
+        String userIdParameter = request.getParameter(RequestParameter.USER_ID);
+        String postIdParameter = request.getParameter(RequestParameter.POST_ID);
+        String commentText = request.getParameter(RequestParameter.COMMENT_TEXT);
+        String markText = request.getParameter(RequestParameter.MARK);
+        IdValidator idValidator = ValidatorProvider.getInstance().getIdValidator();
+
+        if (!idValidator.isIdPositive(userIdParameter)) {
+            logger.log(Level.ERROR, "Invalid user id");
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+        }
+
+        if (!idValidator.isIdPositive(postIdParameter)) {
+            logger.log(Level.ERROR, "Invalid post id");
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+        }
+
+        long userId = Long.parseLong(userIdParameter);
+        long postId = Long.parseLong(postIdParameter);
+        double mark;
+        try {
+            mark = Double.parseDouble(markText);
+        } catch (NumberFormatException e) {
+            logger.log(Level.ERROR, "Invalid mark", e);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+        }
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        CommentService commentService = ServiceProvider.getInstance().getCommentService();
+        try {
+            commentService.addComment(commentText, dateTime, userId, postId, mark);
+        } catch (ServiceException e) {
+            logger.log(Level.ERROR, e);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+        }
+
+        return new CommandResponse(VIEW_FULL_RECIPE_REDIRECT + postId, RoutingType.REDIRECT);
         //TODO
     }
 }
