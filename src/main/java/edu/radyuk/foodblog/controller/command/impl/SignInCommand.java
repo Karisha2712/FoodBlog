@@ -45,6 +45,6 @@ public class SignInCommand implements ClientCommand {
         User user = optionalUser.get();
         session.setAttribute(USER, user);
 
-        return new CommandResponse(PagePath.PROFILE_PAGE, RoutingType.FORWARD);
+        return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
     }
 }

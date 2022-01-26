@@ -40,6 +40,13 @@
         <servlet-name>Controller</servlet-name>
     </filter-mapping>
 
+    <jsp-config>
+        <taglib>
+            <taglib-uri>customtags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/custom.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
     <listener>
         <listener-class>edu.radyuk.foodblog.controller.HttpSessionListenerImpl</listener-class>
     </listener>

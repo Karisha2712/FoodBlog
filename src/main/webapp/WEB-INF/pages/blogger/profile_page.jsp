@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="page" var="rb"/>
@@ -56,107 +57,44 @@
 </form>
 
 <div class="page-content d-flex flex-row">
-    <div class="recipe d-flex flex-column">
-        <div class="post-author d-flex flex-row">
-            <img class="avatar" src="images/default_avatar.png" alt="..."/>
-            <div class="author-name">
-                AuthorName
-            </div>
+    <c:if test="${requestScope.no_posts != null}">
+        <div>
+            <fmt:message key="recipes.no_any_recipes" bundle="${rb}"/>
         </div>
-        <img class="recipe-img" src="images/recipe_1.png" alt="...">
-        <div class="rating-with-category d-flex flex-row">
-            <div class="category" style="background-color: #7CE43C">
-                <fmt:message key="recipes.category.salad" bundle="${rb}"/>
+    </c:if>
+    <c:forEach items="${requestScope.user_recipe_posts}" var="post">
+        <div class="recipe d-flex flex-column">
+            <div class="post-author d-flex flex-row">
+                <img class="avatar"
+                     src="${pageContext.request.contextPath}/picture?picture_path=${post.userPicturePath}" alt="..."/>
+                <div class="author-name">
+                        ${post.userLogin}
+                </div>
             </div>
-            <div class="stars" style="--rating: 3.4;"></div>
-        </div>
-        <div class="recipe-block">
-            <div class="dish-name">
-                Cesar salad
+            <img class="recipe-img"
+                 src="${pageContext.request.contextPath}/picture?picture_path=${post.picturePath}"
+                 alt="${post.dishName}">
+            <div class="rating-with-category d-flex flex-row">
+                <div class="category" id="${post.recipePostCategory}">
+                        ${post.recipePostCategory}
+                </div>
+                <div class="stars" style="--rating: ${post.postRating};"></div>
             </div>
-            <div class="recipe-text">
-                Ingredients: cucumbers, chicken, green salad, eggs, salt, pepper, tomatoes, cheese, garlic, mustard,
-                olive oil.<br/>
-                Steps: Chop together anchovy fillets, garlic, and pinch of salt. Use the side of a knife blade to mash
-                into a paste,
-                then scrape into a medium bowl. Whisk in egg yolks, 2 Tbsp. lemon juice, and mustard. Adding drop by
-                drop to start,
-                gradually whisk in olive oil, then vegetable oil; whisk until dressing is thick and glossy.
-            </div>
+            <div class="recipe-block">
+                <div class="dish-name">
+                        ${post.dishName}
+                </div>
+                <div class="recipe-text">
+                        ${post.recipeText}
+                </div>
 
+            </div>
+            <a href="${pageContext.request.contextPath}/controller?command=view_full_recipe&post_id=${post.postId}"
+               class="view-full-recipe">
+                <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
+            </a>
         </div>
-        <a href="#" class="view-full-recipe">
-            <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
-        </a>
-    </div>
-
-    <div class="recipe d-flex flex-column">
-        <div class="post-author d-flex flex-row">
-            <img class="avatar" src="images/default_avatar.png" alt="..."/>
-            <div class="author-name">
-                AuthorName
-            </div>
-        </div>
-        <img class="recipe-img" src="images/recipe_2.png" alt="...">
-        <div class="rating-with-category d-flex flex-row">
-            <div class="category" style="background-color: #ff7b64">
-                <fmt:message key="recipes.category.soup" bundle="${rb}"/>
-            </div>
-            <div class="stars" style="--rating: 3.4;"></div>
-        </div>
-        <div class="recipe-block">
-            <div class="dish-name">
-                Cesar salad
-            </div>
-            <div class="recipe-text">
-                Ingredients: cucumbers, chicken, green salad, eggs, salt, pepper, tomatoes, cheese, garlic, mustard,
-                olive oil.<br/>
-                Steps: Chop together anchovy fillets, garlic, and pinch of salt. Use the side of a knife blade to mash
-                into a paste,
-                then scrape into a medium bowl. Whisk in egg yolks, 2 Tbsp. lemon juice, and mustard. Adding drop by
-                drop to start,
-                gradually whisk in olive oil, then vegetable oil; whisk until dressing is thick and glossy.
-            </div>
-
-        </div>
-        <a href="#" class="view-full-recipe">
-            <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
-        </a>
-    </div>
-
-    <div class="recipe d-flex flex-column">
-        <div class="post-author d-flex flex-row">
-            <img class="avatar" src="images/default_avatar.png" alt="..."/>
-            <div class="author-name">
-                AuthorName
-            </div>
-        </div>
-        <img class="recipe-img" src="images/recipe_3.png" alt="...">
-        <div class="rating-with-category d-flex flex-row">
-            <div class="category" style="background-color: #ff9f5f">
-                <fmt:message key="recipes.category.main" bundle="${rb}"/>
-            </div>
-            <div class="stars" style="--rating: 3.4;"></div>
-        </div>
-        <div class="recipe-block">
-            <div class="dish-name">
-                Cesar salad
-            </div>
-            <div class="recipe-text">
-                Ingredients: cucumbers, chicken, green salad, eggs, salt, pepper, tomatoes, cheese, garlic, mustard,
-                olive oil.<br/>
-                Steps: Chop together anchovy fillets, garlic, and pinch of salt. Use the side of a knife blade to mash
-                into a paste,
-                then scrape into a medium bowl. Whisk in egg yolks, 2 Tbsp. lemon juice, and mustard. Adding drop by
-                drop to start,
-                gradually whisk in olive oil, then vegetable oil; whisk until dressing is thick and glossy.
-            </div>
-
-        </div>
-        <a href="#" class="view-full-recipe">
-            <fmt:message key="recipes.full_recipe_link" bundle="${rb}"/>
-        </a>
-    </div>
+    </c:forEach>
 
 </div>
 

@@ -74,11 +74,11 @@ public class RecipePostDaoImpl implements RecipePostDao {
 
     @Override
     public List<RecipePost> findRecipePostsByCategory(RecipePostCategory category) throws DaoException {
-        return jdbcHelper.executeQuery(FIND_POSTS_BY_CATEGORY);
+        return jdbcHelper.executeQuery(FIND_POSTS_BY_CATEGORY, category);
     }
 
     @Override
     public List<RecipePost> findRecipePostsByUserId(Long userId) throws DaoException {
-        return jdbcHelper.executeQuery(FIND_POSTS_BY_USER_ID);
+        return jdbcHelper.executeQuery(FIND_POSTS_BY_USER_ID, userId);
     }
 }

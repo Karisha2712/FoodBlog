@@ -10,19 +10,19 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home" aria-current="page"
+                    <a class="nav-link" id="home" aria-current="page"
                        href="${pageContext.request.contextPath}/controller?command=go_to_home_page">
                         <fmt:message key="header.home" bundle="${rb}"/>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link header-item"
+                    <a class="nav-link header-item" id="recipe"
                        href="${pageContext.request.contextPath}/controller?command=go_to_recipes_page">
                         <fmt:message key="header.recipe" bundle="${rb}"/>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link header-item"
+                    <a class="nav-link header-item" id="about"
                        href="${pageContext.request.contextPath}/controller?command=go_to_about_page">
                         <fmt:message key="header.about" bundle="${rb}"/>
                     </a>
@@ -49,7 +49,7 @@
                 <c:if test="${sessionScope.user != null}">
                     <li class="nav-item">
                         <a class="nav-link" id="profile"
-                           href="${pageContext.request.contextPath}/controller?command=go_to_profile_page">
+                           href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${sessionScope.user.entityId}">
                                 ${sessionScope.user.login}
                         </a>
                     </li>

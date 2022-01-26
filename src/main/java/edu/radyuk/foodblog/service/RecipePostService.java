@@ -10,4 +10,6 @@ public interface RecipePostService {
     List<RecipePostDto> retrieveRecipePosts() throws ServiceException;
 
     Optional<RecipePostDto> retrieveRecipePostById(long id) throws ServiceException;
+
+    List<RecipePostDto> retrieveRecipePostsByUserId(long userId) throws ServiceException;
 }

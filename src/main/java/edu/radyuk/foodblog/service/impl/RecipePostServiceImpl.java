@@ -67,6 +67,30 @@ public class RecipePostServiceImpl implements RecipePostService {
         }
     }
 
+    @Override
+    public List<RecipePostDto> retrieveRecipePostsByUserId(long userId) throws ServiceException {
+        RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
+        try {
+            List<RecipePost> recipePosts = recipePostDao.findRecipePostsByUserId(userId);
+            List<RecipePostDto> resultRecipePosts = new ArrayList<>(recipePosts.size());
+            Optional<User> optionalUser = userDao.findEntityById(userId);
+            if (optionalUser.isEmpty()) {
+                logger.log(Level.ERROR, "User with id {} does not exist", userId);
+                throw new ServiceException("User with id " + userId + " does not exist");
+            }
+            for (RecipePost recipePost : recipePosts) {
+                User user = optionalUser.get();
+                RecipePostDto recipePostDto = retrieveRecipePostDto(recipePost, user);
+                resultRecipePosts.add(recipePostDto);
+            }
+            return resultRecipePosts;
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
     private RecipePostDto retrieveRecipePostDto(RecipePost recipePost, User user) throws ServiceException {
         BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
         RecipePostDto recipePostDto = new RecipePostDto();

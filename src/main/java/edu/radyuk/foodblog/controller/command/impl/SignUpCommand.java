@@ -71,6 +71,6 @@ public class SignUpCommand implements ClientCommand {
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
         }
         session.setAttribute(USER, user);
-        return new CommandResponse(PagePath.PROFILE_PAGE, RoutingType.FORWARD);
+        return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
     }
 }
