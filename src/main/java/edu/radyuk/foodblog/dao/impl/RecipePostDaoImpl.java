@@ -22,10 +22,11 @@ public class RecipePostDaoImpl implements RecipePostDao {
             + " WHERE users_user_id = ? ORDER BY date";
     private static final String FIND_POST_BY_ID = FIND_ALL_POSTS_QUERY
             + " WHERE post_id = ?";
-    private static final String INSERT_NEW_POST = "INSERT INTO posts " +
+    private static final String INSERT_NEW_POST_QUERY = "INSERT INTO posts " +
             "(post_text, picture, date, rating, users_user_id, dish_name, post_categories_category_id) " +
             "VALUES(?, ?, ?, ?, ?, ? " +
             "(SELECT category_id FROM categories WHERE category = ?))";
+    private static final String UPDATE_RATING_QUERY = "UPDATE posts SET rating = ? where post_id = ?";
     private JdbcHelper<RecipePost> jdbcHelper;
 
     public RecipePostDaoImpl() {
@@ -44,7 +45,7 @@ public class RecipePostDaoImpl implements RecipePostDao {
 
     @Override
     public long insert(RecipePost recipePost) throws DaoException {
-        return jdbcHelper.executeUpdate(INSERT_NEW_POST,
+        return jdbcHelper.executeUpdate(INSERT_NEW_POST_QUERY,
                 recipePost.getRecipeText(),
                 recipePost.getPicturePath(),
                 recipePost.getPostDate(),
@@ -80,5 +81,10 @@ public class RecipePostDaoImpl implements RecipePostDao {
     @Override
     public List<RecipePost> findRecipePostsByUserId(Long userId) throws DaoException {
         return jdbcHelper.executeQuery(FIND_POSTS_BY_USER_ID, userId);
+    }
+
+    @Override
+    public long updateRecipePostRating(long postId, double rating) throws DaoException {
+        return jdbcHelper.executeUpdate(UPDATE_RATING_QUERY, rating, postId);
     }
 }

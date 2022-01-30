@@ -19,6 +19,7 @@ public final class RequestParameter {
     public static final String COMMENT_TEXT = "comment_text";
     public static final String MARK = "mark";
     public static final String COMMENTS = "comments";
+    public static final String BLOGGER_INFO = "blogger_info";
 
     public static final String PICTURE_PATH = "picture_path";
 

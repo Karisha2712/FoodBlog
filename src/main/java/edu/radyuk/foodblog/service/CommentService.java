@@ -10,4 +10,6 @@ public interface CommentService {
     List<CommentDto> retrievePostComments(long postId) throws ServiceException;
 
     void addComment(String commentText, LocalDateTime dateTime, long userId, long postId, double mark) throws ServiceException;
+
+    void overwriteRecipePostRating(long postId) throws ServiceException;
 }

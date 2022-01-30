@@ -40,6 +40,15 @@
         <servlet-name>Controller</servlet-name>
     </filter-mapping>
 
+    <filter>
+        <filter-name>SaveCurrentQueryFilter</filter-name>
+        <filter-class>edu.radyuk.foodblog.controller.filter.SaveCurrentQuery</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SaveCurrentQueryFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
+
     <jsp-config>
         <taglib>
             <taglib-uri>customtags</taglib-uri>
@@ -48,7 +57,7 @@
     </jsp-config>
 
     <listener>
-        <listener-class>edu.radyuk.foodblog.controller.HttpSessionListenerImpl</listener-class>
+        <listener-class>edu.radyuk.foodblog.controller.listener.HttpSessionListenerImpl</listener-class>
     </listener>
 
     <error-page>
@@ -58,6 +67,11 @@
 
     <error-page>
         <error-code>500</error-code>
+        <location>/error_pages/error_500_page.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
         <location>/error_pages/error_500_page.jsp</location>
     </error-page>
 

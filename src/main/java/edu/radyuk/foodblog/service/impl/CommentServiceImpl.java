@@ -2,6 +2,7 @@ package edu.radyuk.foodblog.service.impl;
 
 import edu.radyuk.foodblog.dao.CommentDao;
 import edu.radyuk.foodblog.dao.DaoProvider;
+import edu.radyuk.foodblog.dao.RecipePostDao;
 import edu.radyuk.foodblog.dao.UserDao;
 import edu.radyuk.foodblog.entity.Comment;
 import edu.radyuk.foodblog.entity.User;
@@ -71,4 +72,24 @@ public class CommentServiceImpl implements CommentService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void overwriteRecipePostRating(long postId) throws ServiceException {
+        CommentDao commentDao = DaoProvider.getInstance().getCommentDao();
+        RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
+        List<Comment> comments;
+        double averageMark = 0;
+        try {
+            comments = commentDao.findCommentsByPostId(postId);
+            for (Comment comment : comments) {
+                averageMark += comment.getMark();
+            }
+            averageMark = averageMark / comments.size();
+            recipePostDao.updateRecipePostRating(postId, averageMark);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
 }

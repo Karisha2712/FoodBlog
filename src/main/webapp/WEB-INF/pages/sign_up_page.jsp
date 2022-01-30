@@ -55,13 +55,15 @@
         </c:if>
         <form class="form-floating mb-3 d-flex flex-column"
               action="${pageContext.request.contextPath}/controller?command=sign_up" method="post">
-            <input type="text" class="field" name="login" id="login"
+            <input type="text" class="field" name="login" id="login" pattern="[A-Za-z0-9_-]{3,20}"
                    placeholder=
                    <fmt:message key="input.login.placeholder" bundle="${rb}"/> required>
             <input type="email" class="field" id="email" name="email"
+                   pattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$"
                    placeholder=
                    <fmt:message key="input.email.placeholder" bundle="${rb}"/> required>
             <input type="password" class="field" id="password" name="password"
+                   pattern="[A-Za-z0-9_-]{6,20}"
                    placeholder=
                    <fmt:message key="input.password.placeholder" bundle="${rb}"/> required>
             <div class="form-check">

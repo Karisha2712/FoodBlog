@@ -1,8 +1,10 @@
 package edu.radyuk.foodblog.controller.command.impl.blogger;
 
 import edu.radyuk.foodblog.controller.command.*;
+import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.entity.dto.RecipePostDto;
 import edu.radyuk.foodblog.exception.ServiceException;
+import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.RecipePostService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.validator.IdValidator;
@@ -13,12 +15,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.EMPTY_POSTS_TABLE;
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_404_PAGE;
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
-import static edu.radyuk.foodblog.controller.command.RequestParameter.NO_POSTS;
-import static edu.radyuk.foodblog.controller.command.RequestParameter.USER_RECIPE_POSTS;
+import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
 
 public class GoToProfilePageCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -46,6 +48,18 @@ public class GoToProfilePageCommand implements ClientCommand {
             request.setAttribute(NO_POSTS, EMPTY_POSTS_TABLE);
         }
         request.setAttribute(USER_RECIPE_POSTS, recipePosts);
+
+        Optional<BloggerInfo> optionalBloggerInfo;
+        BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
+        try {
+            optionalBloggerInfo = bloggerInfoService.findBloggerInfoByUserId(userId);
+        } catch (ServiceException e) {
+            logger.log(Level.ERROR, e);
+            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+        }
+
+        optionalBloggerInfo.ifPresent(bloggerInfo -> request.setAttribute(BLOGGER_INFO, bloggerInfo));
+
         return new CommandResponse(PagePath.PROFILE_PAGE, RoutingType.FORWARD);
         //TODO add personal recipes + check if userId = currentUserId
     }

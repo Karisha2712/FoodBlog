@@ -10,7 +10,7 @@ public class EncodingFilter implements Filter {
     private String encoding;
 
     @Override
-    public void init(FilterConfig fConfig) throws ServletException {
+    public void init(FilterConfig fConfig) {
         encoding = fConfig.getInitParameter(REQUEST_ENCODING_PARAM);
         if (encoding == null) {
             encoding = DEFAULT_ENCODING;

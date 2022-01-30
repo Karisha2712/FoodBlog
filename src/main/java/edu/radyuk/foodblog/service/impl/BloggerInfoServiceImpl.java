@@ -16,6 +16,7 @@ public class BloggerInfoServiceImpl implements BloggerInfoService {
     private static final Logger logger = LogManager.getLogger();
     private static final String DEFAULT_PICTURE_PATH = "default.png";
 
+
     @Override
     public String findPicturePathByUserId(long userId) throws ServiceException {
         BloggerInfoDao bloggerInfoDao = DaoProvider.getInstance().getBloggerInfoDao();
@@ -27,6 +28,17 @@ public class BloggerInfoServiceImpl implements BloggerInfoService {
             }
             String picturePath = optionalBloggerInfo.get().getAvatarPath();
             return picturePath.isBlank() ? DEFAULT_PICTURE_PATH : picturePath;
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Optional<BloggerInfo> findBloggerInfoByUserId(long userId) throws ServiceException {
+        BloggerInfoDao bloggerInfoDao = DaoProvider.getInstance().getBloggerInfoDao();
+        try {
+            return bloggerInfoDao.findEntityById(userId);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);

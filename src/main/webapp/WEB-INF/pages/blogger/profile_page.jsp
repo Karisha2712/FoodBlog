@@ -27,33 +27,39 @@
 <jsp:include page="../template/header.jsp"/>
 
 <body>
-
-<div class="profile-info d-flex flex-row">
-    <img class="blogger-avatar" src="images/default_avatar_big.png">
-    <div class="blogger-info d-flex flex-column">
-        <div class="blogger-name">BloggerName</div>
-        <div class="blogger-city">City</div>
-        <div class="blogger-country">Country</div>
-        <div class="personal-info">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+<c:if test="${requestScope.blogger_info != null}">
+    <div class="profile-info d-flex flex-row">
+        <div class="blogger-avatar d-flex flex-column">
+            <img alt="..."
+                 src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.blogger_info.avatarPath}">
         </div>
-        <a href="${pageContext.request.contextPath}/controller?command=edit_blogger_info" class="edit-info">
-            <fmt:message key="profile.edit.info" bundle="${rb}"/>
-        </a>
+        <div class="blogger-info d-flex flex-column">
+            <div class="blogger-name">${sessionScope.user.login}</div> <!--CHANGE TO BLOGGER INFO-->
+            <div class="blogger-age">${requestScope.blogger_info.bloggerAge}</div>
+            <div class="blogger-city">${requestScope.blogger_info.city},
+                    ${requestScope.blogger_info.country}</div>
+            <div class="personal-info">
+                    ${requestScope.blogger_info.personalInfo}
+            </div>
+            <c:if test="${requestScope.blogger_info.userId == sessionScope.user.entityId}">
+                <a href="${pageContext.request.contextPath}/controller?command=edit_blogger_info" class="edit-info">
+                    <fmt:message key="profile.edit.info" bundle="${rb}"/>
+                </a>
+            </c:if>
+        </div>
     </div>
-</div>
+</c:if>
 
 <form class="page-head d-flex flex-row"
       action="${pageContext.request.contextPath}/controller?command=go_to_add_new_post" method="post">
     <span class="page-title">
         <fmt:message key="recipes.title" bundle="${rb}"/>
     </span>
-    <button class="btn-primary" type="submit">
-        <fmt:message key="profile.new.recipe" bundle="${rb}"/>
-    </button>
+    <c:if test="${requestScope.blogger_info != null && requestScope.blogger_info.userId == sessionScope.user.entityId}">
+        <button class="btn-primary" type="submit">
+            <fmt:message key="profile.new.recipe" bundle="${rb}"/>
+        </button>
+    </c:if>
 </form>
 
 <div class="page-content d-flex flex-row">
@@ -64,13 +70,6 @@
     </c:if>
     <c:forEach items="${requestScope.user_recipe_posts}" var="post">
         <div class="recipe d-flex flex-column">
-            <div class="post-author d-flex flex-row">
-                <img class="avatar"
-                     src="${pageContext.request.contextPath}/picture?picture_path=${post.userPicturePath}" alt="..."/>
-                <div class="author-name">
-                        ${post.userLogin}
-                </div>
-            </div>
             <img class="recipe-img"
                  src="${pageContext.request.contextPath}/picture?picture_path=${post.picturePath}"
                  alt="${post.dishName}">

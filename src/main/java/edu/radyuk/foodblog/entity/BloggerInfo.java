@@ -1,6 +1,8 @@
 package edu.radyuk.foodblog.entity;
 
-public class BloggerInfo {
+import java.io.Serializable;
+
+public class BloggerInfo implements Serializable {
     private int bloggerAge;
     private String avatarPath;
     private String country;

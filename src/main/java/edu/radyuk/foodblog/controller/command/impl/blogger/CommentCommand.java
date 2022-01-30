@@ -1,23 +1,24 @@
 package edu.radyuk.foodblog.controller.command.impl.blogger;
 
-import edu.radyuk.foodblog.controller.command.ClientCommand;
-import edu.radyuk.foodblog.controller.command.CommandResponse;
-import edu.radyuk.foodblog.controller.command.RequestParameter;
-import edu.radyuk.foodblog.controller.command.RoutingType;
+import edu.radyuk.foodblog.controller.command.*;
 import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.CommentService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.validator.IdValidator;
 import edu.radyuk.foodblog.validator.ValidatorProvider;
+import edu.radyuk.foodblog.validator.CommentTextValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
+import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_COMMENT;
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 import static edu.radyuk.foodblog.controller.command.PagePath.VIEW_FULL_RECIPE_REDIRECT;
+import static edu.radyuk.foodblog.controller.command.SessionAttribute.COMMENT_ERROR;
 
 public class CommentCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -29,6 +30,8 @@ public class CommentCommand implements ClientCommand {
         String commentText = request.getParameter(RequestParameter.COMMENT_TEXT);
         String markText = request.getParameter(RequestParameter.MARK);
         IdValidator idValidator = ValidatorProvider.getInstance().getIdValidator();
+        CommentTextValidator commentTextValidator = ValidatorProvider.getInstance().getCommentTextValidator();
+        HttpSession session = request.getSession();
 
         if (!idValidator.isIdPositive(userIdParameter)) {
             logger.log(Level.ERROR, "Invalid user id");
@@ -50,10 +53,17 @@ public class CommentCommand implements ClientCommand {
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
         }
 
+        if (!commentTextValidator.isCommentValid(commentText)) {
+            logger.log(Level.WARN, "Invalid form input");
+            session.setAttribute(COMMENT_ERROR, INVALID_COMMENT);
+            return new CommandResponse(PagePath.VIEW_FULL_RECIPE_REDIRECT + postId, RoutingType.REDIRECT);
+        }
+
         LocalDateTime dateTime = LocalDateTime.now();
         CommentService commentService = ServiceProvider.getInstance().getCommentService();
         try {
             commentService.addComment(commentText, dateTime, userId, postId, mark);
+            commentService.overwriteRecipePostRating(postId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);

@@ -44,8 +44,10 @@
     <c:forEach items="${requestScope.recipe_posts}" var="post">
         <div class="recipe d-flex flex-column">
             <div class="post-author d-flex flex-row">
-                <img class="avatar"
-                     src="${pageContext.request.contextPath}/picture?picture_path=${post.userPicturePath}" alt="..."/>
+                <div class="avatar d-flex flex-row">
+                    <img src="${pageContext.request.contextPath}/picture?picture_path=${post.userPicturePath}"
+                         alt="..."/>
+                </div>
                 <div class="author-name">
                         ${post.userLogin}
                 </div>

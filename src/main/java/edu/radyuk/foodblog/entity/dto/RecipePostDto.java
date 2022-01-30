@@ -9,19 +9,19 @@ public class RecipePostDto implements Serializable {
     private String recipeText;
     private String dishName;
     private String picturePath;
-    private Double postRating;
+    private double postRating;
     private LocalDateTime postDate;
     private RecipePostCategory recipePostCategory;
     private String userPicturePath;
     private String userLogin;
-    private Long userId;
-    private Long postId;
+    private long userId;
+    private long postId;
 
-    public Long getPostId() {
+    public long getPostId() {
         return postId;
     }
 
-    public void setPostId(Long postId) {
+    public void setPostId(long postId) {
         this.postId = postId;
     }
 
@@ -49,7 +49,7 @@ public class RecipePostDto implements Serializable {
         this.picturePath = picturePath;
     }
 
-    public Double getPostRating() {
+    public double getPostRating() {
         return postRating;
     }
 
@@ -89,11 +89,11 @@ public class RecipePostDto implements Serializable {
         this.userLogin = userLogin;
     }
 
-    public Long getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -104,27 +104,34 @@ public class RecipePostDto implements Serializable {
 
         RecipePostDto that = (RecipePostDto) o;
 
+        if (Double.compare(that.postRating, postRating) != 0) return false;
+        if (userId != that.userId) return false;
+        if (postId != that.postId) return false;
         if (recipeText != null ? !recipeText.equals(that.recipeText) : that.recipeText != null) return false;
+        if (dishName != null ? !dishName.equals(that.dishName) : that.dishName != null) return false;
         if (picturePath != null ? !picturePath.equals(that.picturePath) : that.picturePath != null) return false;
-        if (postRating != null ? !postRating.equals(that.postRating) : that.postRating != null) return false;
         if (postDate != null ? !postDate.equals(that.postDate) : that.postDate != null) return false;
         if (recipePostCategory != that.recipePostCategory) return false;
         if (userPicturePath != null ? !userPicturePath.equals(that.userPicturePath) : that.userPicturePath != null)
             return false;
-        if (userLogin != null ? !userLogin.equals(that.userLogin) : that.userLogin != null) return false;
-        return userId != null ? userId.equals(that.userId) : that.userId == null;
+        return userLogin != null ? userLogin.equals(that.userLogin) : that.userLogin == null;
     }
 
     @Override
     public int hashCode() {
-        int result = recipeText != null ? recipeText.hashCode() : 0;
+        int result;
+        long temp;
+        result = recipeText != null ? recipeText.hashCode() : 0;
+        result = 31 * result + (dishName != null ? dishName.hashCode() : 0);
         result = 31 * result + (picturePath != null ? picturePath.hashCode() : 0);
-        result = 31 * result + (postRating != null ? postRating.hashCode() : 0);
+        temp = Double.doubleToLongBits(postRating);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (postDate != null ? postDate.hashCode() : 0);
         result = 31 * result + (recipePostCategory != null ? recipePostCategory.hashCode() : 0);
         result = 31 * result + (userPicturePath != null ? userPicturePath.hashCode() : 0);
         result = 31 * result + (userLogin != null ? userLogin.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (int) (postId ^ (postId >>> 32));
         return result;
     }
 

@@ -10,4 +10,6 @@ public interface RecipePostDao extends Dao<RecipePost> {
     List<RecipePost> findRecipePostsByCategory(RecipePostCategory category) throws DaoException;
 
     List<RecipePost> findRecipePostsByUserId(Long userId) throws DaoException;
+
+    long updateRecipePostRating(long postId, double rating) throws DaoException;
 }

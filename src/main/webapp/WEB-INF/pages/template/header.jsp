@@ -30,11 +30,22 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link header-item dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <fmt:message key="header.en_lang" bundle="${rb}"/>
+                        <c:if test="${sessionScope.locale == 'en'}">
+                            <fmt:message key="header.en_lang" bundle="${rb}"/>
+                        </c:if>
+                        <c:if test="${sessionScope.locale == 'ru'}">
+                            <fmt:message key="header.ru_lang" bundle="${rb}"/>
+                        </c:if>
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">
-                            <fmt:message key="header.ru_lang" bundle="${rb}"/>
+                        <li><a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/controller?command=change_language">
+                            <c:if test="${sessionScope.locale == 'en'}">
+                                <fmt:message key="header.ru_lang" bundle="${rb}"/>
+                            </c:if>
+                            <c:if test="${sessionScope.locale == 'ru'}">
+                                <fmt:message key="header.en_lang" bundle="${rb}"/>
+                            </c:if>
                         </a></li>
                     </ul>
                 </li>
@@ -63,4 +74,5 @@
             </ul>
         </div>
     </div>
+    <script src="script/header.js"></script>
 </header>
