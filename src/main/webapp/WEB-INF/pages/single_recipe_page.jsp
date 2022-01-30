@@ -36,9 +36,10 @@
              src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.picturePath}" alt="...">
         <div class="recipe-info d-flex flex-column">
             <div class="post-author d-flex flex-row">
-                <img class="avatar"
-                     src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.userPicturePath}"
-                     alt="..."/>
+                <div class="avatar d-flex flex-row">
+                    <img src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.userPicturePath}"
+                         alt="..."/>
+                </div>
                 <div class="author-name">
                     ${requestScope.post.userLogin}
                 </div>
@@ -68,6 +69,7 @@
                   action="${pageContext.request.contextPath}/controller?command=comment&user_id=${sessionScope.user.entityId}&post_id=${requestScope.post.postId}"
                   method="post">
                 <div class="post-author d-flex flex-row">
+                    src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.userPicturePath}"
                     <div class="avatar d-flex flex-row">
                         <img src="images/default_avatar.png" alt="..."/>
                     </div>

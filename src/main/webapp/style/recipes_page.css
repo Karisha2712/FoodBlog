@@ -32,21 +32,6 @@
     align-items: center;
 }
 
-.avatar {
-    width: 3vw;
-    height: 3vw;
-    border-radius: 50%;
-    overflow: hidden;
-    align-content: center;
-}
-
-.avatar img {
-    width: 6vw;
-    height: auto;
-    object-fit: cover;
-    justify-content: center;
-}
-
 .author-name {
     font-size: 1.2vw;
     font-weight: 500;
