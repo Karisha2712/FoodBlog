@@ -102,7 +102,7 @@ public class RecipePostServiceImpl implements RecipePostService {
         recipePostDto.setPicturePath(recipePost.getPicturePath());
         recipePostDto.setUserId(user.getEntityId());
         recipePostDto.setUserLogin(user.getLogin());
-        String userAvatar = bloggerInfoService.findPicturePathByUserId(user.getEntityId());
+        String userAvatar = bloggerInfoService.retrievePicturePathByUserLogin(user.getLogin());
         recipePostDto.setUserPicturePath(userAvatar);
         recipePostDto.setPostId(recipePost.getEntityId());
         return recipePostDto;

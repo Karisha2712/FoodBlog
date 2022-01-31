@@ -1,10 +1,12 @@
 package edu.radyuk.foodblog.controller.command.impl;
 
 import edu.radyuk.foodblog.controller.command.*;
+import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.entity.UserRole;
 import edu.radyuk.foodblog.entity.UserStatus;
 import edu.radyuk.foodblog.exception.ServiceException;
+import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.service.UserService;
 import edu.radyuk.foodblog.validator.FormValidator;
@@ -17,8 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.*;
-import static edu.radyuk.foodblog.controller.command.SessionAttribute.SIGN_UP_ERROR;
-import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
+import static edu.radyuk.foodblog.controller.command.SessionAttribute.*;
 
 public class SignUpCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -70,6 +71,22 @@ public class SignUpCommand implements ClientCommand {
             logger.log(Level.ERROR, e);
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
         }
+        BloggerInfo bloggerInfo = new BloggerInfo();
+        bloggerInfo.setBloggerAge(DefaultValues.DEFAULT_AGE);
+        bloggerInfo.setUserLogin(user.getLogin());
+        bloggerInfo.setPersonalInfo(DefaultValues.DEFAULT_INFO);
+        bloggerInfo.setAvatarPath(DefaultValues.DEFAULT_AVATAR);
+        bloggerInfo.setCountry(DefaultValues.DEFAULT_COUNTRY);
+        bloggerInfo.setCity(DefaultValues.DEFAULT_CITY);
+        BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
+        try {
+            bloggerInfoService.addBloggerInfo(bloggerInfo);
+        } catch (ServiceException e) {
+            logger.log(Level.ERROR, e);
+            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+        }
+
+        session.setAttribute(USER_AVATAR, DefaultValues.DEFAULT_AVATAR);
         session.setAttribute(USER, user);
         return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
     }

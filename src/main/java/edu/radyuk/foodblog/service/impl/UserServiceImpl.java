@@ -61,6 +61,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<String> retrieveUserLoginByUserId(long userId) throws ServiceException {
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
+        try {
+            Optional<User> optionalUser = userDao.findEntityById(userId);
+            if (optionalUser.isEmpty()) {
+                return Optional.empty();
+            }
+            return Optional.of(optionalUser.get().getLogin());
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public boolean isLoginAvailable(String login) throws ServiceException {
         UserDao userDao = DaoProvider.getInstance().getUserDao();
         try {

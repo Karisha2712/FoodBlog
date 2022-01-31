@@ -14,8 +14,10 @@ import java.util.Optional;
 
 public class BloggerInfoDaoImpl implements BloggerInfoDao {
     private static final Logger logger = LogManager.getLogger();
-    private static final String FIND_BLOGGER_INFO_BY_USER_ID =
-            "SELECT * FROM blogger_infos WHERE users_user_id = ?";
+    private static final String FIND_BLOGGER_INFO_BY_USER_LOGIN =
+            "SELECT * FROM blogger_infos WHERE users_login = ?";
+    private static final String INSERT_BLOGGER_INFO_QUERY =
+            "INSERT INTO blogger_infos VALUES(?, ?, ?, ?, ?, ?)";
     private JdbcHelper<BloggerInfo> jdbcHelper;
 
     public BloggerInfoDaoImpl() {
@@ -27,17 +29,29 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
     public List<BloggerInfo> findAll() throws DaoException {
         return null;
         //TODO
+
     }
 
     @Override
     public Optional<BloggerInfo> findEntityById(long id) throws DaoException {
-        return jdbcHelper.executeQueryForSingleObject(FIND_BLOGGER_INFO_BY_USER_ID, id);
+        return Optional.empty();
+        //TODO
     }
 
     @Override
-    public long insert(BloggerInfo entity) throws DaoException {
-        return 0;
-        //TODO
+    public Optional<BloggerInfo> findBloggerInfoByUserLogin(String userLogin) throws DaoException {
+        return jdbcHelper.executeQueryForSingleObject(FIND_BLOGGER_INFO_BY_USER_LOGIN, userLogin);
+    }
+
+    @Override
+    public long insert(BloggerInfo bloggerInfo) throws DaoException {
+        return jdbcHelper.executeUpdate(INSERT_BLOGGER_INFO_QUERY,
+                bloggerInfo.getAvatarPath(),
+                bloggerInfo.getBloggerAge(),
+                bloggerInfo.getCountry(),
+                bloggerInfo.getCity(),
+                bloggerInfo.getPersonalInfo(),
+                bloggerInfo.getUserLogin());
     }
 
     @Override

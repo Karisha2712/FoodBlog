@@ -34,14 +34,15 @@
                  src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.blogger_info.avatarPath}">
         </div>
         <div class="blogger-info d-flex flex-column">
-            <div class="blogger-name">${sessionScope.user.login}</div> <!--CHANGE TO BLOGGER INFO-->
+            <div class="blogger-name">${requestScope.blogger_info.userLogin}</div>
             <div class="blogger-age">${requestScope.blogger_info.bloggerAge}</div>
             <div class="blogger-city">${requestScope.blogger_info.city},
                     ${requestScope.blogger_info.country}</div>
             <div class="personal-info">
                     ${requestScope.blogger_info.personalInfo}
             </div>
-            <c:if test="${requestScope.blogger_info.userId == sessionScope.user.entityId}">
+            <c:if test="${sessionScope.user != null
+            && requestScope.blogger_info.userLogin == sessionScope.user.login}">
                 <a href="${pageContext.request.contextPath}/controller?command=edit_blogger_info" class="edit-info">
                     <fmt:message key="profile.edit.info" bundle="${rb}"/>
                 </a>
@@ -55,7 +56,8 @@
     <span class="page-title">
         <fmt:message key="recipes.title" bundle="${rb}"/>
     </span>
-    <c:if test="${requestScope.blogger_info != null && requestScope.blogger_info.userId == sessionScope.user.entityId}">
+    <c:if test="${sessionScope.user != null
+     && requestScope.blogger_info != null && requestScope.blogger_info.userLogin == sessionScope.user.login}">
         <button class="btn-primary" type="submit">
             <fmt:message key="profile.new.recipe" bundle="${rb}"/>
         </button>

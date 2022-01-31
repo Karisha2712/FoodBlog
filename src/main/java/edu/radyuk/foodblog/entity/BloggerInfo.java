@@ -8,7 +8,7 @@ public class BloggerInfo implements Serializable {
     private String country;
     private String city;
     private String personalInfo;
-    private long userId;
+    private String userLogin;
 
     public BloggerInfo() {
     }
@@ -53,12 +53,12 @@ public class BloggerInfo implements Serializable {
         this.personalInfo = personalInfo;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class BloggerInfo implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BloggerInfo that = (BloggerInfo) o;
-        return userId == that.userId
+        return userLogin.equals(that.userLogin)
                 && avatarPath.equals(that.avatarPath)
                 && country.equals(that.country)
                 && city.equals(that.city)
@@ -80,7 +80,7 @@ public class BloggerInfo implements Serializable {
         result += result * 31 + country.hashCode();
         result += result * 31 + avatarPath.hashCode();
         result += result * 31 + personalInfo.hashCode();
-        result += result * 31 + Long.hashCode(userId);
+        result += result * 31 + userLogin.hashCode();
         return result;
     }
 }

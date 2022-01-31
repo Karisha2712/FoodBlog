@@ -3,14 +3,13 @@
     height: 3vw;
     border-radius: 50%;
     overflow: hidden;
-    align-content: center;
+    justify-content: center;
 }
 
 .avatar img {
     width: 6vw;
     height: auto;
     object-fit: cover;
-    justify-content: center;
 }
 
 body {

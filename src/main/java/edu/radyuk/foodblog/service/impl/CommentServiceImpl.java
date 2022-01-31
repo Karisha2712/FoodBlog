@@ -42,7 +42,7 @@ public class CommentServiceImpl implements CommentService {
                     commentDto.setMark(comment.getMark());
                     commentDto.setUserId(user.getEntityId());
                     commentDto.setUserLogin(user.getLogin());
-                    String userAvatar = bloggerInfoService.findPicturePathByUserId(user.getEntityId());
+                    String userAvatar = bloggerInfoService.retrievePicturePathByUserLogin(user.getLogin());
                     commentDto.setUserPicturePath(userAvatar);
                     commentDto.setPostId(comment.getPostId());
                     commentDto.setCommentId(comment.getEntityId());

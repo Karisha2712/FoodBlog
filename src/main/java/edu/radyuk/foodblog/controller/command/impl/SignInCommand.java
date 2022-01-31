@@ -3,6 +3,7 @@ package edu.radyuk.foodblog.controller.command.impl;
 import edu.radyuk.foodblog.controller.command.*;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.exception.ServiceException;
+import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.service.UserService;
 import org.apache.logging.log4j.Level;
@@ -14,8 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_SIGN_IN_FORM_INPUT;
-import static edu.radyuk.foodblog.controller.command.SessionAttribute.SIGN_IN_ERROR;
-import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
+import static edu.radyuk.foodblog.controller.command.SessionAttribute.*;
 
 public class SignInCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -43,8 +43,17 @@ public class SignInCommand implements ClientCommand {
         }
 
         User user = optionalUser.get();
-        session.setAttribute(USER, user);
+        BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
+        String userAvatar;
+        try {
+            userAvatar = bloggerInfoService.retrievePicturePathByUserLogin(user.getLogin());
+        } catch (ServiceException e) {
+            logger.log(Level.ERROR, e);
+            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+        }
 
+        session.setAttribute(USER, user);
+        session.setAttribute(USER_AVATAR, userAvatar);
         return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
     }
 }

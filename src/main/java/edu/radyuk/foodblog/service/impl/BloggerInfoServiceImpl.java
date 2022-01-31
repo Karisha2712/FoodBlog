@@ -18,10 +18,10 @@ public class BloggerInfoServiceImpl implements BloggerInfoService {
 
 
     @Override
-    public String findPicturePathByUserId(long userId) throws ServiceException {
+    public String retrievePicturePathByUserLogin(String userLogin) throws ServiceException {
         BloggerInfoDao bloggerInfoDao = DaoProvider.getInstance().getBloggerInfoDao();
         try {
-            Optional<BloggerInfo> optionalBloggerInfo = bloggerInfoDao.findEntityById(userId);
+            Optional<BloggerInfo> optionalBloggerInfo = bloggerInfoDao.findBloggerInfoByUserLogin(userLogin);
             if (optionalBloggerInfo.isEmpty()) {
                 logger.log(Level.ERROR, "There is no blogger info for this user");
                 return DEFAULT_PICTURE_PATH;
@@ -35,10 +35,21 @@ public class BloggerInfoServiceImpl implements BloggerInfoService {
     }
 
     @Override
-    public Optional<BloggerInfo> findBloggerInfoByUserId(long userId) throws ServiceException {
+    public Optional<BloggerInfo> retrieveBloggerInfoByUserLogin(String userLogin) throws ServiceException {
         BloggerInfoDao bloggerInfoDao = DaoProvider.getInstance().getBloggerInfoDao();
         try {
-            return bloggerInfoDao.findEntityById(userId);
+            return bloggerInfoDao.findBloggerInfoByUserLogin(userLogin);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public long addBloggerInfo(BloggerInfo bloggerInfo) throws ServiceException {
+        BloggerInfoDao bloggerInfoDao = DaoProvider.getInstance().getBloggerInfoDao();
+        try {
+            return bloggerInfoDao.insert(bloggerInfo);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);

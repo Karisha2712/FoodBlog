@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-    <title>${requestScope.post.dishName}<</title>
+    <title>${requestScope.post.dishName}</title>
 </head>
 
 <jsp:include page="template/header.jsp"/>
@@ -36,9 +36,11 @@
              src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.picturePath}" alt="...">
         <div class="recipe-info d-flex flex-column">
             <div class="post-author d-flex flex-row">
-                <div class="avatar d-flex flex-row">
-                    <img src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.userPicturePath}"
-                         alt="..."/>
+                <div>
+                    <a class="avatar d-flex flex-row"
+                       href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${requestScope.post.userId}">
+                        <img src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.userPicturePath}"
+                             alt="..."/> </a>
                 </div>
                 <div class="author-name">
                     ${requestScope.post.userLogin}
@@ -69,9 +71,11 @@
                   action="${pageContext.request.contextPath}/controller?command=comment&user_id=${sessionScope.user.entityId}&post_id=${requestScope.post.postId}"
                   method="post">
                 <div class="post-author d-flex flex-row">
-                    src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.userPicturePath}"
-                    <div class="avatar d-flex flex-row">
-                        <img src="images/default_avatar.png" alt="..."/>
+                    <div>
+                        <a class="avatar d-flex flex-row"
+                           href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${sessionScope.user.entityId}">
+                            <img src="${pageContext.request.contextPath}/picture?picture_path=${sessionScope.user_avatar}"
+                                 alt="..."/> </a>
                     </div>
                     <div class="author-name">
                         <fmt:message key="recipe.comment.your_comment" bundle="${rb}"/>
@@ -109,9 +113,11 @@
         <c:forEach items="${requestScope.comments}" var="comment">
             <div class="some-comment">
                 <div class="post-author d-flex flex-row">
-                    <div class="avatar d-flex flex-row">
-                        <img src="${pageContext.request.contextPath}/picture?picture_path=${comment.userPicturePath}"
-                             alt="..."/>
+                    <div>
+                        <a class="avatar d-flex flex-row"
+                           href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${comment.userId}">
+                            <img src="${pageContext.request.contextPath}/picture?picture_path=${comment.userPicturePath}"
+                                 alt="..."/> </a>
                     </div>
                     <div class="author-name">
                             ${comment.userLogin}

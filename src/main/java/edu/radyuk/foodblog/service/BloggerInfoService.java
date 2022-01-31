@@ -6,7 +6,9 @@ import edu.radyuk.foodblog.exception.ServiceException;
 import java.util.Optional;
 
 public interface BloggerInfoService {
-    String findPicturePathByUserId(long userId) throws ServiceException;
+    String retrievePicturePathByUserLogin(String userLogin) throws ServiceException;
 
-    Optional<BloggerInfo> findBloggerInfoByUserId(long userId) throws ServiceException;
+    Optional<BloggerInfo> retrieveBloggerInfoByUserLogin(String userLogin) throws ServiceException;
+
+    long addBloggerInfo(BloggerInfo bloggerInfo) throws ServiceException;
 }

@@ -7,9 +7,10 @@ public final class TableColumnName {
     public static final String PASSWORD_HASH = "hash";
     public static final String STATUS = "status";
     public static final String TYPE = "type";
+    public static final String USERS_USER_ID = "users_user_id";
 
     public static final String POST_ID = "post_id";
-    public static final String USERS_USER_ID = "users_user_id";
+    public static final String USERS_LOGIN = "users_login";
     public static final String DISH_NAME = "dish_name";
     public static final String POST_TEXT = "post_text";
     public static final String POST_PICTURE = "picture";
