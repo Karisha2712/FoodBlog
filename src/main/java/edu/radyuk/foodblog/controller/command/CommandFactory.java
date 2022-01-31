@@ -23,6 +23,7 @@ public final class CommandFactory {
         commands.put(EDIT_BLOGGER_INFO, new EditBloggerInfoCommand());
         commands.put(GO_TO_ADD_NEW_POST, new GoToAddNewPostCommand());
         commands.put(GO_TO_PROFILE_PAGE, new GoToProfilePageCommand());
+        commands.put(SEARCH, new SearchCommand());
         commands.put(COMMENT, new CommentCommand());
         commands.put(CHANGE_LANGUAGE, new ChangeLanguageCommand());
         commands.put(LOGOUT, new LogoutCommand());

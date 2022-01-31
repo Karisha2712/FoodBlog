@@ -11,5 +11,7 @@ public interface RecipePostDao extends Dao<RecipePost> {
 
     List<RecipePost> findRecipePostsByUserId(Long userId) throws DaoException;
 
+    List<RecipePost> findRecipePostsByDishName(String dishName) throws DaoException;
+
     long updateRecipePostRating(long postId, double rating) throws DaoException;
 }

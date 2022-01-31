@@ -76,6 +76,5 @@ public class GoToProfilePageCommand implements ClientCommand {
         optionalBloggerInfo.ifPresent(bloggerInfo -> request.setAttribute(BLOGGER_INFO, bloggerInfo));
 
         return new CommandResponse(PagePath.PROFILE_PAGE, RoutingType.FORWARD);
-        //TODO add personal recipes + check if userId = currentUserId
     }
 }

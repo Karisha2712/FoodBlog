@@ -22,6 +22,7 @@ public final class RequestParameter {
     public static final String BLOGGER_INFO = "blogger_info";
 
     public static final String PICTURE_PATH = "picture_path";
+    public static final String SEARCH_VALUE = "search_value";
 
     private RequestParameter() {
     }

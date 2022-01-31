@@ -12,4 +12,7 @@ public interface RecipePostService {
     Optional<RecipePostDto> retrieveRecipePostById(long id) throws ServiceException;
 
     List<RecipePostDto> retrieveRecipePostsByUserId(long userId) throws ServiceException;
+
+    List<RecipePostDto> retrieveRecipePostsByDishName(String dishName) throws ServiceException;
+
 }

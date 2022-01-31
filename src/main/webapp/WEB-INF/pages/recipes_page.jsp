@@ -26,10 +26,11 @@
 <jsp:include page="template/header.jsp"/>
 
 <body>
-<div class="form-floating mb-3">
-    <input type="text" class="search" id="floatingInput"
+<form class="form-floating mb-3" id="search_form" action="${pageContext.request.contextPath}/controller?command=search"
+      method="post">
+    <input type="text" class="search" id="search_value" name="search_value"
            placeholder=<fmt:message key="input.search.placeholder" bundle="${rb}"/>>
-</div>
+</form>
 
 <h1 class="page-title"><fmt:message key="recipes.title" bundle="${rb}"/></h1>
 
@@ -93,5 +94,5 @@
 </body>
 
 <jsp:include page="template/footer.jsp"/>
-
+<script src="script/recipes.js"></script>
 </html>
