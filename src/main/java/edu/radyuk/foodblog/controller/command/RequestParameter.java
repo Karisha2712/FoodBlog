@@ -21,6 +21,12 @@ public final class RequestParameter {
     public static final String COMMENTS = "comments";
     public static final String BLOGGER_INFO = "blogger_info";
 
+    public static final String CITY = "city";
+    public static final String COUNTRY = "country";
+    public static final String AGE = "age";
+    public static final String PERSONAL_INFO = "info";
+    public static final String USER_AVATAR = "user_avatar";
+
     public static final String PICTURE_PATH = "picture_path";
     public static final String SEARCH_VALUE = "search_value";
 

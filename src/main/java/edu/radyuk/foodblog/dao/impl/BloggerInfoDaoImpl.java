@@ -18,6 +18,8 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
             "SELECT * FROM blogger_infos WHERE users_login = ?";
     private static final String INSERT_BLOGGER_INFO_QUERY =
             "INSERT INTO blogger_infos VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_BLOGGER_INFO_QUERY =
+            "UPDATE blogger_infos SET picture = ?, age = ?, country = ?, city = ?, personal_info = ? where users_login = ?";
     private JdbcHelper<BloggerInfo> jdbcHelper;
 
     public BloggerInfoDaoImpl() {
@@ -55,9 +57,14 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
     }
 
     @Override
-    public long update(BloggerInfo entity) throws DaoException {
-        return 0;
-        //TODO
+    public long update(BloggerInfo bloggerInfo) throws DaoException {
+        return jdbcHelper.executeUpdate(UPDATE_BLOGGER_INFO_QUERY,
+                bloggerInfo.getAvatarPath(),
+                bloggerInfo.getBloggerAge(),
+                bloggerInfo.getCountry(),
+                bloggerInfo.getCity(),
+                bloggerInfo.getPersonalInfo(),
+                bloggerInfo.getUserLogin());
     }
 
     @Override

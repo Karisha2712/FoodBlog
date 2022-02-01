@@ -43,7 +43,7 @@
             </div>
             <c:if test="${sessionScope.user != null
             && requestScope.blogger_info.userLogin == sessionScope.user.login}">
-                <a href="${pageContext.request.contextPath}/controller?command=edit_blogger_info" class="edit-info">
+                <a href="${pageContext.request.contextPath}/controller?command=go_to_edit_blogger_info" class="edit-info">
                     <fmt:message key="profile.edit.info" bundle="${rb}"/>
                 </a>
             </c:if>

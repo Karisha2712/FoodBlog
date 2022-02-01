@@ -20,9 +20,10 @@ public final class CommandFactory {
         commands.put(GO_TO_ABOUT_PAGE, new GoToAboutPageCommand());
         commands.put(GO_TO_RECIPES_PAGE, new GoToRecipesPageCommand());
         commands.put(VIEW_FULL_RECIPE, new ViewFullRecipeCommand());
-        commands.put(EDIT_BLOGGER_INFO, new EditBloggerInfoCommand());
+        commands.put(GO_TO_EDIT_BLOGGER_INFO, new GoToEditBloggerInfoCommand());
         commands.put(GO_TO_ADD_NEW_POST, new GoToAddNewPostCommand());
         commands.put(GO_TO_PROFILE_PAGE, new GoToProfilePageCommand());
+        commands.put(EDIT_BLOGGER_INFO, new EditBloggerInfoCommand());
         commands.put(SEARCH, new SearchCommand());
         commands.put(COMMENT, new CommentCommand());
         commands.put(CHANGE_LANGUAGE, new ChangeLanguageCommand());

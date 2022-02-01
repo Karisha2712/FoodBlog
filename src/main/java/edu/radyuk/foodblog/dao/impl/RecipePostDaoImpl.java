@@ -28,7 +28,7 @@ public class RecipePostDaoImpl implements RecipePostDao {
             "(SELECT category_id FROM categories WHERE category = ?))";
     private static final String UPDATE_RATING_QUERY = "UPDATE posts SET rating = ? where post_id = ?";
     private static final String FIND_POST_BY_DISH_NAME_QUERY = FIND_ALL_POSTS_QUERY +
-            " WHERE dish_name = ?";
+            " WHERE dish_name LIKE ?";
 
     private JdbcHelper<RecipePost> jdbcHelper;
 
@@ -88,7 +88,7 @@ public class RecipePostDaoImpl implements RecipePostDao {
 
     @Override
     public List<RecipePost> findRecipePostsByDishName(String dishName) throws DaoException {
-        return jdbcHelper.executeQuery(FIND_POST_BY_DISH_NAME_QUERY, dishName);
+        return jdbcHelper.executeQuery(FIND_POST_BY_DISH_NAME_QUERY, dishName + "%");
     }
 
     @Override
