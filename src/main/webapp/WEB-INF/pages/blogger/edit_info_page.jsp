@@ -59,10 +59,10 @@
             <input type="text" class="field" id="info" name="info"
                    placeholder= <fmt:message key="edit_info.info_text" bundle="${rb}"/>>
             <div>
-                <label class="field" id="file-upload-label" for="user_avatar">
+                <label class="field" id="file-upload-label" for="fileInput">
                     <fmt:message key="add_recipe.choose_file" bundle="${rb}"/>
                 </label>
-                <input type="file" id="user_avatar" name="user_avatar" accept="image/png" hidden/>
+                <input type="file" id="fileInput" name="user_avatar" accept="image/png" hidden/>
             </div>
 
             <button class="btn-primary" type="submit" style="margin-top: 2vw;">
@@ -75,6 +75,6 @@
 </div>
 
 </body>
-
+<script src="script/fileinput.js"></script>
 <jsp:include page="../template/footer.jsp"/>
 </html>

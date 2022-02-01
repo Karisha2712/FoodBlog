@@ -60,10 +60,10 @@
                 </ul>
             </div>
             <div>
-                <label class="field" id="file-upload-label" for="file-upload">
+                <label class="field" id="file-upload-label" for="fileInput">
                     <fmt:message key="add_recipe.choose_file" bundle="${rb}"/>
                 </label>
-                <input type="file" id="file-upload" hidden/>
+                <input type="file" id="fileInput" hidden/>
             </div>
             <div class="form-floating">
                     <textarea class="form-control text-area"
@@ -80,7 +80,7 @@
     </div>
 </div>
 </body>
-
+<script src="script/fileinput.js"></script>
 <jsp:include page="../template/footer.jsp"/>
 
 </html>

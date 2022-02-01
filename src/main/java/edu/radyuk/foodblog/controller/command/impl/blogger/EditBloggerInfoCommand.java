@@ -55,15 +55,14 @@ public class EditBloggerInfoCommand implements ClientCommand {
             session.setAttribute(EDIT_INFO_ERROR, INVALID_EDIT_INFO_FORM_INPUT);
             return new CommandResponse(EDIT_INFO_PAGE, RoutingType.FORWARD);
         }
-
         String fileName = pictureParts.get(0).getSubmittedFileName();
         if (!validator.areEditInfoParametersValid(city, country, ageString, personalInfo, fileName)) {
             logger.log(Level.ERROR, "Invalid form input");
             session.setAttribute(EDIT_INFO_ERROR, INVALID_EDIT_INFO_FORM_INPUT);
             return new CommandResponse(EDIT_INFO_PAGE, RoutingType.FORWARD);
         }
-        int age = Integer.parseInt(ageString);
 
+        int age = Integer.parseInt(ageString);
         User user = (User) session.getAttribute(USER);
         BloggerInfo bloggerInfo = new BloggerInfo();
         bloggerInfo.setCity(city);
