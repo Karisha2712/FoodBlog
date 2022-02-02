@@ -5,6 +5,7 @@ public final class SessionAttribute {
     public static final String SIGN_UP_ERROR = "sign_up_error";
     public static final String SIGN_IN_ERROR = "sign_in_error";
     public static final String EDIT_INFO_ERROR = "edit_info_error";
+    public static final String ADD_POST_ERROR = "add_post_error";
     public static final String COMMENT_ERROR = "comment_error";
     public static final String PREVIOUS_QUERY = "previous_query";
     public static final String USER_AVATAR = "user_avatar";

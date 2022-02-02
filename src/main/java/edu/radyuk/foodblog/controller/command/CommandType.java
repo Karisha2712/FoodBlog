@@ -13,6 +13,8 @@ public enum CommandType {
     GO_TO_PROFILE_PAGE,
     CHANGE_LANGUAGE,
     EDIT_BLOGGER_INFO,
+    ADD_RECIPE_POST,
+    DELETE_POST,
     SEARCH,
     COMMENT,
     LOGOUT,

@@ -43,7 +43,8 @@
             </div>
             <c:if test="${sessionScope.user != null
             && requestScope.blogger_info.userLogin == sessionScope.user.login}">
-                <a href="${pageContext.request.contextPath}/controller?command=go_to_edit_blogger_info" class="edit-info">
+                <a href="${pageContext.request.contextPath}/controller?command=go_to_edit_blogger_info"
+                   class="edit-info">
                     <fmt:message key="profile.edit.info" bundle="${rb}"/>
                 </a>
             </c:if>
@@ -64,7 +65,7 @@
     </c:if>
 </form>
 
-<div class="page-content d-flex flex-row">
+<div class="page-content d-flex flex-row flex-wrap">
     <c:if test="${requestScope.no_posts != null}">
         <div>
             <fmt:message key="recipes.no_any_recipes" bundle="${rb}"/>
@@ -75,12 +76,24 @@
             <img class="recipe-img"
                  src="${pageContext.request.contextPath}/picture?picture_path=${post.picturePath}"
                  alt="${post.dishName}">
-            <div class="rating-with-category d-flex flex-row">
+            <form class="rating-with-category d-flex flex-row"
+                  action="${pageContext.request.contextPath}/controller?command=delete_post&post_id=${post.postId}"
+                  method="post">
                 <div class="category" id="${post.recipePostCategory}">
                         ${post.recipePostCategory}
                 </div>
                 <div class="stars" style="--rating: ${post.postRating};"></div>
-            </div>
+                <c:if test="${sessionScope.user != null && requestScope.blogger_info != null
+                && requestScope.blogger_info.userLogin == sessionScope.user.login}">
+                    <button class="delete-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M6.5 1a.5.5 0 0 0-.5.5v1h4v-1a.5.5 0 0 0-.5-.5h-3ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1H3.042l.846 10.58a1 1 0 0 0 .997.92h6.23a1 1 0 0 0 .997-.92l.846-10.58Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                        </svg>
+                    </button>
+                </c:if>
+            </form>
             <div class="recipe-block">
                 <div class="dish-name">
                         ${post.dishName}

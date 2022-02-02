@@ -9,6 +9,7 @@ import edu.radyuk.foodblog.entity.RecipePostCategory;
 import edu.radyuk.foodblog.exception.DaoException;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public class RecipePostDaoImpl implements RecipePostDao {
@@ -19,16 +20,18 @@ public class RecipePostDaoImpl implements RecipePostDao {
             + " WHERE category_id = " +
             "(SELECT category_id FROM categories WHERE category = ?)";
     private static final String FIND_POSTS_BY_USER_ID = FIND_ALL_POSTS_QUERY
-            + " WHERE users_user_id = ? ORDER BY date";
+            + " WHERE users_user_id = ? ORDER BY date DESC";
     private static final String FIND_POST_BY_ID = FIND_ALL_POSTS_QUERY
             + " WHERE post_id = ?";
     private static final String INSERT_NEW_POST_QUERY = "INSERT INTO posts " +
             "(post_text, picture, date, rating, users_user_id, dish_name, post_categories_category_id) " +
-            "VALUES(?, ?, ?, ?, ?, ? " +
-            "(SELECT category_id FROM categories WHERE category = ?))";
-    private static final String UPDATE_RATING_QUERY = "UPDATE posts SET rating = ? where post_id = ?";
+            "VALUES(?, ?, ?, ?, ?, ?, " +
+            "(SELECT category_id FROM post_categories WHERE category = ?))";
+    private static final String UPDATE_RATING_QUERY = "UPDATE posts SET rating = ? WHERE post_id = ?";
+    private static final String UPDATE_PICTURE_QUERY = "UPDATE posts SET picture = ? WHERE post_id = ?";
     private static final String FIND_POST_BY_DISH_NAME_QUERY = FIND_ALL_POSTS_QUERY +
             " WHERE dish_name LIKE ?";
+    private static final String DELETE_POST_QUERY = "DELETE FROM posts WHERE post_id = ?";
 
     private JdbcHelper<RecipePost> jdbcHelper;
 
@@ -48,14 +51,14 @@ public class RecipePostDaoImpl implements RecipePostDao {
 
     @Override
     public long insert(RecipePost recipePost) throws DaoException {
-        return jdbcHelper.executeUpdate(INSERT_NEW_POST_QUERY,
+        return jdbcHelper.executeInsert(INSERT_NEW_POST_QUERY,
                 recipePost.getRecipeText(),
                 recipePost.getPicturePath(),
                 recipePost.getPostDate(),
                 recipePost.getPostRating(),
                 recipePost.getUserId(),
                 recipePost.getDishName(),
-                recipePost.getRecipePostCategory());
+                recipePost.getRecipePostCategory().toString().toLowerCase(Locale.ROOT));
     }
 
     @Override
@@ -72,8 +75,7 @@ public class RecipePostDaoImpl implements RecipePostDao {
 
     @Override
     public long removeEntityById(long id) throws DaoException {
-        return 0;
-        //TODO
+        return jdbcHelper.executeUpdate(DELETE_POST_QUERY, id);
     }
 
     @Override
@@ -94,5 +96,10 @@ public class RecipePostDaoImpl implements RecipePostDao {
     @Override
     public long updateRecipePostRating(long postId, double rating) throws DaoException {
         return jdbcHelper.executeUpdate(UPDATE_RATING_QUERY, rating, postId);
+    }
+
+    @Override
+    public long updateRecipePostPicture(long postId, String picturePath) throws DaoException {
+        return jdbcHelper.executeUpdate(UPDATE_PICTURE_QUERY, picturePath, postId);
     }
 }

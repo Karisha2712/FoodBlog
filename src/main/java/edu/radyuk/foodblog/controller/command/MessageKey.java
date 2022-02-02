@@ -9,6 +9,7 @@ public class MessageKey {
     public static final String EMPTY_POSTS_TABLE = "recipes.no_any_recipes";
     public static final String NO_COMMENTS_FOR_POST = "comments.no_any_comments";
     public static final String INVALID_EDIT_INFO_FORM_INPUT = "edit_info_error.incorrect_data";
+    public static final String INVALID_ADD_POST_FORM_INPUT = "add_post.incorrect_data";
 
     private MessageKey() {
     }

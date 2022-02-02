@@ -4,10 +4,11 @@ import edu.radyuk.foodblog.controller.command.ClientCommand;
 import edu.radyuk.foodblog.controller.command.CommandResponse;
 import edu.radyuk.foodblog.controller.command.DefaultValues;
 import edu.radyuk.foodblog.controller.command.RoutingType;
-import edu.radyuk.foodblog.entity.BloggerInfo;
+import edu.radyuk.foodblog.entity.RecipePost;
+import edu.radyuk.foodblog.entity.RecipePostCategory;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.exception.ServiceException;
-import edu.radyuk.foodblog.service.BloggerInfoService;
+import edu.radyuk.foodblog.service.RecipePostService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.validator.FormValidator;
 import edu.radyuk.foodblog.validator.ValidatorProvider;
@@ -20,28 +21,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_EDIT_INFO_FORM_INPUT;
+import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_ADD_POST_FORM_INPUT;
 import static edu.radyuk.foodblog.controller.command.PagePath.*;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
-import static edu.radyuk.foodblog.controller.command.SessionAttribute.EDIT_INFO_ERROR;
+import static edu.radyuk.foodblog.controller.command.SessionAttribute.ADD_POST_ERROR;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
-public class EditBloggerInfoCommand implements ClientCommand {
+public class AddRecipePostCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
+    private static final double DEFAULT_RATING = 0;
 
     @Override
     public CommandResponse execute(HttpServletRequest request) {
-        String country = request.getParameter(COUNTRY);
-        String city = request.getParameter(CITY);
-        String ageString = request.getParameter(AGE);
-        String personalInfo = request.getParameter(PERSONAL_INFO);
+        String dishName = request.getParameter(DISH_NAME);
+        String recipeCategory = request.getParameter(RECIPE_CATEGORY);
+        String recipeText = request.getParameter(RECIPE_TEXT);
         List<Part> pictureParts;
         try {
             pictureParts = request.getParts().stream()
-                    .filter(part -> part.getName().equals(USER_AVATAR) && part.getSize() > 0)
+                    .filter(part -> part.getName().equals(POST_PICTURE) && part.getSize() > 0)
                     .collect(Collectors.toList());
         } catch (IOException | ServletException e) {
             logger.log(Level.ERROR, e);
@@ -52,36 +54,35 @@ public class EditBloggerInfoCommand implements ClientCommand {
         HttpSession session = request.getSession();
         if (pictureParts.isEmpty()) {
             logger.log(Level.ERROR, "Invalid form input");
-            session.setAttribute(EDIT_INFO_ERROR, INVALID_EDIT_INFO_FORM_INPUT);
-            return new CommandResponse(EDIT_INFO_PAGE, RoutingType.FORWARD);
+            session.setAttribute(ADD_POST_ERROR, INVALID_ADD_POST_FORM_INPUT);
+            return new CommandResponse(ADD_RECIPE_POST_PAGE, RoutingType.FORWARD);
         }
         String fileName = pictureParts.get(0).getSubmittedFileName();
-        if (!validator.areEditInfoParametersValid(city, country, ageString, personalInfo, fileName)) {
+        if (!validator.areRecipePostParametersValid(dishName, recipeCategory, fileName, recipeText)) {
             logger.log(Level.ERROR, "Invalid form input");
-            session.setAttribute(EDIT_INFO_ERROR, INVALID_EDIT_INFO_FORM_INPUT);
-            return new CommandResponse(EDIT_INFO_PAGE, RoutingType.FORWARD);
+            session.setAttribute(ADD_POST_ERROR, INVALID_ADD_POST_FORM_INPUT);
+            return new CommandResponse(ADD_RECIPE_POST_PAGE, RoutingType.FORWARD);
         }
 
-        int age = Integer.parseInt(ageString);
         User user = (User) session.getAttribute(USER);
-        BloggerInfo bloggerInfo = new BloggerInfo();
-        bloggerInfo.setCity(city);
-        bloggerInfo.setCountry(country);
-        bloggerInfo.setBloggerAge(age);
-        bloggerInfo.setPersonalInfo(personalInfo);
-        bloggerInfo.setUserLogin(user.getLogin());
-        bloggerInfo.setAvatarPath(DefaultValues.DEFAULT_AVATAR); //?todo
-        BloggerInfoService service = ServiceProvider.getInstance().getBloggerInfoService();
+        RecipePost recipePost = new RecipePost();
+        recipePost.setRecipePostCategory(RecipePostCategory.valueOf(recipeCategory));
+        recipePost.setRecipeText(recipeText);
+        recipePost.setDishName(dishName);
+        recipePost.setUserId(user.getEntityId());
+        recipePost.setPostRating(DEFAULT_RATING);
+        recipePost.setPicturePath(DefaultValues.DEFAULT_AVATAR);
+        recipePost.setPostDate(LocalDateTime.now());
+        RecipePostService service = ServiceProvider.getInstance().getRecipePostService();
 
         try {
-            String avatarPath = service.saveUserAvatar(user.getEntityId(), pictureParts);
-            bloggerInfo.setAvatarPath(avatarPath);
-            service.refreshBloggerInfo(bloggerInfo);
+            long postId = service.addNewRecipePost(recipePost);
+            String picturePath = service.saveRecipePostPicture(postId, pictureParts);
+            service.refreshRecipePostPicture(postId, picturePath);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
         }
-        session.setAttribute(BLOGGER_INFO, bloggerInfo);
         return new CommandResponse(PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
     }
 }

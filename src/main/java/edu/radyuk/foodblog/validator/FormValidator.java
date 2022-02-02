@@ -6,4 +6,6 @@ public interface FormValidator {
     boolean areSearchParameterValid(String searchValue);
 
     boolean areEditInfoParametersValid(String city, String country, String age, String personalInfo, String fileName);
+
+    boolean areRecipePostParametersValid(String dishName, String category, String fileName, String recipeText);
 }

@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public long insert(User user) throws DaoException {
-        return jdbcHelper.executeUpdate(INSERT_NEW_USER,
+        return jdbcHelper.executeInsert(INSERT_NEW_USER,
                 user.getLogin(),
                 user.getEmail(),
                 user.getPasswordHash(),

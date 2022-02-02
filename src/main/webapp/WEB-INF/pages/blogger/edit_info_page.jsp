@@ -75,6 +75,6 @@
 </div>
 
 </body>
-<script src="script/fileinput.js"></script>
+<script src="script/file_input.js"></script>
 <jsp:include page="../template/footer.jsp"/>
 </html>

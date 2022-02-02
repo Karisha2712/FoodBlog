@@ -30,7 +30,7 @@ public class GoToRecipesPageCommand implements ClientCommand {
         RecipePostService service = serviceProvider.getRecipePostService();
         List<RecipePostDto> recipePosts;
         try {
-            recipePosts = service.retrieveRecipePosts();
+            recipePosts = service.retrieveAllRecipePosts();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, REDIRECT);

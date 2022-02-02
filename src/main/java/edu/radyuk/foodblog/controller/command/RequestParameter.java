@@ -30,6 +30,11 @@ public final class RequestParameter {
     public static final String PICTURE_PATH = "picture_path";
     public static final String SEARCH_VALUE = "search_value";
 
+    public static final String DISH_NAME = "dish_name";
+    public static final String RECIPE_CATEGORY = "recipe_category";
+    public static final String POST_PICTURE = "post_picture";
+    public static final String RECIPE_TEXT = "recipe_text";
+
     private RequestParameter() {
     }
 }

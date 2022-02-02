@@ -6,14 +6,11 @@ import edu.radyuk.foodblog.dao.JdbcHelper;
 import edu.radyuk.foodblog.dao.mapper.impl.BloggerInfoRowMapperImpl;
 import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.exception.DaoException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
 public class BloggerInfoDaoImpl implements BloggerInfoDao {
-    private static final Logger logger = LogManager.getLogger();
     private static final String FIND_BLOGGER_INFO_BY_USER_LOGIN =
             "SELECT * FROM blogger_infos WHERE users_login = ?";
     private static final String INSERT_BLOGGER_INFO_QUERY =

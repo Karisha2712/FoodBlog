@@ -40,7 +40,7 @@
     </div>
 </c:if>
 
-<div class="page-content d-flex flex-row">
+<div class="page-content d-flex flex-row flex-wrap">
 
     <c:forEach items="${requestScope.recipe_posts}" var="post">
         <div class="recipe d-flex flex-column">

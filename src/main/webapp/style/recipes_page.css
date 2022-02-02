@@ -21,7 +21,7 @@
 
 .recipe {
     width: 25vw;
-
+    margin-bottom: 2vw;
 }
 
 .recipe:not(last-child) {
@@ -48,6 +48,18 @@
     text-align: center;
     border-radius: 1.5vw;
     height: 1.5vw;
+}
+
+
+.delete-button {
+    padding: 0;
+    background: none;
+    border: none;
+    margin-left: 11vw;
+}
+
+.delete-button:hover {
+    color: rgba(0,0,0,.75);
 }
 
 #SOUP {
