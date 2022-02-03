@@ -28,12 +28,16 @@ public final class RequestParameter {
     public static final String USER_AVATAR = "user_avatar";
 
     public static final String PICTURE_PATH = "picture_path";
+    public static final String SEARCH = "search";
     public static final String SEARCH_VALUE = "search_value";
 
     public static final String DISH_NAME = "dish_name";
     public static final String RECIPE_CATEGORY = "recipe_category";
     public static final String POST_PICTURE = "post_picture";
     public static final String RECIPE_TEXT = "recipe_text";
+    public static final String PAGES_NUMBER = "pages_number";
+    public static final String PAGE = "page";
+    public static final String CURRENT_PAGE = "current_page";
 
     private RequestParameter() {
     }

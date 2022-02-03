@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.*;
-import static edu.radyuk.foodblog.controller.command.SessionAttribute.*;
+import static edu.radyuk.foodblog.controller.command.SessionAttribute.SIGN_UP_ERROR;
 
 public class SignUpCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -86,8 +86,6 @@ public class SignUpCommand implements ClientCommand {
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
         }
 
-        session.setAttribute(USER_AVATAR, DefaultValues.DEFAULT_AVATAR);
-        session.setAttribute(USER, user);
-        return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
+        return new CommandResponse(PagePath.SIGN_IN_PAGE, RoutingType.FORWARD);
     }
 }

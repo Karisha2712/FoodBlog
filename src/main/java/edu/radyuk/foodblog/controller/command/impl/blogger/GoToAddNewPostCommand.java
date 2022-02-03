@@ -13,6 +13,7 @@ import static edu.radyuk.foodblog.controller.command.PagePath.ADD_RECIPE_POST_PA
 
 public class GoToAddNewPostCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
+
     @Override
     public CommandResponse execute(HttpServletRequest request) {
         logger.log(Level.ERROR, "ERROR");

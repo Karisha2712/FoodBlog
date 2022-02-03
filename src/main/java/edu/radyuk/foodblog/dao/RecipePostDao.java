@@ -16,4 +16,12 @@ public interface RecipePostDao extends Dao<RecipePost> {
     long updateRecipePostRating(long postId, double rating) throws DaoException;
 
     long updateRecipePostPicture(long postId, String picturePath) throws DaoException;
+
+    int countAllRecipePosts() throws DaoException;
+
+    int countRecipePostsWithSameDishNamePart(String dishName) throws DaoException;
+
+    List<RecipePost> findRecipePostsFromRange(int skipNumber, int number) throws DaoException;
+
+    List<RecipePost> findRecipePostsFromRangeWithSameDishNameParts(String dishName, int skipNumber, int number) throws DaoException;
 }

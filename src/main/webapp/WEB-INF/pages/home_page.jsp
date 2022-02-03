@@ -38,7 +38,7 @@
     <img class="home-page-pic" src="images/main_page_2.png" alt="...">
 
     <form class="CTA-block d-flex flex-column"
-          action="${pageContext.request.contextPath}/controller?command=go_to_recipes_page" method="post">
+          action="${pageContext.request.contextPath}/controller?command=go_to_recipes_page&page=1" method="post">
         <div class="main-text">
             <fmt:message key="home.main_text" bundle="${rb}"/>
         </div>

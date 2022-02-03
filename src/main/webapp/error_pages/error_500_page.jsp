@@ -35,9 +35,11 @@
     <div class="sub-text">
         <fmt:message key="error500.sub.message" bundle="${rb}"/>
     </div>
-    <button class="btn-primary">
-        <fmt:message key="error.button.backHome" bundle="${rb}"/>
-    </button>
+    <form action="${pageContext.request.contextPath}/controller?command=go_to_home_page" method="post">
+        <button class="btn-primary">
+            <fmt:message key="error.button.backHome" bundle="${rb}"/>
+        </button>
+    </form>
 
 </div>
 </body>

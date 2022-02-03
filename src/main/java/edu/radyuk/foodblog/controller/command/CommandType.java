@@ -15,7 +15,6 @@ public enum CommandType {
     EDIT_BLOGGER_INFO,
     ADD_RECIPE_POST,
     DELETE_POST,
-    SEARCH,
     COMMENT,
     LOGOUT,
     SIGN_IN,

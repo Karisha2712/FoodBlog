@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="custom" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="page" var="rb"/>
@@ -26,9 +27,10 @@
 <jsp:include page="template/header.jsp"/>
 
 <body>
-<form class="form-floating mb-3" id="search_form" action="${pageContext.request.contextPath}/controller?command=search"
+<form class="form-floating mb-3" id="search_form"
+      action="${pageContext.request.contextPath}/controller?command=go_to_recipes_page&page=1"
       method="post">
-    <input type="text" class="search" id="search_value" name="search_value"
+    <input type="text" class="search" id="search" name="search"
            placeholder=<fmt:message key="input.search.placeholder" bundle="${rb}"/>>
 </form>
 
@@ -81,15 +83,10 @@
     </c:forEach>
 </div>
 
-<nav aria-label="...">
-    <ul class="pagination pagination-lg">
-        <li class="page-item active" aria-current="page">
-            <span class="page-link">1</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-    </ul>
-</nav>
+<ctg:pagesTag pagesCountAttribute="${requestScope.pages_number}"
+              currentPageAttribute="${requestScope.current_page}"
+              searchAttribute="${requestScope.search_value}"
+              command="go_to_recipes_page"/>
 
 </body>
 

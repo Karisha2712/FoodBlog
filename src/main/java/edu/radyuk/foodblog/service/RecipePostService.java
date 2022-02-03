@@ -17,6 +17,10 @@ public interface RecipePostService {
 
     List<RecipePostDto> retrieveRecipePostsByDishName(String dishName) throws ServiceException;
 
+    List<RecipePostDto> retrieveRecipePostsForPage(int page, String dishName) throws ServiceException;
+
+    int retrievePagesNumber(String dishName) throws ServiceException;
+
     long addNewRecipePost(RecipePost recipePost) throws ServiceException;
 
     long refreshRecipePostPicture(long postId, String picturePath) throws ServiceException;

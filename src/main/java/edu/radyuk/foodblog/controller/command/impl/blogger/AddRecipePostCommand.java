@@ -12,6 +12,7 @@ import edu.radyuk.foodblog.service.RecipePostService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.validator.FormValidator;
 import edu.radyuk.foodblog.validator.ValidatorProvider;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,6 +68,7 @@ public class AddRecipePostCommand implements ClientCommand {
         User user = (User) session.getAttribute(USER);
         RecipePost recipePost = new RecipePost();
         recipePost.setRecipePostCategory(RecipePostCategory.valueOf(recipeCategory));
+        recipeText = StringEscapeUtils.escapeHtml4(recipeText);
         recipePost.setRecipeText(recipeText);
         recipePost.setDishName(dishName);
         recipePost.setUserId(user.getEntityId());

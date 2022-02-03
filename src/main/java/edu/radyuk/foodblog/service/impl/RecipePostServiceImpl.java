@@ -31,6 +31,7 @@ public class RecipePostServiceImpl implements RecipePostService {
     private static final String DEFAULT_BASE_DIRECTORY = "D:/blog_pictures/";
     private static final String DEFAULT_PICTURE_PATH_PROPERTY = "posts/";
     private static final String EXTENSION = ".png";
+    private static final int POST_NUMBER_PER_PAGE = 3;
     private String baseDirectory;
     private String recipePostPicturePath;
 
@@ -137,6 +138,51 @@ public class RecipePostServiceImpl implements RecipePostService {
                 }
             }
             return resultRecipePosts;
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<RecipePostDto> retrieveRecipePostsForPage(int page, String dishName) throws ServiceException {
+        RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
+        UserDao userDao = DaoProvider.getInstance().getUserDao();   //TODO remove duplicate code
+        int skipNumber = (page - 1) * POST_NUMBER_PER_PAGE;
+        try {
+            List<RecipePost> recipePosts;
+            if (dishName != null) {
+                recipePosts = recipePostDao.findRecipePostsFromRangeWithSameDishNameParts(dishName, skipNumber, POST_NUMBER_PER_PAGE);
+            } else {
+                recipePosts = recipePostDao.findRecipePostsFromRange(skipNumber, POST_NUMBER_PER_PAGE);
+            }
+            List<RecipePostDto> resultRecipePosts = new ArrayList<>(recipePosts.size());
+            for (RecipePost recipePost : recipePosts) {
+                Optional<User> optionalUser = userDao.findEntityById(recipePost.getUserId());
+                if (optionalUser.isPresent()) {
+                    User user = optionalUser.get();
+                    RecipePostDto recipePostDto = retrieveRecipePostDto(recipePost, user);
+                    resultRecipePosts.add(recipePostDto);
+                }
+            }
+            return resultRecipePosts;
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int retrievePagesNumber(String dishName) throws ServiceException {
+        RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
+        double pagesNumber;
+        try {
+            if (dishName != null) {
+                pagesNumber = (double) recipePostDao.countRecipePostsWithSameDishNamePart(dishName) / POST_NUMBER_PER_PAGE;
+                return (int) Math.ceil(pagesNumber);
+            }
+            pagesNumber = (double) recipePostDao.countAllRecipePosts() / POST_NUMBER_PER_PAGE;
+            return (int) Math.ceil(pagesNumber);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);

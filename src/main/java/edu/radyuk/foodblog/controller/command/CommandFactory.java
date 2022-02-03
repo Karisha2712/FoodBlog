@@ -25,7 +25,6 @@ public final class CommandFactory {
         commands.put(GO_TO_PROFILE_PAGE, new GoToProfilePageCommand());
         commands.put(EDIT_BLOGGER_INFO, new EditBloggerInfoCommand());
         commands.put(ADD_RECIPE_POST, new AddRecipePostCommand());
-        commands.put(SEARCH, new SearchCommand());
         commands.put(COMMENT, new CommentCommand());
         commands.put(DELETE_POST, new DeleteRecipePostCommand());
         commands.put(CHANGE_LANGUAGE, new ChangeLanguageCommand());

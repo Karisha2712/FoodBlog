@@ -1,41 +1,31 @@
 <taglib>
     <tlib-version>1.0</tlib-version>
     <jsp-version>2.0</jsp-version>
-    <short-name>headerItemsTag</short-name>
+    <short-name>pagesTag</short-name>
     <uri>custom</uri>
 
     <tag>
-        <name>headerItemsTag</name>
-        <tag-class>edu.radyuk.foodblog.tag.Tag</tag-class>
+        <name>pagesTag</name>
+        <tag-class>edu.radyuk.foodblog.tag.PagesTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>home</name>
-            <required>false</required>
+            <name>pagesCountAttribute</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>recipes</name>
-            <required>false</required>
+            <name>currentPageAttribute</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>about</name>
-            <required>false</required>
+            <name>searchAttribute</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>profile</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>signIn</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>logout</name>
-            <required>false</required>
+            <name>command</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>

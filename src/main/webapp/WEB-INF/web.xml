@@ -47,7 +47,7 @@
 
     <filter>
         <filter-name>SaveCurrentQueryFilter</filter-name>
-        <filter-class>edu.radyuk.foodblog.controller.filter.SaveCurrentQuery</filter-class>
+        <filter-class>edu.radyuk.foodblog.controller.filter.SaveCurrentQueryFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>SaveCurrentQueryFilter</filter-name>

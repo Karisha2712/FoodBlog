@@ -17,7 +17,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link header-item" id="recipe"
-                       href="${pageContext.request.contextPath}/controller?command=go_to_recipes_page">
+                       href="${pageContext.request.contextPath}/controller?command=go_to_recipes_page&page=1">
                         <fmt:message key="header.recipe" bundle="${rb}"/>
                     </a>
                 </li>

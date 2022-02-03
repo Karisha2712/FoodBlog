@@ -12,6 +12,7 @@ import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.CommentService;
 import edu.radyuk.foodblog.service.ServiceProvider;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,6 +61,7 @@ public class CommentServiceImpl implements CommentService {
     public void addComment(String commentText, LocalDateTime dateTime, long userId, long postId, double mark) throws ServiceException {
         Comment comment = new Comment();
         CommentDao commentDao = DaoProvider.getInstance().getCommentDao();
+        commentText = StringEscapeUtils.escapeHtml4(commentText);
         comment.setCommentText(commentText);
         comment.setCommentDate(dateTime);
         comment.setUserId(userId);

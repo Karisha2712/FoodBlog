@@ -11,6 +11,7 @@ import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.validator.FormValidator;
 import edu.radyuk.foodblog.validator.ValidatorProvider;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,6 +69,7 @@ public class EditBloggerInfoCommand implements ClientCommand {
         bloggerInfo.setCity(city);
         bloggerInfo.setCountry(country);
         bloggerInfo.setBloggerAge(age);
+        personalInfo = StringEscapeUtils.escapeHtml4(personalInfo);
         bloggerInfo.setPersonalInfo(personalInfo);
         bloggerInfo.setUserLogin(user.getLogin());
         bloggerInfo.setAvatarPath(DefaultValues.DEFAULT_AVATAR); //?todo
