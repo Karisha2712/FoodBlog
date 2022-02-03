@@ -11,6 +11,5 @@ public class GoToEditBloggerInfoCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {
         return new CommandResponse(PagePath.EDIT_INFO_PAGE, RoutingType.FORWARD);
-        //TODO
     }
 }

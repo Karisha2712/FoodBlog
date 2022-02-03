@@ -1,7 +1,6 @@
 package edu.radyuk.foodblog.controller.command.impl;
 
 import edu.radyuk.foodblog.controller.command.*;
-import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.entity.UserRole;
 import edu.radyuk.foodblog.entity.UserStatus;
@@ -64,23 +63,18 @@ public class SignUpCommand implements ClientCommand {
             session.setAttribute(SIGN_UP_ERROR, UNAVAILABLE_LOGIN);
             return new CommandResponse(PagePath.SIGN_UP_PAGE_REDIRECT, RoutingType.REDIRECT);
         }
+
         User user;
         try {
-            user = userService.signUp(login, password, email, userRole, UserStatus.ACTIVE);
+            user = userService.signUp(login, password, email, userRole, UserStatus.AWAITING_CONFIRMATION);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
         }
-        BloggerInfo bloggerInfo = new BloggerInfo();
-        bloggerInfo.setBloggerAge(DefaultValues.DEFAULT_AGE);
-        bloggerInfo.setUserLogin(user.getLogin());
-        bloggerInfo.setPersonalInfo(DefaultValues.DEFAULT_INFO);
-        bloggerInfo.setAvatarPath(DefaultValues.DEFAULT_AVATAR);
-        bloggerInfo.setCountry(DefaultValues.DEFAULT_COUNTRY);
-        bloggerInfo.setCity(DefaultValues.DEFAULT_CITY);
+
         BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
         try {
-            bloggerInfoService.addBloggerInfo(bloggerInfo);
+            bloggerInfoService.addDefaultBloggerInfo(user.getLogin());
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);

@@ -70,6 +70,5 @@ public class CommentCommand implements ClientCommand {
         }
 
         return new CommandResponse(VIEW_FULL_RECIPE_REDIRECT + postId, RoutingType.REDIRECT);
-        //TODO
     }
 }

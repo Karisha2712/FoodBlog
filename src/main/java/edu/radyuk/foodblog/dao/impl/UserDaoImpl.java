@@ -5,6 +5,7 @@ import edu.radyuk.foodblog.dao.JdbcHelper;
 import edu.radyuk.foodblog.dao.UserDao;
 import edu.radyuk.foodblog.dao.mapper.impl.UserRowMapperImpl;
 import edu.radyuk.foodblog.entity.User;
+import edu.radyuk.foodblog.entity.UserStatus;
 import edu.radyuk.foodblog.exception.DaoException;
 
 import java.util.List;
@@ -17,6 +18,12 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_USER_BY_ID_QUERY = FIND_ALL_USERS_QUERY + " WHERE user_id = ?";
     private static final String FIND_USER_BY_LOGIN_QUERY = FIND_ALL_USERS_QUERY + " WHERE login = ?";
     private static final String FIND_USER_BY_EMAIL_QUERY = FIND_ALL_USERS_QUERY + " WHERE email = ?";
+    private static final String UPDATE_USER_STATUS = "UPDATE users SET user_statuses_status_id = " +
+            "(SELECT status_id from user_statuses WHERE status = ?) WHERE user_id = ?";
+    private static final String FIND_UNAPPROVED_USERS_QUERY = FIND_ALL_USERS_QUERY + " WHERE status = 'awaiting_confirmation'" +
+            " ORDER BY user_id";
+    private static final String FIND_APPROVED_USERS_QUERY = FIND_ALL_USERS_QUERY + " WHERE status != 'awaiting_confirmation'" +
+            " ORDER BY user_id";
     private static final String INSERT_NEW_USER = "INSERT INTO users " +
             "(login, email, hash, user_types_type_id, user_statuses_status_id) " +
             "VALUES(?, ?, ?, " +
@@ -75,5 +82,20 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> findUserByEmail(String email) throws DaoException {
         return jdbcHelper.executeQueryForSingleObject(FIND_USER_BY_EMAIL_QUERY, email);
+    }
+
+    @Override
+    public List<User> findAllUnapprovedUsers() throws DaoException {
+        return jdbcHelper.executeQuery(FIND_UNAPPROVED_USERS_QUERY);
+    }
+
+    @Override
+    public List<User> findAllApprovedUsers() throws DaoException {
+        return jdbcHelper.executeQuery(FIND_APPROVED_USERS_QUERY);
+    }
+
+    @Override
+    public long updateUserStatus(long userId, UserStatus status) throws DaoException {
+        return jdbcHelper.executeUpdate(UPDATE_USER_STATUS, status.toString(), userId);
     }
 }

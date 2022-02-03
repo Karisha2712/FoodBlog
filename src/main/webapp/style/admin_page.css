@@ -1,0 +1,36 @@
+table {
+    margin-left: 9.8vw;
+    margin-right: 9.8vw;
+    width: 80.4vw !important;
+}
+
+thead {
+    color: #afafaf;
+}
+
+.action {
+    color: black;
+}
+
+.action:hover {
+    color: rgba(0, 0, 0, .75);
+}
+
+.page-title {
+    margin-top: 3vw;
+    margin-bottom: 1.5vw;
+}
+
+.post-author {
+    align-items: center;
+}
+
+.avatar {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+}
+
+.author-name {
+    margin-left: .7vw;
+}

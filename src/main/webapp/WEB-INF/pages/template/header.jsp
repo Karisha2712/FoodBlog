@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="edu.radyuk.foodblog.entity.UserRole" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
@@ -49,21 +50,33 @@
                         </a></li>
                     </ul>
                 </li>
-                <c:if test="${sessionScope.user == null}">
-                    <li class="nav-item">
-                        <a class="nav-link" id="sign-in"
-                           href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page">
-                            <fmt:message key="header.sign" bundle="${rb}"/>
-                        </a>
-                    </li>
-                </c:if>
+                <c:choose>
+                    <c:when test="${sessionScope.user == null}">
+                        <li class="nav-item">
+                            <a class="nav-link" id="sign-in"
+                               href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page">
+                                <fmt:message key="header.sign" bundle="${rb}"/>
+                            </a>
+                        </li>
+                    </c:when>
+                    <c:when test="${sessionScope.user.userRole ne UserRole.ADMIN}">
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile"
+                               href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${sessionScope.user.entityId}">
+                                    ${sessionScope.user.login}
+                            </a>
+                        </li>
+                    </c:when>
+                    <c:when test="${sessionScope.user.userRole eq UserRole.ADMIN}">
+                        <li class="nav-item">
+                            <a class="nav-link" id="admin"
+                               href="${pageContext.request.contextPath}/controller?command=go_to_admin_page&user_id=${sessionScope.user.entityId}">
+                                    ${sessionScope.user.login}
+                            </a>
+                        </li>
+                    </c:when>
+                </c:choose>
                 <c:if test="${sessionScope.user != null}">
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile"
-                           href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${sessionScope.user.entityId}">
-                                ${sessionScope.user.login}
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link header-item" id="logout"
                            href="${pageContext.request.contextPath}/controller?command=logout">

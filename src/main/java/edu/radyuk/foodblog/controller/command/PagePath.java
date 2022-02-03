@@ -12,11 +12,12 @@ public final class PagePath {
     public static final String SINGLE_RECIPE_PAGE = "WEB-INF/pages/single_recipe_page.jsp";
     public static final String EDIT_INFO_PAGE = "WEB-INF/pages/blogger/edit_info_page.jsp";
     public static final String ADD_RECIPE_POST_PAGE = "WEB-INF/pages/blogger/add_recipe_post_page.jsp";
+    public static final String ADMIN_PAGE = "WEB-INF/pages/admin/admin_page.jsp";
 
     public static final String PROFILE_PAGE_REDIRECT = "/controller?command=go_to_profile_page&user_id=";
     public static final String SIGN_UP_PAGE_REDIRECT = "/controller?command=go_to_sign_up_page";
     public static final String SIGN_IN_PAGE_REDIRECT = "/controller?command=go_to_sign_in_page";
-    public static final String RECIPES_PAGE_REDIRECT = "/controller?command=go_to_recipes_page&pages_number=";
+    public static final String ADMIN_PAGE_REDIRECT = "/controller?command=go_to_admin_page";
     public static final String VIEW_FULL_RECIPE_REDIRECT = "/controller?command=view_full_recipe&post_id=";
 
 

@@ -1,6 +1,6 @@
 package edu.radyuk.foodblog.service;
 
-import edu.radyuk.foodblog.entity.RecipePost;
+import edu.radyuk.foodblog.entity.RecipePostCategory;
 import edu.radyuk.foodblog.entity.dto.RecipePostDto;
 import edu.radyuk.foodblog.exception.ServiceException;
 
@@ -21,11 +21,10 @@ public interface RecipePostService {
 
     int retrievePagesNumber(String dishName) throws ServiceException;
 
-    long addNewRecipePost(RecipePost recipePost) throws ServiceException;
+    long addNewRecipePost(String category, String recipeText,
+                          String dishName, long userId, List<Part> pictureParts) throws ServiceException;
 
     long refreshRecipePostPicture(long postId, String picturePath) throws ServiceException;
-
-    String saveRecipePostPicture(long postId, List<Part> pictureParts) throws ServiceException;
 
     long deletePostById(long postId) throws ServiceException;
 }

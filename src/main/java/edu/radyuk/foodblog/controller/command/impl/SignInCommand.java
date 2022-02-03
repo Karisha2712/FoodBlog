@@ -2,6 +2,7 @@ package edu.radyuk.foodblog.controller.command.impl;
 
 import edu.radyuk.foodblog.controller.command.*;
 import edu.radyuk.foodblog.entity.User;
+import edu.radyuk.foodblog.entity.UserStatus;
 import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.ServiceProvider;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_SIGN_IN_FORM_INPUT;
+import static edu.radyuk.foodblog.controller.command.MessageKey.UNAVAILABLE_ACCESS;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.*;
 
 public class SignInCommand implements ClientCommand {
@@ -43,6 +45,12 @@ public class SignInCommand implements ClientCommand {
         }
 
         User user = optionalUser.get();
+        if (user.getUserStatus() != UserStatus.ACTIVE) {
+            logger.log(Level.WARN, "User is blocked or awaiting_confirmation");
+            session.setAttribute(SIGN_IN_ERROR, UNAVAILABLE_ACCESS);
+            return new CommandResponse(PagePath.SIGN_IN_PAGE_REDIRECT, RoutingType.REDIRECT);
+        }
+
         BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
         String userAvatar;
         try {
@@ -51,9 +59,21 @@ public class SignInCommand implements ClientCommand {
             logger.log(Level.ERROR, e);
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
         }
+        session.setAttribute(USER_AVATAR, userAvatar);
 
         session.setAttribute(USER, user);
-        session.setAttribute(USER_AVATAR, userAvatar);
-        return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
+
+        switch (user.getUserRole()) {
+            case BLOGGER: {
+                return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
+            }
+            case ADMIN: {
+                return new CommandResponse(PagePath.ADMIN_PAGE_REDIRECT, RoutingType.REDIRECT);
+            }
+            default: {
+                logger.log(Level.ERROR, "User has invalid role");
+                return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+            }
+        }
     }
 }

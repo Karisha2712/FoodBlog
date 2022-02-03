@@ -4,54 +4,31 @@ import edu.radyuk.foodblog.dao.DaoProvider;
 import edu.radyuk.foodblog.dao.RecipePostDao;
 import edu.radyuk.foodblog.dao.UserDao;
 import edu.radyuk.foodblog.entity.RecipePost;
+import edu.radyuk.foodblog.entity.RecipePostCategory;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.entity.dto.RecipePostDto;
 import edu.radyuk.foodblog.exception.DaoException;
 import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.BloggerInfoService;
+import edu.radyuk.foodblog.service.PictureLoadingService;
 import edu.radyuk.foodblog.service.RecipePostService;
 import edu.radyuk.foodblog.service.ServiceProvider;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
 
 public class RecipePostServiceImpl implements RecipePostService {
     private static final Logger logger = LogManager.getLogger();
-    private static final String PICTURE_PROPERTIES = "property/picture.properties";
-    private static final String PICTURE_PATH_PROPERTY = "picture.post";
-    private static final String BASE_DIRECTORY_PROPERTY = "picture.base_directory";
-    private static final String DEFAULT_BASE_DIRECTORY = "D:/blog_pictures/";
-    private static final String DEFAULT_PICTURE_PATH_PROPERTY = "posts/";
-    private static final String EXTENSION = ".png";
+    private static final String DEFAULT_AVATAR = "default_avatar_big.png";
+    private static final double DEFAULT_RATING = 0;
     private static final int POST_NUMBER_PER_PAGE = 3;
-    private String baseDirectory;
-    private String recipePostPicturePath;
-
-    public RecipePostServiceImpl() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            Properties properties = new Properties();
-            properties.load(classLoader.getResourceAsStream(PICTURE_PROPERTIES));
-            baseDirectory = properties.getProperty(BASE_DIRECTORY_PROPERTY);
-            recipePostPicturePath = properties.getProperty(PICTURE_PATH_PROPERTY);
-            if (baseDirectory == null || recipePostPicturePath == null) {
-                baseDirectory = DEFAULT_BASE_DIRECTORY;
-                recipePostPicturePath = DEFAULT_PICTURE_PATH_PROPERTY;
-            }
-        } catch (IOException e) {
-            logger.log(Level.ERROR, "Error while reading property file {} ", PICTURE_PROPERTIES, e);
-            baseDirectory = DEFAULT_BASE_DIRECTORY;
-            recipePostPicturePath = DEFAULT_PICTURE_PATH_PROPERTY;
-        }
-    }
 
     @Override
     public List<RecipePostDto> retrieveAllRecipePosts() throws ServiceException {
@@ -190,10 +167,24 @@ public class RecipePostServiceImpl implements RecipePostService {
     }
 
     @Override
-    public long addNewRecipePost(RecipePost recipePost) throws ServiceException {
+    public long addNewRecipePost(String category, String recipeText,
+                                 String dishName, long userId, List<Part> pictureParts) throws ServiceException {
+        RecipePost recipePost = new RecipePost();
+        recipePost.setRecipePostCategory(RecipePostCategory.valueOf(category));
+        recipeText = StringEscapeUtils.escapeHtml4(recipeText);
+        recipePost.setRecipeText(recipeText);
+        recipePost.setDishName(dishName);
+        recipePost.setUserId(userId);
+        recipePost.setPostRating(DEFAULT_RATING);
+        recipePost.setPicturePath(DEFAULT_AVATAR);
+        recipePost.setPostDate(LocalDateTime.now());
+        PictureLoadingService pictureLoadingService = ServiceProvider.getInstance().getPictureLoadingService();
         RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
         try {
-            return recipePostDao.insert(recipePost);
+            long postId = recipePostDao.insert(recipePost);
+            String picturePath = pictureLoadingService.savePicture(postId,
+                    PictureLoadingServiceImpl.PictureCategory.POST, pictureParts);
+            return refreshRecipePostPicture(postId, picturePath);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);
@@ -209,21 +200,6 @@ public class RecipePostServiceImpl implements RecipePostService {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);
         }
-    }
-
-    @Override
-    public String saveRecipePostPicture(long postId, List<Part> pictureParts) throws ServiceException {
-        String relativePicturePath = recipePostPicturePath + postId + EXTENSION;  //TODO remove duplicate code
-        String absolutePath = baseDirectory + relativePicturePath;
-        try (FileOutputStream fileOutputStream = new FileOutputStream(absolutePath)) {
-            for (Part part : pictureParts) {
-                part.getInputStream().transferTo(fileOutputStream);
-            }
-        } catch (IOException e) {
-            logger.log(Level.ERROR, e);
-            throw new ServiceException(e);
-        }
-        return relativePicturePath;
     }
 
     @Override

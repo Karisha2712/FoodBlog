@@ -12,9 +12,8 @@ public interface BloggerInfoService {
 
     Optional<BloggerInfo> retrieveBloggerInfoByUserLogin(String userLogin) throws ServiceException;
 
-    long addBloggerInfo(BloggerInfo bloggerInfo) throws ServiceException;
+    long addDefaultBloggerInfo(String userLogin) throws ServiceException;
 
-    long refreshBloggerInfo(BloggerInfo bloggerInfo) throws ServiceException;
-
-    String saveUserAvatar(long userId, List<Part> pictureParts) throws ServiceException;
+    BloggerInfo refreshBloggerInfo(String city, String country, int age,
+                            String personalInfo, String userLogin, long userId, List<Part> pictureParts) throws ServiceException;
 }

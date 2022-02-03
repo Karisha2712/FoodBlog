@@ -2,17 +2,13 @@ package edu.radyuk.foodblog.controller.command.impl.blogger;
 
 import edu.radyuk.foodblog.controller.command.ClientCommand;
 import edu.radyuk.foodblog.controller.command.CommandResponse;
-import edu.radyuk.foodblog.controller.command.DefaultValues;
 import edu.radyuk.foodblog.controller.command.RoutingType;
-import edu.radyuk.foodblog.entity.RecipePost;
-import edu.radyuk.foodblog.entity.RecipePostCategory;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.RecipePostService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.validator.FormValidator;
 import edu.radyuk.foodblog.validator.ValidatorProvider;
-import org.apache.commons.text.StringEscapeUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +29,6 @@ import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
 public class AddRecipePostCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
-    private static final double DEFAULT_RATING = 0;
 
     @Override
     public CommandResponse execute(HttpServletRequest request) {
@@ -58,6 +52,7 @@ public class AddRecipePostCommand implements ClientCommand {
             session.setAttribute(ADD_POST_ERROR, INVALID_ADD_POST_FORM_INPUT);
             return new CommandResponse(ADD_RECIPE_POST_PAGE, RoutingType.FORWARD);
         }
+
         String fileName = pictureParts.get(0).getSubmittedFileName();
         if (!validator.areRecipePostParametersValid(dishName, recipeCategory, fileName, recipeText)) {
             logger.log(Level.ERROR, "Invalid form input");
@@ -66,21 +61,10 @@ public class AddRecipePostCommand implements ClientCommand {
         }
 
         User user = (User) session.getAttribute(USER);
-        RecipePost recipePost = new RecipePost();
-        recipePost.setRecipePostCategory(RecipePostCategory.valueOf(recipeCategory));
-        recipeText = StringEscapeUtils.escapeHtml4(recipeText);
-        recipePost.setRecipeText(recipeText);
-        recipePost.setDishName(dishName);
-        recipePost.setUserId(user.getEntityId());
-        recipePost.setPostRating(DEFAULT_RATING);
-        recipePost.setPicturePath(DefaultValues.DEFAULT_AVATAR);
-        recipePost.setPostDate(LocalDateTime.now());
         RecipePostService service = ServiceProvider.getInstance().getRecipePostService();
 
         try {
-            long postId = service.addNewRecipePost(recipePost);
-            String picturePath = service.saveRecipePostPicture(postId, pictureParts);
-            service.refreshRecipePostPicture(postId, picturePath);
+            service.addNewRecipePost(recipeCategory, recipeText, dishName, user.getEntityId(), pictureParts);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);

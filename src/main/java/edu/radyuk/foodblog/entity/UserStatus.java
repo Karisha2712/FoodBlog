@@ -4,5 +4,6 @@ import java.io.Serializable;
 
 public enum UserStatus implements Serializable {
     ACTIVE,
-    BLOCKED
+    BLOCKED,
+    AWAITING_CONFIRMATION
 }

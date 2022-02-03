@@ -2,7 +2,6 @@ package edu.radyuk.foodblog.controller.command.impl.blogger;
 
 import edu.radyuk.foodblog.controller.command.ClientCommand;
 import edu.radyuk.foodblog.controller.command.CommandResponse;
-import edu.radyuk.foodblog.controller.command.DefaultValues;
 import edu.radyuk.foodblog.controller.command.RoutingType;
 import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.entity.User;
@@ -11,7 +10,6 @@ import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.ServiceProvider;
 import edu.radyuk.foodblog.validator.FormValidator;
 import edu.radyuk.foodblog.validator.ValidatorProvider;
-import org.apache.commons.text.StringEscapeUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,6 +54,7 @@ public class EditBloggerInfoCommand implements ClientCommand {
             session.setAttribute(EDIT_INFO_ERROR, INVALID_EDIT_INFO_FORM_INPUT);
             return new CommandResponse(EDIT_INFO_PAGE, RoutingType.FORWARD);
         }
+
         String fileName = pictureParts.get(0).getSubmittedFileName();
         if (!validator.areEditInfoParametersValid(city, country, ageString, personalInfo, fileName)) {
             logger.log(Level.ERROR, "Invalid form input");
@@ -65,20 +64,11 @@ public class EditBloggerInfoCommand implements ClientCommand {
 
         int age = Integer.parseInt(ageString);
         User user = (User) session.getAttribute(USER);
-        BloggerInfo bloggerInfo = new BloggerInfo();
-        bloggerInfo.setCity(city);
-        bloggerInfo.setCountry(country);
-        bloggerInfo.setBloggerAge(age);
-        personalInfo = StringEscapeUtils.escapeHtml4(personalInfo);
-        bloggerInfo.setPersonalInfo(personalInfo);
-        bloggerInfo.setUserLogin(user.getLogin());
-        bloggerInfo.setAvatarPath(DefaultValues.DEFAULT_AVATAR); //?todo
         BloggerInfoService service = ServiceProvider.getInstance().getBloggerInfoService();
-
+        BloggerInfo bloggerInfo;
         try {
-            String avatarPath = service.saveUserAvatar(user.getEntityId(), pictureParts);
-            bloggerInfo.setAvatarPath(avatarPath);
-            service.refreshBloggerInfo(bloggerInfo);
+            bloggerInfo = service.refreshBloggerInfo(city, country, age, personalInfo,
+                    user.getLogin(), user.getEntityId(), pictureParts);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);

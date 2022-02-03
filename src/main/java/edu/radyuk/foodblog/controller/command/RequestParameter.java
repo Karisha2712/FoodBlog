@@ -39,6 +39,11 @@ public final class RequestParameter {
     public static final String PAGE = "page";
     public static final String CURRENT_PAGE = "current_page";
 
+    public static final String NO_USERS = "no_users";
+    public static final String UNAPPROVED_USERS = "unapproved_users";
+    public static final String APPROVED_USERS = "approved_users";
+    public static final String USER_STATUS = "user_status";
+
     private RequestParameter() {
     }
 }

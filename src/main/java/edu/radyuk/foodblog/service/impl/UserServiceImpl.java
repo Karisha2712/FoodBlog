@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -38,6 +39,28 @@ public class UserServiceImpl implements UserService {
         }
         user.setEntityId(id);
         return user;
+    }
+
+    @Override
+    public List<User> retrieveUnapprovedUsers() throws ServiceException {
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
+        try {
+            return userDao.findAllUnapprovedUsers();
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<User> retrieveApprovedUsers() throws ServiceException {
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
+        try {
+            return userDao.findAllApprovedUsers();
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
     }
 
     @Override
@@ -69,6 +92,17 @@ public class UserServiceImpl implements UserService {
                 return Optional.empty();
             }
             return Optional.of(optionalUser.get().getLogin());
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public long refreshUserStatus(long userId, UserStatus status) throws ServiceException {
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
+        try {
+            return userDao.updateUserStatus(userId, status);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);
