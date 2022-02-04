@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="edu.radyuk.foodblog.entity.UserRole" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
@@ -31,7 +32,7 @@
 
 <div class="page-content d-flex flex-column">
     <h1 class="page-title">${requestScope.post.dishName}</h1>
-    <div class="date">${requestScope.post.postDate}</div>
+    <div class="date">${requestScope.post.postDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy  HH:mm"))}</div>
     <div class="recipe-block d-flex flex-row">
         <img class="recipe-img"
              src="${pageContext.request.contextPath}/picture?picture_path=${requestScope.post.picturePath}" alt="...">
@@ -125,7 +126,7 @@
                             ${comment.userLogin}
                     </div>
                 </div>
-                <div class="date">${comment.commentDate}</div>
+                <div class="date">${comment.commentDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy  HH:mm"))}</div>
                 <div class="comment-text"> ${comment.commentText}
                 </div>
                 <div class="stars" style="--rating: ${comment.mark};"></div>
