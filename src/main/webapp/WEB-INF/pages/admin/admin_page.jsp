@@ -22,21 +22,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-    <title><fmt:message key="page.name.home" bundle="${rb}"/></title>
+    <title><fmt:message key="page.name.admin" bundle="${rb}"/></title>
 </head>
 
 <jsp:include page="../template/header.jsp"/>
 
 <body>
 <c:if test="${requestScope.unapproved_users.size() != 0}">
-    <h1 class="page-title">Awaiting confirmation</h1>
+    <h1 class="page-title"><fmt:message key="admin.awaiting_confirmation" bundle="${rb}"/></h1>
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
-            <th scope="col">Login</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col">Action</th>
+            <th scope="col"><fmt:message key="admin.table_column_name.login" bundle="${rb}"/></th>
+            <th scope="col"><fmt:message key="admin.table_column_name.email" bundle="${rb}"/></th>
+            <th scope="col"><fmt:message key="admin.table_column_name.role" bundle="${rb}"/></th>
+            <th scope="col"><fmt:message key="admin.table_column_name.action" bundle="${rb}"/></th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
                 <td>
                     <a class="action"
                        href="${pageContext.request.contextPath}/controller?command=change_user_status&user_id=${user.entityId}&user_status=${user.userStatus}">
-                        <strong>Confirm</strong>
+                        <strong><fmt:message key="admin.confirm" bundle="${rb}"/></strong>
                     </a>
                 </td>
             </tr>
@@ -56,15 +56,15 @@
         </tbody>
     </table>
 </c:if>
-<h1 class="page-title">Users</h1>
+<h1 class="page-title"><fmt:message key="admin.users" bundle="${rb}"/></h1>
 
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th scope="col">Login</th>
-        <th scope="col">Email</th>
-        <th scope="col">Role</th>
-        <th scope="col">Action</th>
+        <th scope="col"><fmt:message key="admin.table_column_name.login" bundle="${rb}"/></th>
+        <th scope="col"><fmt:message key="admin.table_column_name.email" bundle="${rb}"/></th>
+        <th scope="col"><fmt:message key="admin.table_column_name.role" bundle="${rb}"/></th>
+        <th scope="col"><fmt:message key="admin.table_column_name.action" bundle="${rb}"/></th>
     </tr>
     </thead>
     <tbody>
@@ -84,10 +84,10 @@
                     <strong>
                         <c:choose>
                             <c:when test="${user.userStatus eq UserStatus.ACTIVE}">
-                                Block
+                                <fmt:message key="admin.action.block" bundle="${rb}"/>
                             </c:when>
                             <c:when test="${user.userStatus eq UserStatus.BLOCKED}">
-                                Unblock
+                                <fmt:message key="admin.action.unblock" bundle="${rb}"/>
                             </c:when>
                         </c:choose>
                     </strong>

@@ -133,7 +133,7 @@
                     <c:if test="${sessionScope.user != null and sessionScope.user.userRole eq UserRole.ADMIN}">
                         <a class="delete-comment"
                            href="${pageContext.request.contextPath}/controller?command=delete_comment&comment_id=${comment.commentId}&post_id=${requestScope.post.postId}">
-                            Delete comment
+                            <fmt:message key="admin.delete_comment" bundle="${rb}"/>
                         </a>
                     </c:if>
                 </div>
