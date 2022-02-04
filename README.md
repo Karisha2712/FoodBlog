@@ -1,6 +1,6 @@
 # Food blog
-Food blog is a service for sharing recipes. The platform allows new users to create new recipes,    
-share them, rate other users' recipes and comment on them. Service administrators can confirm user registration,  
+Food blog is a service for sharing recipes. The platform allows users to create recipes,    
+share them, rate other users' recipes and comment them. Service administrators can confirm user registration,  
 block and unblock users, delete posts and comments. Also, all users can change the language.
 ## Roles in project
 ### Unauthorised user
