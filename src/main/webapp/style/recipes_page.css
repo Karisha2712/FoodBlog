@@ -43,6 +43,8 @@
 }
 
 .category {
+    padding-left: 8px;
+    padding-right: 8px;
     width: 7.5vw;
     font-size: 1vw;
     text-align: center;
@@ -50,17 +52,6 @@
     height: 1.5vw;
 }
 
-
-.delete-button {
-    padding: 0;
-    background: none;
-    border: none;
-    margin-left: 11vw;
-}
-
-.delete-button:hover {
-    color: rgba(0,0,0,.75);
-}
 
 #SOUP {
     background-color: #ff6042;

@@ -2,6 +2,7 @@ package edu.radyuk.foodblog.controller.command;
 
 import edu.radyuk.foodblog.controller.command.impl.*;
 import edu.radyuk.foodblog.controller.command.impl.admin.ChangeUserStatusCommand;
+import edu.radyuk.foodblog.controller.command.impl.admin.DeleteCommentCommand;
 import edu.radyuk.foodblog.controller.command.impl.admin.GoToAdminPageCommand;
 import edu.radyuk.foodblog.controller.command.impl.blogger.*;
 
@@ -29,6 +30,7 @@ public final class CommandFactory {
         commands.put(ADD_RECIPE_POST, new AddRecipePostCommand());
         commands.put(GO_TO_ADMIN_PAGE, new GoToAdminPageCommand());
         commands.put(CHANGE_USER_STATUS, new ChangeUserStatusCommand());
+        commands.put(DELETE_COMMENT, new DeleteCommentCommand());
         commands.put(COMMENT, new CommentCommand());
         commands.put(DELETE_POST, new DeleteRecipePostCommand());
         commands.put(CHANGE_LANGUAGE, new ChangeLanguageCommand());

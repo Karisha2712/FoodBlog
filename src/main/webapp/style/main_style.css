@@ -107,3 +107,20 @@ nav > .pagination {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.delete-button {
+    padding: 0;
+    background: none;
+    border: none;
+    margin-left: 10vw;
+}
+
+.delete-button:hover {
+    color: rgba(0,0,0,.75);
+}
+
+
+.delete-comment {
+    color: black;
+    margin-top: 1vw;
+}

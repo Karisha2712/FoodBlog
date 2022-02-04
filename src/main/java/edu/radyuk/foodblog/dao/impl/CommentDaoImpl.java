@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public class CommentDaoImpl implements CommentDao {
     private static final String FIND_COMMENTS_BY_POST_ID_QUERY = "SELECT * FROM comments WHERE posts_post_id = ?";
+    private static final String DELETE_COMMENT_BY_ID = "DELETE FROM comments WHERE comment_id = ?";
     private static final String INSERT_COMMENT_QUERY = "INSERT INTO comments (mark, comment_text, date, users_user_id, posts_post_id) " +
             "VALUES(?, ?, ?, ?, ?)";
 
@@ -57,8 +58,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public long removeEntityById(long id) throws DaoException {
-        return 0;
-        //TODO
+        return jdbcHelper.executeUpdate(DELETE_COMMENT_BY_ID, id);
     }
 
     @Override

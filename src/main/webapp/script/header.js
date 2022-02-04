@@ -14,9 +14,14 @@ switch (command) {
     case "go_to_about_page":
         id = "about";
         break;
-    case "go_to_profile_page":
+    case "go_to_profile_page": {
         id = "profile";
         break;
+    }
+    case "go_to_admin_page": {
+        id = "admin";
+        break;
+    }
     default :
         id = "home";
 }

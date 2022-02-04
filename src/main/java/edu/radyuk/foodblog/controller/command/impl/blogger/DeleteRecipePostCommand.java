@@ -1,10 +1,6 @@
 package edu.radyuk.foodblog.controller.command.impl.blogger;
 
-import edu.radyuk.foodblog.controller.command.ClientCommand;
-import edu.radyuk.foodblog.controller.command.CommandResponse;
-import edu.radyuk.foodblog.controller.command.RequestParameter;
-import edu.radyuk.foodblog.controller.command.RoutingType;
-import edu.radyuk.foodblog.entity.User;
+import edu.radyuk.foodblog.controller.command.*;
 import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.RecipePostService;
 import edu.radyuk.foodblog.service.ServiceProvider;
@@ -15,10 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
-import static edu.radyuk.foodblog.controller.command.PagePath.PROFILE_PAGE_REDIRECT;
-import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
 public class DeleteRecipePostCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -40,7 +35,8 @@ public class DeleteRecipePostCommand implements ClientCommand {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
         }
-        User user = (User) request.getSession().getAttribute(USER);
-        return new CommandResponse(PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
+        HttpSession session = request.getSession();
+        String previousQuery = session.getAttribute(SessionAttribute.PREVIOUS_QUERY).toString();
+        return new CommandResponse(previousQuery, RoutingType.REDIRECT);
     }
 }

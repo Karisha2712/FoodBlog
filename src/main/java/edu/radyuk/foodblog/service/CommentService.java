@@ -11,5 +11,7 @@ public interface CommentService {
 
     void addComment(String commentText, LocalDateTime dateTime, long userId, long postId, double mark) throws ServiceException;
 
+    long deleteCommentById(long commentId) throws ServiceException;
+
     void overwriteRecipePostRating(long postId) throws ServiceException;
 }

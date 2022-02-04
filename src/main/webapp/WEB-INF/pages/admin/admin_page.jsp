@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="edu.radyuk.foodblog.entity.UserStatus" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
@@ -27,34 +28,34 @@
 <jsp:include page="../template/header.jsp"/>
 
 <body>
-<h1 class="page-title">Awaiting confirmation</h1>
-
-<table class="table table-striped table-bordered">
-    <thead>
-    <tr>
-        <th scope="col">Login</th>
-        <th scope="col">Email</th>
-        <th scope="col">Role</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${requestScope.unapproved_users}" var="user">
+<c:if test="${requestScope.unapproved_users.size() != 0}">
+    <h1 class="page-title">Awaiting confirmation</h1>
+    <table class="table table-striped table-bordered">
+        <thead>
         <tr>
-            <th scope="row">${user.login}</th>
-            <td>${user.email}</td>
-            <td>${user.userRole}</td>
-            <td>
-                <a class="action"
-                   href="${pageContext.request.contextPath}/controller?command=change_user_status&user_id=${user.entityId}&user_status=${user.userStatus}">
-                    <strong>Confirm</strong>
-                </a>
-            </td>
+            <th scope="col">Login</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Action</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+        <c:forEach items="${requestScope.unapproved_users}" var="user">
+            <tr>
+                <th scope="row">${user.login}</th>
+                <td>${user.email}</td>
+                <td>${user.userRole}</td>
+                <td>
+                    <a class="action"
+                       href="${pageContext.request.contextPath}/controller?command=change_user_status&user_id=${user.entityId}&user_status=${user.userStatus}">
+                        <strong>Confirm</strong>
+                    </a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</c:if>
 <h1 class="page-title">Users</h1>
 
 <table class="table table-striped table-bordered">
@@ -69,13 +70,27 @@
     <tbody>
     <c:forEach items="${requestScope.approved_users}" var="user">
         <tr>
-            <th scope="row">${user.login}</th>
+            <th scope="row">
+                <a class="action"
+                   href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${user.entityId}">
+                        ${user.login}
+                </a>
+            </th>
             <td>${user.email}</td>
             <td>${user.userRole}</td>
             <td>
                 <a class="action"
                    href="${pageContext.request.contextPath}/controller?command=change_user_status&user_id=${user.entityId}&user_status=${user.userStatus}">
-                    <strong>Block</strong>
+                    <strong>
+                        <c:choose>
+                            <c:when test="${user.userStatus eq UserStatus.ACTIVE}">
+                                Block
+                            </c:when>
+                            <c:when test="${user.userStatus eq UserStatus.BLOCKED}">
+                                Unblock
+                            </c:when>
+                        </c:choose>
+                    </strong>
                 </a>
             </td>
         </tr>

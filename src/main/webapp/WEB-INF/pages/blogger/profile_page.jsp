@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="edu.radyuk.foodblog.entity.UserRole" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
@@ -84,7 +85,8 @@
                 </div>
                 <div class="stars" style="--rating: ${post.postRating};"></div>
                 <c:if test="${sessionScope.user != null && requestScope.blogger_info != null
-                && requestScope.blogger_info.userLogin == sessionScope.user.login}">
+                && (requestScope.blogger_info.userLogin == sessionScope.user.login
+                || sessionScope.user.userRole eq UserRole.ADMIN)}">
                     <button class="delete-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                              class="bi bi-trash3" viewBox="0 0 16 16">

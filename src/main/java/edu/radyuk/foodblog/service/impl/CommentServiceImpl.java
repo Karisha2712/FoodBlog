@@ -76,6 +76,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public long deleteCommentById(long commentId) throws ServiceException {
+        CommentDao commentDao = DaoProvider.getInstance().getCommentDao();
+        try {
+            return commentDao.removeEntityById(commentId);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void overwriteRecipePostRating(long postId) throws ServiceException {
         CommentDao commentDao = DaoProvider.getInstance().getCommentDao();
         RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
@@ -86,7 +97,7 @@ public class CommentServiceImpl implements CommentService {
             for (Comment comment : comments) {
                 averageMark += comment.getMark();
             }
-            averageMark = averageMark / comments.size();
+            averageMark = comments.isEmpty() ? 0 : averageMark / comments.size();
             recipePostDao.updateRecipePostRating(postId, averageMark);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);

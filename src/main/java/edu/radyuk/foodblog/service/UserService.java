@@ -17,6 +17,8 @@ public interface UserService {
 
     Optional<User> retrieveUserIfExists(String password, String email) throws ServiceException;
 
+    Optional<User> retrieveUserById(long userId) throws ServiceException;
+
     Optional<String> retrieveUserLoginByUserId(long userId) throws ServiceException;
 
     long refreshUserStatus(long userId, UserStatus status) throws ServiceException;

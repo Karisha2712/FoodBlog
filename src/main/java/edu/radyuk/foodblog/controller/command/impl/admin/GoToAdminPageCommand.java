@@ -18,13 +18,13 @@ import java.util.List;
 import static edu.radyuk.foodblog.controller.command.PagePath.ADMIN_PAGE;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.APPROVED_USERS;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.UNAPPROVED_USERS;
+import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
 public class GoToAdminPageCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
     public CommandResponse execute(HttpServletRequest request) {
-
         UserService service = ServiceProvider.getInstance().getUserService();
         List<User> approvedUsers;
         List<User> unapprovedUsers;
@@ -36,10 +36,11 @@ public class GoToAdminPageCommand implements ClientCommand {
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
         }
 
+        User user = (User) request.getSession().getAttribute(USER);
+        approvedUsers.remove(user);
+
         request.setAttribute(UNAPPROVED_USERS, unapprovedUsers);
         request.setAttribute(APPROVED_USERS, approvedUsers);
-
         return new CommandResponse(ADMIN_PAGE, RoutingType.FORWARD);
-        //TODO
     }
 }

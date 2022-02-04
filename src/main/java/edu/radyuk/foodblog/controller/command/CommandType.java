@@ -16,6 +16,7 @@ public enum CommandType {
     CHANGE_LANGUAGE,
     EDIT_BLOGGER_INFO,
     ADD_RECIPE_POST,
+    DELETE_COMMENT,
     DELETE_POST,
     COMMENT,
     LOGOUT,

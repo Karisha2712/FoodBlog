@@ -13,7 +13,6 @@ public final class RequestParameter {
     public static final String RECIPE_POST = "post";
 
     public static final String NO_POSTS = "no_posts";
-    public static final String NO_COMMENTS = "no_comments";
     public static final String RECIPE_POSTS = "recipe_posts";
     public static final String USER_RECIPE_POSTS = "user_recipe_posts";
     public static final String COMMENT_TEXT = "comment_text";
@@ -39,7 +38,7 @@ public final class RequestParameter {
     public static final String PAGE = "page";
     public static final String CURRENT_PAGE = "current_page";
 
-    public static final String NO_USERS = "no_users";
+    public static final String COMMENT_ID = "comment_id";
     public static final String UNAPPROVED_USERS = "unapproved_users";
     public static final String APPROVED_USERS = "approved_users";
     public static final String USER_STATUS = "user_status";

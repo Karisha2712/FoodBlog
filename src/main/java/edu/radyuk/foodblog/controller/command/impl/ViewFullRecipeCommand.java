@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
-import static edu.radyuk.foodblog.controller.command.MessageKey.NO_COMMENTS_FOR_POST;
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_404_PAGE;
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
-import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
+import static edu.radyuk.foodblog.controller.command.RequestParameter.COMMENTS;
+import static edu.radyuk.foodblog.controller.command.RequestParameter.RECIPE_POST;
 
 public class ViewFullRecipeCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -55,11 +55,6 @@ public class ViewFullRecipeCommand implements ClientCommand {
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
-        }
-
-        if (comments.isEmpty()) {
-            logger.log(Level.WARN, "There is no comments for this post {}", postId);
-            request.setAttribute(NO_COMMENTS, NO_COMMENTS_FOR_POST);
         }
 
         request.setAttribute(RECIPE_POST, optionalRecipePostDto.get());

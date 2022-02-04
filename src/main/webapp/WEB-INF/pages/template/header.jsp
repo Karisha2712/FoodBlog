@@ -70,7 +70,7 @@
                     <c:when test="${sessionScope.user.userRole eq UserRole.ADMIN}">
                         <li class="nav-item">
                             <a class="nav-link" id="admin"
-                               href="${pageContext.request.contextPath}/controller?command=go_to_admin_page&user_id=${sessionScope.user.entityId}">
+                               href="${pageContext.request.contextPath}/controller?command=go_to_admin_page">
                                     ${sessionScope.user.login}
                             </a>
                         </li>

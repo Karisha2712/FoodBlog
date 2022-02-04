@@ -51,20 +51,19 @@ public class SignInCommand implements ClientCommand {
             return new CommandResponse(PagePath.SIGN_IN_PAGE_REDIRECT, RoutingType.REDIRECT);
         }
 
-        BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
-        String userAvatar;
-        try {
-            userAvatar = bloggerInfoService.retrievePicturePathByUserLogin(user.getLogin());
-        } catch (ServiceException e) {
-            logger.log(Level.ERROR, e);
-            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
-        }
-        session.setAttribute(USER_AVATAR, userAvatar);
-
         session.setAttribute(USER, user);
 
         switch (user.getUserRole()) {
             case BLOGGER: {
+                BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
+                String userAvatar;
+                try {
+                    userAvatar = bloggerInfoService.retrievePicturePathByUserLogin(user.getLogin());
+                } catch (ServiceException e) {
+                    logger.log(Level.ERROR, e);
+                    return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+                }
+                session.setAttribute(USER_AVATAR, userAvatar);
                 return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
             }
             case ADMIN: {

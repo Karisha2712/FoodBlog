@@ -61,12 +61,6 @@
             <input type="password" class="field" id="password" name="password"
                    placeholder=
                    <fmt:message key="input.password.placeholder" bundle="${rb}"/> required>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="is-admin" name="is-admin">
-                <label class="form-check-label" for="is-admin">
-                    <fmt:message key="sign_up.choose_role" bundle="${rb}"/>
-                </label>
-            </div>
             <button type="submit" class="btn-primary" id="sign_btn">
                 <fmt:message key="sign_in.button" bundle="${rb}"/>
             </button>

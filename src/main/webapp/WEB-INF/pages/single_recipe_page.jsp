@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="edu.radyuk.foodblog.entity.UserRole" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
@@ -62,11 +63,12 @@
 
     <div class="comments-block d-flex flex-column">
 
-        <div class="sub-title">
-            <fmt:message key="recipe.title.comment" bundle="${rb}"/>
-        </div>
-
-        <c:if test="${sessionScope.user != null}">
+        <c:if test="${requestScope.comments.size() != 0}">
+            <div class="sub-title">
+                <fmt:message key="recipe.title.comment" bundle="${rb}"/>
+            </div>
+        </c:if>
+        <c:if test="${sessionScope.user != null and sessionScope.user.userRole ne UserRole.ADMIN }">
             <form class="your-comment"
                   action="${pageContext.request.contextPath}/controller?command=comment&user_id=${sessionScope.user.entityId}&post_id=${requestScope.post.postId}"
                   method="post">
@@ -127,6 +129,14 @@
                 <div class="comment-text"> ${comment.commentText}
                 </div>
                 <div class="stars" style="--rating: ${comment.mark};"></div>
+                <div>
+                    <c:if test="${sessionScope.user != null and sessionScope.user.userRole eq UserRole.ADMIN}">
+                        <a class="delete-comment"
+                           href="${pageContext.request.contextPath}/controller?command=delete_comment&comment_id=${comment.commentId}&post_id=${requestScope.post.postId}">
+                            Delete comment
+                        </a>
+                    </c:if>
+                </div>
             </div>
         </c:forEach>
 
