@@ -1,13 +1,12 @@
 package edu.radyuk.foodblog.controller.command.impl.blogger;
 
 import edu.radyuk.foodblog.controller.command.*;
-import edu.radyuk.foodblog.entity.BloggerInfo;
+import edu.radyuk.foodblog.entity.dto.BloggerInfoDto;
 import edu.radyuk.foodblog.entity.dto.RecipePostDto;
 import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.BloggerInfoService;
 import edu.radyuk.foodblog.service.RecipePostService;
 import edu.radyuk.foodblog.service.ServiceProvider;
-import edu.radyuk.foodblog.service.UserService;
 import edu.radyuk.foodblog.validator.IdValidator;
 import edu.radyuk.foodblog.validator.ValidatorProvider;
 import org.apache.logging.log4j.Level;
@@ -50,24 +49,10 @@ public class GoToProfilePageCommand implements ClientCommand {
         }
         request.setAttribute(USER_RECIPE_POSTS, recipePosts);
 
-        UserService userService = ServiceProvider.getInstance().getUserService();
-        Optional<String> optionalLogin;
-        try {
-            optionalLogin = userService.retrieveUserLoginByUserId(userId);
-        } catch (ServiceException e) {
-            logger.log(Level.ERROR, e);
-            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
-        }
-
-        if (optionalLogin.isEmpty()) {
-            logger.log(Level.ERROR, "No user with such id");
-            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
-        }
-
         BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
-        Optional<BloggerInfo> optionalBloggerInfo;
+        Optional<BloggerInfoDto> optionalBloggerInfo;
         try {
-            optionalBloggerInfo = bloggerInfoService.retrieveBloggerInfoByUserLogin(optionalLogin.get());
+            optionalBloggerInfo = bloggerInfoService.retrieveBloggerInfoByUserId(userId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);

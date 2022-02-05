@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class BloggerInfoDaoImpl implements BloggerInfoDao {
-    private static final String FIND_BLOGGER_INFO_BY_USER_LOGIN =
-            "SELECT * FROM blogger_infos WHERE users_login = ?";
+    private static final String FIND_BLOGGER_INFO_BY_USER_ID =
+            "SELECT * FROM blogger_infos WHERE users_user_id = ?";
     private static final String INSERT_BLOGGER_INFO_QUERY =
             "INSERT INTO blogger_infos VALUES(?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_BLOGGER_INFO_QUERY =
-            "UPDATE blogger_infos SET picture = ?, age = ?, country = ?, city = ?, personal_info = ? where users_login = ?";
+            "UPDATE blogger_infos SET picture = ?, age = ?, country = ?, city = ?, personal_info = ? where users_user_id = ?";
     private JdbcHelper<BloggerInfo> jdbcHelper;
 
     public BloggerInfoDaoImpl() {
@@ -38,8 +38,8 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
     }
 
     @Override
-    public Optional<BloggerInfo> findBloggerInfoByUserLogin(String userLogin) throws DaoException {
-        return jdbcHelper.executeQueryForSingleObject(FIND_BLOGGER_INFO_BY_USER_LOGIN, userLogin);
+    public Optional<BloggerInfo> findBloggerInfoByUserId(long userId) throws DaoException {
+        return jdbcHelper.executeQueryForSingleObject(FIND_BLOGGER_INFO_BY_USER_ID, userId);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
                 bloggerInfo.getCountry(),
                 bloggerInfo.getCity(),
                 bloggerInfo.getPersonalInfo(),
-                bloggerInfo.getUserLogin());
+                bloggerInfo.getUserId());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
                 bloggerInfo.getCountry(),
                 bloggerInfo.getCity(),
                 bloggerInfo.getPersonalInfo(),
-                bloggerInfo.getUserLogin());
+                bloggerInfo.getUserId());
     }
 
     @Override

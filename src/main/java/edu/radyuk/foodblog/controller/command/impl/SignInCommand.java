@@ -58,7 +58,7 @@ public class SignInCommand implements ClientCommand {
                 BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
                 String userAvatar;
                 try {
-                    userAvatar = bloggerInfoService.retrievePicturePathByUserLogin(user.getLogin());
+                    userAvatar = bloggerInfoService.retrievePicturePathByUserId(user.getEntityId());
                 } catch (ServiceException e) {
                     logger.log(Level.ERROR, e);
                     return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);

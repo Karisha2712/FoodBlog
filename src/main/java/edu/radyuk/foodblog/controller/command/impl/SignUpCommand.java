@@ -75,7 +75,7 @@ public class SignUpCommand implements ClientCommand {
         if (user.getUserRole() != UserRole.ADMIN) {
             BloggerInfoService bloggerInfoService = ServiceProvider.getInstance().getBloggerInfoService();
             try {
-                bloggerInfoService.addDefaultBloggerInfo(user.getLogin());
+                bloggerInfoService.addDefaultBloggerInfo(user.getEntityId());
             } catch (ServiceException e) {
                 logger.log(Level.ERROR, e);
                 return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);

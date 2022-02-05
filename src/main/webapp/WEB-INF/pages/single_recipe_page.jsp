@@ -64,7 +64,7 @@
 
     <div class="comments-block d-flex flex-column">
 
-        <c:if test="${requestScope.comments.size() != 0}">
+        <c:if test="${requestScope.comments.size() != 0 or sessionScope.user != null}">
             <div class="sub-title">
                 <fmt:message key="recipe.title.comment" bundle="${rb}"/>
             </div>
@@ -131,7 +131,9 @@
                 </div>
                 <div class="stars" style="--rating: ${comment.mark};"></div>
                 <div>
-                    <c:if test="${sessionScope.user != null and sessionScope.user.userRole eq UserRole.ADMIN}">
+                    <c:if test="${sessionScope.user != null and ((sessionScope.user.userRole eq UserRole.ADMIN)
+                    or (sessionScope.user.entityId == comment.userId)
+                    or (sessionScope.user.entityId == requestScope.post.userId))}">
                         <a class="delete-comment"
                            href="${pageContext.request.contextPath}/controller?command=delete_comment&comment_id=${comment.commentId}&post_id=${requestScope.post.postId}">
                             <fmt:message key="admin.delete_comment" bundle="${rb}"/>

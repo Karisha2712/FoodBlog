@@ -6,5 +6,5 @@ import edu.radyuk.foodblog.exception.DaoException;
 import java.util.Optional;
 
 public interface BloggerInfoDao extends Dao<BloggerInfo> {
-    Optional<BloggerInfo> findBloggerInfoByUserLogin(String userLogin) throws DaoException;
+    Optional<BloggerInfo> findBloggerInfoByUserId(long userId) throws DaoException;
 }

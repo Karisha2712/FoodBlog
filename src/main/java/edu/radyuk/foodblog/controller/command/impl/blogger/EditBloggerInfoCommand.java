@@ -68,7 +68,7 @@ public class EditBloggerInfoCommand implements ClientCommand {
         BloggerInfo bloggerInfo;
         try {
             bloggerInfo = service.refreshBloggerInfo(city, country, age, personalInfo,
-                    user.getLogin(), user.getEntityId(), pictureParts);
+                    user.getEntityId(), pictureParts);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);

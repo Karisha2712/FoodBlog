@@ -2,7 +2,10 @@ package edu.radyuk.foodblog.service.impl;
 
 import edu.radyuk.foodblog.dao.BloggerInfoDao;
 import edu.radyuk.foodblog.dao.DaoProvider;
+import edu.radyuk.foodblog.dao.UserDao;
 import edu.radyuk.foodblog.entity.BloggerInfo;
+import edu.radyuk.foodblog.entity.User;
+import edu.radyuk.foodblog.entity.dto.BloggerInfoDto;
 import edu.radyuk.foodblog.exception.DaoException;
 import edu.radyuk.foodblog.exception.ServiceException;
 import edu.radyuk.foodblog.service.BloggerInfoService;
@@ -26,10 +29,10 @@ public class BloggerInfoServiceImpl implements BloggerInfoService {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
-    public String retrievePicturePathByUserLogin(String userLogin) throws ServiceException {
+    public String retrievePicturePathByUserId(long userId) throws ServiceException {
         BloggerInfoDao bloggerInfoDao = DaoProvider.getInstance().getBloggerInfoDao();
         try {
-            Optional<BloggerInfo> optionalBloggerInfo = bloggerInfoDao.findBloggerInfoByUserLogin(userLogin);
+            Optional<BloggerInfo> optionalBloggerInfo = bloggerInfoDao.findBloggerInfoByUserId(userId);
             if (optionalBloggerInfo.isEmpty()) {
                 logger.log(Level.ERROR, "There is no blogger info for this user");
                 return DEFAULT_AVATAR;
@@ -43,21 +46,42 @@ public class BloggerInfoServiceImpl implements BloggerInfoService {
     }
 
     @Override
-    public Optional<BloggerInfo> retrieveBloggerInfoByUserLogin(String userLogin) throws ServiceException {
+    public Optional<BloggerInfoDto> retrieveBloggerInfoByUserId(long userId) throws ServiceException {
         BloggerInfoDao bloggerInfoDao = DaoProvider.getInstance().getBloggerInfoDao();
+        UserDao userDao = DaoProvider.getInstance().getUserDao();
+        Optional<BloggerInfo> optionalBloggerInfo;
+        Optional<User> optionalUser;
         try {
-            return bloggerInfoDao.findBloggerInfoByUserLogin(userLogin);
+            optionalBloggerInfo = bloggerInfoDao.findBloggerInfoByUserId(userId);
+            optionalUser = userDao.findEntityById(userId);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);
         }
+        if (optionalBloggerInfo.isEmpty()) {
+            return Optional.empty();
+        }
+        if (optionalUser.isEmpty()) {
+            logger.log(Level.ERROR, "User with such id does not exist");
+            throw new ServiceException("User with such id does not exist");
+        }
+        BloggerInfo bloggerInfo = optionalBloggerInfo.get();
+        User user = optionalUser.get();
+        BloggerInfoDto bloggerInfoDto = new BloggerInfoDto();
+        bloggerInfoDto.setBloggerAge(bloggerInfo.getBloggerAge());
+        bloggerInfoDto.setUserLogin(user.getLogin());
+        bloggerInfoDto.setPersonalInfo(bloggerInfo.getPersonalInfo());
+        bloggerInfoDto.setCity(bloggerInfo.getCity());
+        bloggerInfoDto.setCountry(bloggerInfo.getCountry());
+        bloggerInfoDto.setAvatarPath(bloggerInfo.getAvatarPath());
+        return Optional.of(bloggerInfoDto);
     }
 
     @Override
-    public long addDefaultBloggerInfo(String userLogin) throws ServiceException {
+    public long addDefaultBloggerInfo(long userId) throws ServiceException {
         BloggerInfo bloggerInfo = new BloggerInfo();
         bloggerInfo.setBloggerAge(DEFAULT_AGE);
-        bloggerInfo.setUserLogin(userLogin);
+        bloggerInfo.setUserId(userId);
         bloggerInfo.setPersonalInfo(DEFAULT_INFO);
         bloggerInfo.setAvatarPath(DEFAULT_AVATAR);
         bloggerInfo.setCountry(DEFAULT_COUNTRY);
@@ -73,14 +97,14 @@ public class BloggerInfoServiceImpl implements BloggerInfoService {
 
     @Override
     public BloggerInfo refreshBloggerInfo(String city, String country, int age, String personalInfo,
-                                          String userLogin, long userId, List<Part> pictureParts) throws ServiceException {
+                                          long userId, List<Part> pictureParts) throws ServiceException {
         BloggerInfo bloggerInfo = new BloggerInfo();
         bloggerInfo.setCity(city);
         bloggerInfo.setCountry(country);
         bloggerInfo.setBloggerAge(age);
         personalInfo = StringEscapeUtils.escapeHtml4(personalInfo);
         bloggerInfo.setPersonalInfo(personalInfo);
-        bloggerInfo.setUserLogin(userLogin);
+        bloggerInfo.setUserId(userId);
         PictureLoadingService pictureLoadingService = ServiceProvider.getInstance().getPictureLoadingService();
         String avatarPath = pictureLoadingService.savePicture(userId,
                 PictureLoadingServiceImpl.PictureCategory.AVATAR, pictureParts);

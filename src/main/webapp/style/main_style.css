@@ -116,11 +116,14 @@ nav > .pagination {
 }
 
 .delete-button:hover {
-    color: rgba(0,0,0,.75);
+    color: rgba(0, 0, 0, .75);
 }
-
 
 .delete-comment {
     color: black;
     margin-top: 1vw;
+}
+
+.delete-comment:hover {
+    color: rgba(0, 0, 0, .75);
 }
