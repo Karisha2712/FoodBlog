@@ -55,11 +55,29 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>SessionValidationFilter</filter-name>
-        <filter-class>edu.radyuk.foodblog.controller.filter.SessionValidationFilter</filter-class>
+        <filter-name>SessionAttributeFilter</filter-name>
+        <filter-class>edu.radyuk.foodblog.controller.filter.SessionAttributeFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>SessionValidationFilter</filter-name>
+        <filter-name>SessionAttributeFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>UserStatusValidationFilter</filter-name>
+        <filter-class>edu.radyuk.foodblog.controller.filter.UserStatusValidationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserStatusValidationFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CommandAccessFilter</filter-name>
+        <filter-class>edu.radyuk.foodblog.controller.filter.CommandAccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CommandAccessFilter</filter-name>
         <servlet-name>Controller</servlet-name>
     </filter-mapping>
 

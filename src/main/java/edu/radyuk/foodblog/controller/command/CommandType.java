@@ -2,26 +2,29 @@ package edu.radyuk.foodblog.controller.command;
 
 public enum CommandType {
     INVALID,
-    GO_TO_HOME_PAGE,
     GO_TO_SIGN_IN_PAGE,
     GO_TO_SIGN_UP_PAGE,
+    GO_TO_HOME_PAGE,
     GO_TO_ABOUT_PAGE,
     GO_TO_RECIPES_PAGE,
     VIEW_FULL_RECIPE,
+    CHANGE_LANGUAGE,
+    GO_TO_PROFILE_PAGE,
+    SIGN_IN,
+    SIGN_UP,
+
     GO_TO_EDIT_BLOGGER_INFO,
     GO_TO_ADD_NEW_POST,
-    GO_TO_PROFILE_PAGE,
-    GO_TO_ADMIN_PAGE,
-    CHANGE_USER_STATUS,
-    CHANGE_LANGUAGE,
     EDIT_BLOGGER_INFO,
     ADD_RECIPE_POST,
     DELETE_COMMENT,
     DELETE_POST,
     COMMENT,
-    LOGOUT,
-    SIGN_IN,
-    SIGN_UP;
+
+    GO_TO_ADMIN_PAGE,
+    CHANGE_USER_STATUS,
+
+    LOGOUT;
 
     public static CommandType getCommandType(String command) {
         if (command == null) {
