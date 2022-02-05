@@ -4,6 +4,9 @@ import javax.servlet.*;
 import java.io.IOException;
 
 
+/**
+ * The type Encoding filter.
+ */
 public class EncodingFilter implements Filter {
     private static final String DEFAULT_ENCODING = "UTF-8";
     private static final String REQUEST_ENCODING_PARAM = "encoding";

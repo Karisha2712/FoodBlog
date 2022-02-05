@@ -19,6 +19,9 @@ import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_SIGN_IN_
 import static edu.radyuk.foodblog.controller.command.MessageKey.UNAVAILABLE_ACCESS;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.*;
 
+/**
+ * The type Sign in command.
+ */
 public class SignInCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

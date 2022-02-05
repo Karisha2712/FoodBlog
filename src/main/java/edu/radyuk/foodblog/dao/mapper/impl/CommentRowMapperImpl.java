@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+/**
+ * The type Comment row mapper.
+ */
 public class CommentRowMapperImpl implements RowMapper<Comment> {
     @Override
     public Comment mapRow(ResultSet resultSet) throws SQLException {

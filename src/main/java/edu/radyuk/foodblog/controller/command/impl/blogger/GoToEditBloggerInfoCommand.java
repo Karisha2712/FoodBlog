@@ -7,6 +7,9 @@ import edu.radyuk.foodblog.controller.command.RoutingType;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Go to edit blogger info command.
+ */
 public class GoToEditBloggerInfoCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {

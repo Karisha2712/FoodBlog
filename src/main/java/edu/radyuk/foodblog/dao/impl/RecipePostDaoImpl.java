@@ -5,7 +5,6 @@ import edu.radyuk.foodblog.dao.JdbcHelper;
 import edu.radyuk.foodblog.dao.RecipePostDao;
 import edu.radyuk.foodblog.dao.mapper.impl.RecipePostRowMapperImpl;
 import edu.radyuk.foodblog.entity.RecipePost;
-import edu.radyuk.foodblog.entity.RecipePostCategory;
 import edu.radyuk.foodblog.exception.DaoException;
 import edu.radyuk.foodblog.exception.DataBaseConnectionException;
 import org.apache.logging.log4j.Level;
@@ -17,20 +16,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+/**
+ * The type Recipe post dao.
+ */
 public class RecipePostDaoImpl implements RecipePostDao {
     private static final Logger logger = LogManager.getLogger();
     private static final String FIND_ALL_POSTS_QUERY = "SELECT * FROM posts " +
             "JOIN post_categories " +
             "ON post_categories_category_id = category_id";
     private static final String COUNT_ALL_POSTS_QUERY = "SELECT COUNT(post_id) FROM posts";
-    private static final String COUNT_SEARCH_POSTS_QUERY = "SELECT COUNT(post_id) FROM posts " +
+    private static final String COUNT_SOUGHT_POSTS_QUERY = "SELECT COUNT(post_id) FROM posts " +
             "WHERE dish_name LIKE ?";
-    private static final String FIND_LIMIT_SEARCH_POSTS_QUERY = FIND_ALL_POSTS_QUERY + " WHERE dish_name LIKE ? " +
+    private static final String FIND_LIMIT_POSTS_QUERY = FIND_ALL_POSTS_QUERY
+            + " ORDER BY date DESC LIMIT ?, ?";
+    private static final String FIND_LIMIT_SOUGHT_POSTS_QUERY = FIND_ALL_POSTS_QUERY
+            + " WHERE dish_name LIKE ? " +
             "ORDER BY date DESC LIMIT ?, ?";
-    private static final String FIND_LIMIT_POSTS_QUERY = FIND_ALL_POSTS_QUERY + " ORDER BY date DESC LIMIT ?, ?";
-    private static final String FIND_POSTS_BY_CATEGORY = FIND_ALL_POSTS_QUERY
-            + " WHERE category_id = " +
-            "(SELECT category_id FROM categories WHERE category = ?)";
     private static final String FIND_POSTS_BY_USER_ID = FIND_ALL_POSTS_QUERY
             + " WHERE users_user_id = ? ORDER BY date";
     private static final String FIND_POST_BY_ID = FIND_ALL_POSTS_QUERY
@@ -47,13 +48,11 @@ public class RecipePostDaoImpl implements RecipePostDao {
 
     private JdbcHelper<RecipePost> jdbcHelper;
 
+    /**
+     * Instantiates a new Recipe post dao.
+     */
     public RecipePostDaoImpl() {
         jdbcHelper = new JdbcHelper<>(ConnectionPool.getInstance(), new RecipePostRowMapperImpl());
-    }
-
-    @Override
-    public List<RecipePost> findAll() throws DaoException {
-        return jdbcHelper.executeQuery(FIND_ALL_POSTS_QUERY);
     }
 
     @Override
@@ -74,25 +73,13 @@ public class RecipePostDaoImpl implements RecipePostDao {
     }
 
     @Override
-    public long update(RecipePost entity) throws DaoException {
-        return 0;
-        //TODO
-    }
-
-    @Override
-    public long remove(RecipePost entity) throws DaoException {
-        return 0;
-        //TODO
+    public long update(RecipePost entity) {
+        throw new UnsupportedOperationException("Method is not realised");
     }
 
     @Override
     public long removeEntityById(long id) throws DaoException {
         return jdbcHelper.executeUpdate(DELETE_POST_QUERY, id);
-    }
-
-    @Override
-    public List<RecipePost> findRecipePostsByCategory(RecipePostCategory category) throws DaoException {
-        return jdbcHelper.executeQuery(FIND_POSTS_BY_CATEGORY, category);
     }
 
     @Override
@@ -134,7 +121,7 @@ public class RecipePostDaoImpl implements RecipePostDao {
     public int countRecipePostsWithSameDishNamePart(String dishName) throws DaoException {
         int result;
         try (Connection connection = ConnectionPool.getInstance().acquireConnection();
-             PreparedStatement statement = connection.prepareStatement(COUNT_SEARCH_POSTS_QUERY)) {
+             PreparedStatement statement = connection.prepareStatement(COUNT_SOUGHT_POSTS_QUERY)) {
             statement.setString(1, "%" + dishName + "%");
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -154,6 +141,6 @@ public class RecipePostDaoImpl implements RecipePostDao {
     @Override
     public List<RecipePost> findRecipePostsFromRangeWithSameDishNameParts(String dishName, int skipNumber, int number)
             throws DaoException {
-        return jdbcHelper.executeQuery(FIND_LIMIT_SEARCH_POSTS_QUERY, "%" + dishName + "%", skipNumber, number);
+        return jdbcHelper.executeQuery(FIND_LIMIT_SOUGHT_POSTS_QUERY, "%" + dishName + "%", skipNumber, number);
     }
 }

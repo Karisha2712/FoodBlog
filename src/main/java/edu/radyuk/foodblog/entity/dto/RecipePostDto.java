@@ -5,6 +5,9 @@ import edu.radyuk.foodblog.entity.RecipePostCategory;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * The type Recipe post dto.
+ */
 public class RecipePostDto implements Serializable {
     private String recipeText;
     private String dishName;
@@ -17,82 +20,182 @@ public class RecipePostDto implements Serializable {
     private long userId;
     private long postId;
 
+    /**
+     * Gets post id.
+     *
+     * @return the post id
+     */
     public long getPostId() {
         return postId;
     }
 
+    /**
+     * Sets post id.
+     *
+     * @param postId the post id
+     */
     public void setPostId(long postId) {
         this.postId = postId;
     }
 
+    /**
+     * Gets dish name.
+     *
+     * @return the dish name
+     */
     public String getDishName() {
         return dishName;
     }
 
+    /**
+     * Sets dish name.
+     *
+     * @param dishName the dish name
+     */
     public void setDishName(String dishName) {
         this.dishName = dishName;
     }
 
+    /**
+     * Gets recipe text.
+     *
+     * @return the recipe text
+     */
     public String getRecipeText() {
         return recipeText;
     }
 
+    /**
+     * Sets recipe text.
+     *
+     * @param recipeText the recipe text
+     */
     public void setRecipeText(String recipeText) {
         this.recipeText = recipeText;
     }
 
+    /**
+     * Gets picture path.
+     *
+     * @return the picture path
+     */
     public String getPicturePath() {
         return picturePath;
     }
 
+    /**
+     * Sets picture path.
+     *
+     * @param picturePath the picture path
+     */
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
 
+    /**
+     * Gets post rating.
+     *
+     * @return the post rating
+     */
     public double getPostRating() {
         return postRating;
     }
 
+    /**
+     * Sets post rating.
+     *
+     * @param postRating the post rating
+     */
     public void setPostRating(Double postRating) {
         this.postRating = postRating;
     }
 
+    /**
+     * Gets post date.
+     *
+     * @return the post date
+     */
     public LocalDateTime getPostDate() {
         return postDate;
     }
 
+    /**
+     * Sets post date.
+     *
+     * @param postDate the post date
+     */
     public void setPostDate(LocalDateTime postDate) {
         this.postDate = postDate;
     }
 
+    /**
+     * Gets recipe post category.
+     *
+     * @return the recipe post category
+     */
     public RecipePostCategory getRecipePostCategory() {
         return recipePostCategory;
     }
 
+    /**
+     * Sets recipe post category.
+     *
+     * @param recipePostCategory the recipe post category
+     */
     public void setRecipePostCategory(RecipePostCategory recipePostCategory) {
         this.recipePostCategory = recipePostCategory;
     }
 
+    /**
+     * Gets user picture path.
+     *
+     * @return the user picture path
+     */
     public String getUserPicturePath() {
         return userPicturePath;
     }
 
+    /**
+     * Sets user picture path.
+     *
+     * @param userPicturePath the user picture path
+     */
     public void setUserPicturePath(String userPicturePath) {
         this.userPicturePath = userPicturePath;
     }
 
+    /**
+     * Gets user login.
+     *
+     * @return the user login
+     */
     public String getUserLogin() {
         return userLogin;
     }
 
+    /**
+     * Sets user login.
+     *
+     * @param userLogin the user login
+     */
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }
 
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public long getUserId() {
         return userId;
     }
 
+    /**
+     * Sets user id.
+     *
+     * @param userId the user id
+     */
     public void setUserId(long userId) {
         this.userId = userId;
     }

@@ -20,6 +20,9 @@ import static edu.radyuk.foodblog.controller.command.RequestParameter.APPROVED_U
 import static edu.radyuk.foodblog.controller.command.RequestParameter.UNAPPROVED_USERS;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
+/**
+ * The type Go to admin page command.
+ */
 public class GoToAdminPageCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 
@@ -38,7 +41,6 @@ public class GoToAdminPageCommand implements ClientCommand {
 
         User user = (User) request.getSession().getAttribute(USER);
         approvedUsers.remove(user);
-
         request.setAttribute(UNAPPROVED_USERS, unapprovedUsers);
         request.setAttribute(APPROVED_USERS, approvedUsers);
         return new CommandResponse(ADMIN_PAGE, RoutingType.FORWARD);

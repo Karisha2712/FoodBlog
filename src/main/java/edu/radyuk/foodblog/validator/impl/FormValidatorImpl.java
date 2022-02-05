@@ -2,6 +2,9 @@ package edu.radyuk.foodblog.validator.impl;
 
 import edu.radyuk.foodblog.validator.FormValidator;
 
+/**
+ * The type Form validator.
+ */
 public final class FormValidatorImpl implements FormValidator {
     private static final String REGEXP_FOR_LOGIN_VALIDATION = "[A-Za-z0-9_-]{3,20}";
     private static final String REGEXP_FOR_EMAIL_VALIDATION =

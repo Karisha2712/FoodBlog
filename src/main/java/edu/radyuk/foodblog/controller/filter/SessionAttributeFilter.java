@@ -11,6 +11,9 @@ import java.util.EnumMap;
 
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.*;
 
+/**
+ * The type Session attribute filter.
+ */
 public class SessionAttributeFilter implements Filter {
     private EnumMap<CommandType, String> attributesForRemove;
 

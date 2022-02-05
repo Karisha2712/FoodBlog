@@ -92,6 +92,10 @@
         <listener-class>edu.radyuk.foodblog.controller.listener.HttpSessionListenerImpl</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>edu.radyuk.foodblog.controller.listener.ServletContextListenerImpl</listener-class>
+    </listener>
+
     <error-page>
         <error-code>404</error-code>
         <location>/error_pages/error_404_page.jsp</location>

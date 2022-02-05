@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
+/**
+ * The type Recipe post row mapper.
+ */
 public class RecipePostRowMapperImpl implements RowMapper<RecipePost> {
     @Override
     public RecipePost mapRow(ResultSet resultSet) throws SQLException {

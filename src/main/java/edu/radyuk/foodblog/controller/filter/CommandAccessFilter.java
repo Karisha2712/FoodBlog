@@ -19,6 +19,9 @@ import java.util.EnumSet;
 import static edu.radyuk.foodblog.controller.command.CommandType.*;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
+/**
+ * The type Command access filter.
+ */
 public class CommandAccessFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
     private EnumSet<CommandType> guestAvailableCommands;

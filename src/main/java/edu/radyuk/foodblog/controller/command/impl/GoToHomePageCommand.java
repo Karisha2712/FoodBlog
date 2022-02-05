@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import static edu.radyuk.foodblog.controller.command.PagePath.HOME_PAGE;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
 
+/**
+ * The type Go to home page command.
+ */
 public class GoToHomePageCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {

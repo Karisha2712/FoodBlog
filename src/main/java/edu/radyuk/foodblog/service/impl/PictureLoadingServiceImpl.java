@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * The type Picture loading service.
+ */
 public class PictureLoadingServiceImpl implements PictureLoadingService {
     private static final Logger logger = LogManager.getLogger();
     private static final String PICTURE_PROPERTIES = "property/picture.properties";
@@ -26,6 +29,9 @@ public class PictureLoadingServiceImpl implements PictureLoadingService {
     private String avatarPath;
     private String postPath;
 
+    /**
+     * Instantiates a new Picture loading service.
+     */
     public PictureLoadingServiceImpl() {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
@@ -47,11 +53,6 @@ public class PictureLoadingServiceImpl implements PictureLoadingService {
         }
     }
 
-    public enum PictureCategory {
-        POST,
-        AVATAR
-    }
-
     @Override
     public String savePicture(long id, PictureCategory pictureCategory, List<Part> pictureParts)
             throws ServiceException {
@@ -67,5 +68,19 @@ public class PictureLoadingServiceImpl implements PictureLoadingService {
             throw new ServiceException(e);
         }
         return relativePicturePath;
+    }
+
+    /**
+     * The enum Picture category.
+     */
+    public enum PictureCategory {
+        /**
+         * Post picture category.
+         */
+        POST,
+        /**
+         * Avatar picture category.
+         */
+        AVATAR
     }
 }

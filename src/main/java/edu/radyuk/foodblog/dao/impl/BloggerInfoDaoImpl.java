@@ -7,34 +7,31 @@ import edu.radyuk.foodblog.dao.mapper.impl.BloggerInfoRowMapperImpl;
 import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.exception.DaoException;
 
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Blogger info dao.
+ */
 public class BloggerInfoDaoImpl implements BloggerInfoDao {
     private static final String FIND_BLOGGER_INFO_BY_USER_ID =
             "SELECT * FROM blogger_infos WHERE users_user_id = ?";
     private static final String INSERT_BLOGGER_INFO_QUERY =
             "INSERT INTO blogger_infos VALUES(?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_BLOGGER_INFO_QUERY =
-            "UPDATE blogger_infos SET picture = ?, age = ?, country = ?, city = ?, personal_info = ? where users_user_id = ?";
+            "UPDATE blogger_infos SET picture = ?, age = ?, country = ?, " +
+                    "city = ?, personal_info = ? where users_user_id = ?";
     private JdbcHelper<BloggerInfo> jdbcHelper;
 
+    /**
+     * Instantiates a new Blogger info dao.
+     */
     public BloggerInfoDaoImpl() {
         jdbcHelper = new JdbcHelper<>(ConnectionPool.getInstance(), new BloggerInfoRowMapperImpl());
     }
 
-
     @Override
-    public List<BloggerInfo> findAll() throws DaoException {
-        return null;
-        //TODO
-
-    }
-
-    @Override
-    public Optional<BloggerInfo> findEntityById(long id) throws DaoException {
-        return Optional.empty();
-        //TODO
+    public Optional<BloggerInfo> findEntityById(long id) {
+        throw new UnsupportedOperationException("Method is not realised");
     }
 
     @Override
@@ -65,14 +62,7 @@ public class BloggerInfoDaoImpl implements BloggerInfoDao {
     }
 
     @Override
-    public long remove(BloggerInfo entity) throws DaoException {
-        return 0;
-        //TODO
-    }
-
-    @Override
-    public long removeEntityById(long id) throws DaoException {
-        return 0;
-        //TODO
+    public long removeEntityById(long id) {
+        throw new UnsupportedOperationException("Method is not realised");
     }
 }

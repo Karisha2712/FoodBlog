@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 
+/**
+ * The type Delete recipe post command.
+ */
 public class DeleteRecipePostCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

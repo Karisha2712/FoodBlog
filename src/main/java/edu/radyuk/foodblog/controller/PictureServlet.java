@@ -4,7 +4,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,9 @@ import java.util.Properties;
 
 import static edu.radyuk.foodblog.controller.command.RequestParameter.PICTURE_PATH;
 
+/**
+ * The type Picture servlet.
+ */
 public class PictureServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
     private static final String PICTURE_PROPERTIES_FILE = "property/picture.properties";
@@ -23,7 +25,7 @@ public class PictureServlet extends HttpServlet {
     private String baseDirectory;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PICTURE_PROPERTIES_FILE)) {
             Properties properties = new Properties();
             properties.load(inputStream);
@@ -36,7 +38,7 @@ public class PictureServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String picturePath = req.getParameter(PICTURE_PATH);
         if (picturePath == null) {
             logger.log(Level.ERROR, "There is no such parameter {} in request", PICTURE_PATH);

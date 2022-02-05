@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import static edu.radyuk.foodblog.controller.command.PagePath.SIGN_UP_PAGE;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
 
+/**
+ * The type Go to sign up page command.
+ */
 public class GoToSignUpPageCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {

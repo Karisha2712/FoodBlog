@@ -19,6 +19,9 @@ import java.util.Optional;
 
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
+/**
+ * The type User status validation filter.
+ */
 public class UserStatusValidationFilter implements Filter {
     private static final Logger logger = LogManager.getLogger();
 

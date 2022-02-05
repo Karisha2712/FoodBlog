@@ -24,23 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Recipe post service.
+ */
 public class RecipePostServiceImpl implements RecipePostService {
     private static final Logger logger = LogManager.getLogger();
     private static final String DEFAULT_AVATAR = "default_avatar_big.png";
     private static final double DEFAULT_RATING = 0;
     private static final int POST_NUMBER_PER_PAGE = 3;
-
-    @Override
-    public List<RecipePostDto> retrieveAllRecipePosts() throws ServiceException {
-        RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
-        try {
-            List<RecipePost> recipePosts = recipePostDao.findAll();
-            return retrieveAllRecipePostsDto(recipePosts);
-        } catch (DaoException e) {
-            logger.log(Level.ERROR, e);
-            throw new ServiceException(e);
-        }
-    }
 
     @Override
     public Optional<RecipePostDto> retrieveRecipePostById(long id) throws ServiceException {
@@ -70,18 +61,6 @@ public class RecipePostServiceImpl implements RecipePostService {
         RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
         try {
             List<RecipePost> recipePosts = recipePostDao.findRecipePostsByUserId(userId);
-            return retrieveAllRecipePostsDto(recipePosts);
-        } catch (DaoException e) {
-            logger.log(Level.ERROR, e);
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public List<RecipePostDto> retrieveRecipePostsByDishName(String dishName) throws ServiceException {
-        RecipePostDao recipePostDao = DaoProvider.getInstance().getRecipePostDao();
-        try {
-            List<RecipePost> recipePosts = recipePostDao.findRecipePostsByDishName(dishName);
             return retrieveAllRecipePostsDto(recipePosts);
         } catch (DaoException e) {
             logger.log(Level.ERROR, e);

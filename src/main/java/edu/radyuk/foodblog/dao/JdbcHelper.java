@@ -13,16 +13,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Jdbc helper.
+ *
+ * @param <T> the type parameter
+ */
 public class JdbcHelper<T> {
     private static final Logger logger = LogManager.getLogger();
     private ConnectionPool connectionPool;
     private RowMapper<T> mapper;
 
+    /**
+     * Instantiates a new Jdbc helper.
+     *
+     * @param connectionPool the connection pool
+     * @param mapper         the mapper
+     */
     public JdbcHelper(ConnectionPool connectionPool, RowMapper<T> mapper) {
         this.connectionPool = connectionPool;
         this.mapper = mapper;
     }
 
+    /**
+     * Execute query list.
+     *
+     * @param query      the query
+     * @param parameters the parameters
+     * @return the list
+     * @throws DaoException the dao exception
+     */
     public List<T> executeQuery(String query, Object... parameters) throws DaoException {
         List<T> queryResult = new ArrayList<>();
         try (Connection connection = connectionPool.acquireConnection();
@@ -41,12 +60,28 @@ public class JdbcHelper<T> {
         return queryResult;
     }
 
+    /**
+     * Execute query for single object optional.
+     *
+     * @param query      the query
+     * @param parameters the parameters
+     * @return the optional
+     * @throws DaoException the dao exception
+     */
     public Optional<T> executeQueryForSingleObject(String query, Object... parameters) throws DaoException {
         return executeQuery(query, parameters)
                 .stream()
                 .findFirst();
     }
 
+    /**
+     * Execute update long.
+     *
+     * @param query      the query
+     * @param parameters the parameters
+     * @return the long
+     * @throws DaoException the dao exception
+     */
     public long executeUpdate(String query, Object... parameters) throws DaoException {
         try (Connection connection = connectionPool.acquireConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -58,6 +93,14 @@ public class JdbcHelper<T> {
         }
     }
 
+    /**
+     * Execute insert long.
+     *
+     * @param query      the query
+     * @param parameters the parameters
+     * @return the long
+     * @throws DaoException the dao exception
+     */
     public long executeInsert(String query, Object... parameters) throws DaoException {
         try (Connection connection = connectionPool.acquireConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {

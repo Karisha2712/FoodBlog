@@ -22,6 +22,9 @@ import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
 import static edu.radyuk.foodblog.controller.command.RoutingType.REDIRECT;
 
+/**
+ * The type Go to recipes page command.
+ */
 public class GoToRecipesPageCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

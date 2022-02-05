@@ -7,6 +7,9 @@ import edu.radyuk.foodblog.entity.BloggerInfo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The type Blogger info row mapper.
+ */
 public class BloggerInfoRowMapperImpl implements RowMapper<BloggerInfo> {
     @Override
     public BloggerInfo mapRow(ResultSet resultSet) throws SQLException {

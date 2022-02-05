@@ -2,6 +2,9 @@ package edu.radyuk.foodblog.entity;
 
 import java.io.Serializable;
 
+/**
+ * The type User.
+ */
 public class User extends AbstractEntity implements Serializable {
     private String login;
     private String email;
@@ -9,45 +12,92 @@ public class User extends AbstractEntity implements Serializable {
     private UserRole userRole;
     private UserStatus userStatus;
 
-    public User() {
-    }
-
+    /**
+     * Gets login.
+     *
+     * @return the login
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * Sets login.
+     *
+     * @param login the login
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets password hash.
+     *
+     * @return the password hash
+     */
     public String getPasswordHash() {
         return passwordHash;
     }
 
+    /**
+     * Sets password hash.
+     *
+     * @param passwordHash the password hash
+     */
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
+    /**
+     * Gets user role.
+     *
+     * @return the user role
+     */
     public UserRole getUserRole() {
         return userRole;
     }
 
+    /**
+     * Sets user role.
+     *
+     * @param userRole the user role
+     */
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
 
+    /**
+     * Gets user status.
+     *
+     * @return the user status
+     */
     public UserStatus getUserStatus() {
         return userStatus;
     }
 
+    /**
+     * Sets user status.
+     *
+     * @param userStatus the user status
+     */
     public void setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
     }

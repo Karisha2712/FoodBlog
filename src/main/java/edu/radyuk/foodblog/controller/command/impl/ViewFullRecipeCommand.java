@@ -22,6 +22,9 @@ import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.COMMENTS;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.RECIPE_POST;
 
+/**
+ * The type View full recipe command.
+ */
 public class ViewFullRecipeCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

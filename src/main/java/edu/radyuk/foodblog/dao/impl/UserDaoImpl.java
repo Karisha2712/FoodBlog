@@ -11,6 +11,9 @@ import edu.radyuk.foodblog.exception.DaoException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User dao.
+ */
 public class UserDaoImpl implements UserDao {
     private static final String FIND_ALL_USERS_QUERY = "SELECT * FROM users " +
             "JOIN user_types ON user_types_type_id = type_id " +
@@ -20,9 +23,11 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_USER_BY_EMAIL_QUERY = FIND_ALL_USERS_QUERY + " WHERE email = ?";
     private static final String UPDATE_USER_STATUS = "UPDATE users SET user_statuses_status_id = " +
             "(SELECT status_id from user_statuses WHERE status = ?) WHERE user_id = ?";
-    private static final String FIND_UNAPPROVED_USERS_QUERY = FIND_ALL_USERS_QUERY + " WHERE status = 'awaiting_confirmation'" +
+    private static final String FIND_UNAPPROVED_USERS_QUERY = FIND_ALL_USERS_QUERY +
+            " WHERE status = 'awaiting_confirmation'" +
             " ORDER BY user_id";
-    private static final String FIND_APPROVED_USERS_QUERY = FIND_ALL_USERS_QUERY + " WHERE status != 'awaiting_confirmation'" +
+    private static final String FIND_APPROVED_USERS_QUERY = FIND_ALL_USERS_QUERY +
+            " WHERE status != 'awaiting_confirmation'" +
             " ORDER BY user_id";
     private static final String INSERT_NEW_USER = "INSERT INTO users " +
             "(login, email, hash, user_types_type_id, user_statuses_status_id) " +
@@ -31,14 +36,11 @@ public class UserDaoImpl implements UserDao {
             "(SELECT status_id FROM user_statuses WHERE status = ?))";
     private JdbcHelper<User> jdbcHelper;
 
+    /**
+     * Instantiates a new User dao.
+     */
     public UserDaoImpl() {
         jdbcHelper = new JdbcHelper<>(ConnectionPool.getInstance(), new UserRowMapperImpl());
-    }
-
-    @Override
-    public List<User> findAll() throws DaoException {
-        return null;
-        //TODO
     }
 
     @Override
@@ -57,21 +59,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public long update(User entity) throws DaoException {
-        return 0;
-        //TODO
+    public long update(User entity) {
+        throw new UnsupportedOperationException("Method is not realised");
     }
 
     @Override
-    public long remove(User entity) throws DaoException {
-        return 0;
-        //TODO
-    }
-
-    @Override
-    public long removeEntityById(long id) throws DaoException {
-        return 0;
-        //TODO
+    public long removeEntityById(long id) {
+        throw new UnsupportedOperationException("Method is not realised");
     }
 
     @Override

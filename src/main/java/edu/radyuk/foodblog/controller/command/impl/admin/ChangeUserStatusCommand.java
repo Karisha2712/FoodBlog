@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import static edu.radyuk.foodblog.controller.command.PagePath.*;
 
+/**
+ * The type Change user status command.
+ */
 public class ChangeUserStatusCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -2,6 +2,9 @@ package edu.radyuk.foodblog.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Recipe post.
+ */
 public class RecipePost extends AbstractEntity {
     private String recipeText;
     private String picturePath;
@@ -11,61 +14,134 @@ public class RecipePost extends AbstractEntity {
     private RecipePostCategory recipePostCategory;
     private long userId;
 
+    /**
+     * Instantiates a new Recipe post.
+     */
     public RecipePost() {
     }
 
+    /**
+     * Gets dish name.
+     *
+     * @return the dish name
+     */
     public String getDishName() {
         return dishName;
     }
 
+    /**
+     * Sets dish name.
+     *
+     * @param dishName the dish name
+     */
     public void setDishName(String dishName) {
         this.dishName = dishName;
     }
 
+    /**
+     * Gets recipe text.
+     *
+     * @return the recipe text
+     */
     public String getRecipeText() {
         return recipeText;
     }
 
+    /**
+     * Sets recipe text.
+     *
+     * @param recipeText the recipe text
+     */
     public void setRecipeText(String recipeText) {
         this.recipeText = recipeText;
     }
 
+    /**
+     * Gets picture path.
+     *
+     * @return the picture path
+     */
     public String getPicturePath() {
         return picturePath;
     }
 
+    /**
+     * Sets picture path.
+     *
+     * @param picturePath the picture path
+     */
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
 
+    /**
+     * Gets post rating.
+     *
+     * @return the post rating
+     */
     public Double getPostRating() {
         return postRating;
     }
 
+    /**
+     * Sets post rating.
+     *
+     * @param postRating the post rating
+     */
     public void setPostRating(Double postRating) {
         this.postRating = postRating;
     }
 
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public long getUserId() {
         return userId;
     }
 
+    /**
+     * Sets user id.
+     *
+     * @param userId the user id
+     */
     public void setUserId(long userId) {
         this.userId = userId;
     }
 
+    /**
+     * Gets post date.
+     *
+     * @return the post date
+     */
     public LocalDateTime getPostDate() {
         return postDate;
     }
 
+    /**
+     * Sets post date.
+     *
+     * @param postDate the post date
+     */
     public void setPostDate(LocalDateTime postDate) {
         this.postDate = postDate;
     }
 
+    /**
+     * Gets recipe post category.
+     *
+     * @return the recipe post category
+     */
     public RecipePostCategory getRecipePostCategory() {
         return recipePostCategory;
     }
 
+    /**
+     * Sets recipe post category.
+     *
+     * @param recipePostCategory the recipe post category
+     */
     public void setRecipePostCategory(RecipePostCategory recipePostCategory) {
         this.recipePostCategory = recipePostCategory;
     }

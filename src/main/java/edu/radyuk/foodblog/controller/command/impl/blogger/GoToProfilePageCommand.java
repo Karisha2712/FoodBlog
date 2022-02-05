@@ -22,6 +22,9 @@ import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_404_PAGE;
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
 
+/**
+ * The type Go to profile page command.
+ */
 public class GoToProfilePageCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -13,6 +13,9 @@ import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * The type Connection pool.
+ */
 public final class ConnectionPool {
     private static final Logger logger = LogManager.getLogger();
     private static final int DEFAULT_POOL_SIZE = 4;
@@ -43,10 +46,21 @@ public final class ConnectionPool {
         logger.log(Level.INFO, "ConnectionPool was created successfully ");
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ConnectionPool getInstance() {
         return Holder.instance;
     }
 
+    /**
+     * Acquire connection.
+     *
+     * @return the connection
+     * @throws DataBaseConnectionException the database connection exception
+     */
     public Connection acquireConnection() throws DataBaseConnectionException {
         ProxyConnection connection;
         try {
@@ -60,6 +74,13 @@ public final class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Release connection boolean.
+     *
+     * @param connection the connection
+     * @return the boolean
+     * @throws DataBaseConnectionException the data base connection exception
+     */
     public boolean releaseConnection(Connection connection) throws DataBaseConnectionException {
         if (!(connection instanceof ProxyConnection)) {
             return false;
@@ -75,6 +96,9 @@ public final class ConnectionPool {
         return true;
     }
 
+    /**
+     * Close connections.
+     */
     public void closeConnections() {
         availableConnections.forEach(ProxyConnection::reallyClose);
         usedConnections.forEach(ProxyConnection::reallyClose);

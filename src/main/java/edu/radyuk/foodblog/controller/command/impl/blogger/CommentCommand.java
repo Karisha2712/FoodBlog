@@ -20,6 +20,9 @@ import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 import static edu.radyuk.foodblog.controller.command.PagePath.VIEW_FULL_RECIPE_REDIRECT;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.COMMENT_ERROR;
 
+/**
+ * The type Comment command.
+ */
 public class CommentCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

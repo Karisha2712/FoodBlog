@@ -20,6 +20,9 @@ import javax.servlet.http.HttpSession;
 import static edu.radyuk.foodblog.controller.command.MessageKey.*;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.SIGN_UP_ERROR;
 
+/**
+ * The type Sign up command.
+ */
 public class SignUpCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

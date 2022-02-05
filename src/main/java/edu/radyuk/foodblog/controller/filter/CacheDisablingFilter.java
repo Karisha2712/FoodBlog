@@ -4,6 +4,9 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Cache disabling filter.
+ */
 public class CacheDisablingFilter implements Filter {
 
     @Override

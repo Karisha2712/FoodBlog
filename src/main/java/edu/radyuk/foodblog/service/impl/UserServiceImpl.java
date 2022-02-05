@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User service.
+ */
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger();
 
@@ -92,15 +95,6 @@ public class UserServiceImpl implements UserService {
             logger.log(Level.ERROR, e);
             throw new ServiceException(e);
         }
-    }
-
-    @Override
-    public Optional<String> retrieveUserLoginByUserId(long userId) throws ServiceException {
-        Optional<User> optionalUser = retrieveUserById(userId);
-        if (optionalUser.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(optionalUser.get().getLogin());
     }
 
     @Override

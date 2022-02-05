@@ -2,6 +2,9 @@ package edu.radyuk.foodblog.validator.impl;
 
 import edu.radyuk.foodblog.validator.PageNumberValidator;
 
+/**
+ * The type Page number validator.
+ */
 public class PageNumberValidatorImpl implements PageNumberValidator {
     private static final String REGEXP_FOR_DIGIT = "\\d+";
 

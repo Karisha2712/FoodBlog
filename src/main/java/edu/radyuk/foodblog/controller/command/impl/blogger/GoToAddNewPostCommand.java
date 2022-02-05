@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import static edu.radyuk.foodblog.controller.command.PagePath.ADD_RECIPE_POST_PAGE;
 
+/**
+ * The type Go to add new post command.
+ */
 public class GoToAddNewPostCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

@@ -10,6 +10,9 @@ import java.util.EnumMap;
 
 import static edu.radyuk.foodblog.controller.command.CommandType.*;
 
+/**
+ * The type Command factory.
+ */
 public final class CommandFactory {
     private static final CommandFactory instance = new CommandFactory();
     private EnumMap<CommandType, ClientCommand> commands;
@@ -39,10 +42,21 @@ public final class CommandFactory {
         commands.put(SIGN_UP, new SignUpCommand());
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static CommandFactory getInstance() {
         return instance;
     }
 
+    /**
+     * Gets command.
+     *
+     * @param command the command
+     * @return the command
+     */
     public ClientCommand getCommand(String command) {
         CommandType commandType = CommandType.getCommandType(command);
         return commands.get(commandType);

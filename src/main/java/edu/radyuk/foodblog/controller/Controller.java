@@ -13,6 +13,9 @@ import java.io.IOException;
 
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 
+/**
+ * The type Controller.
+ */
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
 

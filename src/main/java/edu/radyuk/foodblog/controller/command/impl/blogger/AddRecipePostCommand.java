@@ -27,6 +27,9 @@ import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.ADD_POST_ERROR;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
+/**
+ * The type Add recipe post command.
+ */
 public class AddRecipePostCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

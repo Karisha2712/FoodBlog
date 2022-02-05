@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 import static edu.radyuk.foodblog.controller.command.PagePath.VIEW_FULL_RECIPE_REDIRECT;
 
+/**
+ * The type Delete comment command.
+ */
 public class DeleteCommentCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

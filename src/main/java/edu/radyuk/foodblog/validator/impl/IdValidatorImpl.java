@@ -2,6 +2,9 @@ package edu.radyuk.foodblog.validator.impl;
 
 import edu.radyuk.foodblog.validator.IdValidator;
 
+/**
+ * The type Id validator.
+ */
 public class IdValidatorImpl implements IdValidator {
     private static final String REGEXP_FOR_DIGIT = "\\d+";
 

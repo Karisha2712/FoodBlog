@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import static edu.radyuk.foodblog.controller.command.PagePath.SIGN_IN_PAGE;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
 
+/**
+ * The type Go to sign in page command.
+ */
 public class GoToSignInPageCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {

@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Comment service.
+ */
 public class CommentServiceImpl implements CommentService {
     private static final Logger logger = LogManager.getLogger();
 

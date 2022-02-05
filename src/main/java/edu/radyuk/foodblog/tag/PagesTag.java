@@ -8,6 +8,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
+/**
+ * The type Pages tag.
+ */
 public class PagesTag extends TagSupport {
     private static final Logger logger = LogManager.getLogger();
     private String pagesCountAttribute;
@@ -15,18 +18,38 @@ public class PagesTag extends TagSupport {
     private String searchAttribute;
     private String command;
 
+    /**
+     * Sets current page attribute.
+     *
+     * @param currentPageAttribute the current page attribute
+     */
     public void setCurrentPageAttribute(String currentPageAttribute) {
         this.currentPageAttribute = currentPageAttribute;
     }
 
+    /**
+     * Sets search attribute.
+     *
+     * @param searchAttribute the search attribute
+     */
     public void setSearchAttribute(String searchAttribute) {
         this.searchAttribute = searchAttribute;
     }
 
+    /**
+     * Sets pages count attribute.
+     *
+     * @param pagesCountAttribute the pages count attribute
+     */
     public void setPagesCountAttribute(String pagesCountAttribute) {
         this.pagesCountAttribute = pagesCountAttribute;
     }
 
+    /**
+     * Sets command.
+     *
+     * @param command the command
+     */
     public void setCommand(String command) {
         this.command = command;
     }

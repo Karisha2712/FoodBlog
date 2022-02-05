@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import static edu.radyuk.foodblog.controller.command.PagePath.HOME_PAGE;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
+/**
+ * The type Logout command.
+ */
 public class LogoutCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {

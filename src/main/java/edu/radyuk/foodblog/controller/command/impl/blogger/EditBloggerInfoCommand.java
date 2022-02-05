@@ -28,6 +28,9 @@ import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.EDIT_INFO_ERROR;
 import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 
+/**
+ * The type Edit blogger info command.
+ */
 public class EditBloggerInfoCommand implements ClientCommand {
     private static final Logger logger = LogManager.getLogger();
 

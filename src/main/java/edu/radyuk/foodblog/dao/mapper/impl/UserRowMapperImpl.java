@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 
+/**
+ * The type User row mapper.
+ */
 public class UserRowMapperImpl implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet resultSet) throws SQLException {

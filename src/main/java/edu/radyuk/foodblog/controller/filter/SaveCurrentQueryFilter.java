@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import static edu.radyuk.foodblog.controller.command.CommandType.CHANGE_LANGUAGE;
 
+/**
+ * The type Save current query filter.
+ */
 public class SaveCurrentQueryFilter implements Filter {
     private static final String GET_METHOD = "GET";
     private static final String QUESTION_MARK = "?";

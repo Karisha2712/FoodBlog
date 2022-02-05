@@ -8,6 +8,9 @@ import edu.radyuk.foodblog.controller.command.SessionAttribute;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type Change language command.
+ */
 public class ChangeLanguageCommand implements ClientCommand {
     private static final String RUSSIAN_LOCALE = "ru";
     private static final String ENGLISH_LOCALE = "en";

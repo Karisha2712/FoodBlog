@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import static edu.radyuk.foodblog.controller.command.PagePath.ABOUT_US_PAGE;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
 
+/**
+ * The type Go to about page command.
+ */
 public class GoToAboutPageCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {
