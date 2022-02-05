@@ -20,6 +20,8 @@ block and unblock users, delete posts and comments. Also, all users can change t
 - Delete his post
 - Rate the post
 - Comment post
+- Delete his comment to any post
+- Delete any comment to his post
 - Logout
 ### Admin
 - Change language
