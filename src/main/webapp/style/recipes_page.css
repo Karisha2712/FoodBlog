@@ -40,6 +40,9 @@
 
 .rating-with-category {
     margin-top: .8vw;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 7.5vw;
 }
 
 .category {

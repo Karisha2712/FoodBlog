@@ -28,8 +28,37 @@
 <jsp:include page="../template/header.jsp"/>
 
 <body>
-<c:if test="${requestScope.unapproved_users.size() != 0}">
-    <h1 class="page-title"><fmt:message key="admin.awaiting_confirmation" bundle="${rb}"/></h1>
+<div class="body">
+    <c:if test="${requestScope.unapproved_users.size() != 0}">
+        <h1 class="page-title"><fmt:message key="admin.awaiting_confirmation" bundle="${rb}"/></h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th scope="col"><fmt:message key="admin.table_column_name.login" bundle="${rb}"/></th>
+                <th scope="col"><fmt:message key="admin.table_column_name.email" bundle="${rb}"/></th>
+                <th scope="col"><fmt:message key="admin.table_column_name.role" bundle="${rb}"/></th>
+                <th scope="col"><fmt:message key="admin.table_column_name.action" bundle="${rb}"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${requestScope.unapproved_users}" var="user">
+                <tr>
+                    <th scope="row">${user.login}</th>
+                    <td>${user.email}</td>
+                    <td>${user.userRole}</td>
+                    <td>
+                        <a class="action"
+                           href="${pageContext.request.contextPath}/controller?command=change_user_status&user_id=${user.entityId}&user_status=${user.userStatus}">
+                            <strong><fmt:message key="admin.confirm" bundle="${rb}"/></strong>
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+    <h1 class="page-title"><fmt:message key="admin.users" bundle="${rb}"/></h1>
+
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
@@ -40,67 +69,37 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${requestScope.unapproved_users}" var="user">
+        <c:forEach items="${requestScope.approved_users}" var="user">
             <tr>
-                <th scope="row">${user.login}</th>
+                <th scope="row">
+                    <a class="action"
+                       href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${user.entityId}">
+                            ${user.login}
+                    </a>
+                </th>
                 <td>${user.email}</td>
                 <td>${user.userRole}</td>
                 <td>
                     <a class="action"
                        href="${pageContext.request.contextPath}/controller?command=change_user_status&user_id=${user.entityId}&user_status=${user.userStatus}">
-                        <strong><fmt:message key="admin.confirm" bundle="${rb}"/></strong>
+                        <strong>
+                            <c:choose>
+                                <c:when test="${user.userStatus eq UserStatus.ACTIVE}">
+                                    <fmt:message key="admin.action.block" bundle="${rb}"/>
+                                </c:when>
+                                <c:when test="${user.userStatus eq UserStatus.BLOCKED}">
+                                    <fmt:message key="admin.action.unblock" bundle="${rb}"/>
+                                </c:when>
+                            </c:choose>
+                        </strong>
                     </a>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-</c:if>
-<h1 class="page-title"><fmt:message key="admin.users" bundle="${rb}"/></h1>
-
-<table class="table table-striped table-bordered">
-    <thead>
-    <tr>
-        <th scope="col"><fmt:message key="admin.table_column_name.login" bundle="${rb}"/></th>
-        <th scope="col"><fmt:message key="admin.table_column_name.email" bundle="${rb}"/></th>
-        <th scope="col"><fmt:message key="admin.table_column_name.role" bundle="${rb}"/></th>
-        <th scope="col"><fmt:message key="admin.table_column_name.action" bundle="${rb}"/></th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${requestScope.approved_users}" var="user">
-        <tr>
-            <th scope="row">
-                <a class="action"
-                   href="${pageContext.request.contextPath}/controller?command=go_to_profile_page&user_id=${user.entityId}">
-                        ${user.login}
-                </a>
-            </th>
-            <td>${user.email}</td>
-            <td>${user.userRole}</td>
-            <td>
-                <a class="action"
-                   href="${pageContext.request.contextPath}/controller?command=change_user_status&user_id=${user.entityId}&user_status=${user.userStatus}">
-                    <strong>
-                        <c:choose>
-                            <c:when test="${user.userStatus eq UserStatus.ACTIVE}">
-                                <fmt:message key="admin.action.block" bundle="${rb}"/>
-                            </c:when>
-                            <c:when test="${user.userStatus eq UserStatus.BLOCKED}">
-                                <fmt:message key="admin.action.unblock" bundle="${rb}"/>
-                            </c:when>
-                        </c:choose>
-                    </strong>
-                </a>
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-
-
+</div>
 </body>
-
 
 <jsp:include page="../template/footer.jsp"/>
 
