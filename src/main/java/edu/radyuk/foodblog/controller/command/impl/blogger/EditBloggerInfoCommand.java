@@ -14,13 +14,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_EDIT_INFO_FORM_INPUT;
 import static edu.radyuk.foodblog.controller.command.PagePath.*;
@@ -40,15 +37,7 @@ public class EditBloggerInfoCommand implements ClientCommand {
         String city = request.getParameter(CITY);
         String ageString = request.getParameter(AGE);
         String personalInfo = request.getParameter(PERSONAL_INFO);
-        List<Part> pictureParts;
-        try {
-            pictureParts = request.getParts().stream()
-                    .filter(part -> part.getName().equals(USER_AVATAR) && part.getSize() > 0)
-                    .collect(Collectors.toList());
-        } catch (IOException | ServletException e) {
-            logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
-        }
+        List<Part> pictureParts = PicturePartsLoader.loadPictureParts(request, USER_AVATAR);
 
         FormValidator validator = ValidatorProvider.getInstance().getFormValidator();
         HttpSession session = request.getSession();
@@ -59,7 +48,7 @@ public class EditBloggerInfoCommand implements ClientCommand {
         }
 
         String fileName = pictureParts.get(0).getSubmittedFileName();
-        if (!validator.areEditInfoParametersValid(city, country, ageString, personalInfo, fileName)) {
+        if (!validator.isEditInfoParametersValid(city, country, ageString, personalInfo, fileName)) {
             logger.log(Level.ERROR, "Invalid form input");
             session.setAttribute(EDIT_INFO_ERROR, INVALID_EDIT_INFO_FORM_INPUT);
             return new CommandResponse(EDIT_INFO_PAGE, RoutingType.FORWARD);

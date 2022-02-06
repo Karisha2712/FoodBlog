@@ -13,13 +13,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.INVALID_ADD_POST_FORM_INPUT;
 import static edu.radyuk.foodblog.controller.command.PagePath.*;
@@ -38,15 +35,7 @@ public class AddRecipePostCommand implements ClientCommand {
         String dishName = request.getParameter(DISH_NAME);
         String recipeCategory = request.getParameter(RECIPE_CATEGORY);
         String recipeText = request.getParameter(RECIPE_TEXT);
-        List<Part> pictureParts;
-        try {
-            pictureParts = request.getParts().stream()
-                    .filter(part -> part.getName().equals(POST_PICTURE) && part.getSize() > 0)
-                    .collect(Collectors.toList());
-        } catch (IOException | ServletException e) {
-            logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
-        }
+        List<Part> pictureParts = PicturePartsLoader.loadPictureParts(request, POST_PICTURE);
 
         FormValidator validator = ValidatorProvider.getInstance().getFormValidator();
         HttpSession session = request.getSession();
@@ -57,7 +46,7 @@ public class AddRecipePostCommand implements ClientCommand {
         }
 
         String fileName = pictureParts.get(0).getSubmittedFileName();
-        if (!validator.areRecipePostParametersValid(dishName, recipeCategory, fileName, recipeText)) {
+        if (!validator.isRecipePostParametersValid(dishName, recipeCategory, fileName, recipeText)) {
             logger.log(Level.ERROR, "Invalid form input");
             session.setAttribute(ADD_POST_ERROR, INVALID_ADD_POST_FORM_INPUT);
             return new CommandResponse(ADD_RECIPE_POST_PAGE, RoutingType.FORWARD);

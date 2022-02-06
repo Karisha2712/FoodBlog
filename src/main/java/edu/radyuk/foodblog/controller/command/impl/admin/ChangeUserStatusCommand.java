@@ -43,17 +43,7 @@ public class ChangeUserStatusCommand implements ClientCommand {
             return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
         }
 
-        switch (userStatus) {
-            case AWAITING_CONFIRMATION:
-            case BLOCKED: {
-                userStatus = UserStatus.ACTIVE;
-                break;
-            }
-            case ACTIVE: {
-                userStatus = UserStatus.BLOCKED;
-                break;
-            }
-        }
+        userStatus = userStatus == UserStatus.ACTIVE ? UserStatus.BLOCKED : UserStatus.ACTIVE;
 
         UserService service = ServiceProvider.getInstance().getUserService();
         try {

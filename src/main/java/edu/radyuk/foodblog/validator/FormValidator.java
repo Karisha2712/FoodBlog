@@ -12,7 +12,7 @@ public interface FormValidator {
      * @param password the password
      * @return the boolean
      */
-    boolean areSignUpParametersValid(String login, String email, String password);
+    boolean isSignUpParametersValid(String login, String email, String password);
 
     /**
      * Are edit info parameters valid boolean.
@@ -24,7 +24,7 @@ public interface FormValidator {
      * @param fileName     the file name
      * @return the boolean
      */
-    boolean areEditInfoParametersValid(String city, String country, String age, String personalInfo, String fileName);
+    boolean isEditInfoParametersValid(String city, String country, String age, String personalInfo, String fileName);
 
     /**
      * Are recipe post parameters valid boolean.
@@ -35,5 +35,5 @@ public interface FormValidator {
      * @param recipeText the recipe text
      * @return the boolean
      */
-    boolean areRecipePostParametersValid(String dishName, String category, String fileName, String recipeText);
+    boolean isRecipePostParametersValid(String dishName, String category, String fileName, String recipeText);
 }

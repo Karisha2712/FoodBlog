@@ -38,7 +38,7 @@ public class SignUpCommand implements ClientCommand {
         HttpSession session = request.getSession();
         FormValidator validator = ValidatorProvider.getInstance().getFormValidator();
 
-        if (!validator.areSignUpParametersValid(login, email, password)) {
+        if (!validator.isSignUpParametersValid(login, email, password)) {
             logger.log(Level.WARN, "Invalid form input");
             session.setAttribute(SIGN_UP_ERROR, INVALID_SIGN_UP_FORM_INPUT);
             return new CommandResponse(PagePath.SIGN_UP_PAGE_REDIRECT, RoutingType.REDIRECT);

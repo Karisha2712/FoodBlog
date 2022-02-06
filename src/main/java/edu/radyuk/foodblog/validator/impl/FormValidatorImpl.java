@@ -16,7 +16,7 @@ public final class FormValidatorImpl implements FormValidator {
     private static final int MAX_RECIPE_TEXT_LENGTH = 2000;
     private static final int MAX_PERSONAL_INFO_LENGTH = 256;
 
-    public boolean areSignUpParametersValid(String login, String email, String password) {
+    public boolean isSignUpParametersValid(String login, String email, String password) {
         boolean areValid = login != null && email != null && password != null;
         return areValid &&
                 login.matches(REGEXP_FOR_LOGIN_VALIDATION)
@@ -25,8 +25,8 @@ public final class FormValidatorImpl implements FormValidator {
     }
 
     @Override
-    public boolean areEditInfoParametersValid(String city, String country, String age,
-                                              String personalInfo, String fileName) {
+    public boolean isEditInfoParametersValid(String city, String country, String age,
+                                             String personalInfo, String fileName) {
         boolean areValid = city != null && country != null && age != null && personalInfo != null && fileName != null;
         return areValid
                 && city.matches(REGEXP_FOR_CITY_COUNTRY_NAME)
@@ -37,7 +37,7 @@ public final class FormValidatorImpl implements FormValidator {
     }
 
     @Override
-    public boolean areRecipePostParametersValid(String dishName, String category, String fileName, String recipeText) {
+    public boolean isRecipePostParametersValid(String dishName, String category, String fileName, String recipeText) {
         boolean areValid = dishName != null && category != null && fileName != null && recipeText != null;
         return areValid
                 && dishName.matches(REGEXP_FOR_CITY_COUNTRY_NAME)
