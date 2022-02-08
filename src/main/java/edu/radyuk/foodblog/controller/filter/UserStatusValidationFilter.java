@@ -39,7 +39,7 @@ public class UserStatusValidationFilter implements Filter {
                 optionalUser = service.retrieveUserById(user.getEntityId());
             } catch (ServiceException e) {
                 logger.log(Level.ERROR, e);
-                response.sendRedirect(request.getContextPath() + PagePath.ERROR_500_PAGE);
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 return;
             }
             if (optionalUser.isEmpty() || optionalUser.get().getUserStatus() == UserStatus.BLOCKED) {

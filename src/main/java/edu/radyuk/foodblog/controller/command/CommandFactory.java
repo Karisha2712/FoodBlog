@@ -37,7 +37,7 @@ public final class CommandFactory {
         commands.put(COMMENT, new CommentCommand());
         commands.put(DELETE_POST, new DeleteRecipePostCommand());
         commands.put(CHANGE_LANGUAGE, new ChangeLanguageCommand());
-        commands.put(LOGOUT, new LogoutCommandCommand());
+        commands.put(LOGOUT, new LogoutCommand());
         commands.put(SIGN_IN, new SignInCommand());
         commands.put(SIGN_UP, new SignUpCommand());
     }

@@ -1,7 +1,6 @@
 package edu.radyuk.foodblog.controller.filter;
 
 import edu.radyuk.foodblog.controller.command.CommandType;
-import edu.radyuk.foodblog.controller.command.PagePath;
 import edu.radyuk.foodblog.controller.command.RequestParameter;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.entity.UserRole;
@@ -79,14 +78,14 @@ public class CommandAccessFilter implements Filter {
             }
             default: {
                 logger.log(Level.ERROR, "Invalid user role");
-                response.sendRedirect(request.getContextPath() + PagePath.ERROR_500_PAGE);
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 return;
             }
         }
 
         if (!availableCommands.contains(currentCommand)) {
             logger.log(Level.ERROR, "Unavailable command");
-            response.sendRedirect(request.getContextPath() + PagePath.ERROR_404_PAGE);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 

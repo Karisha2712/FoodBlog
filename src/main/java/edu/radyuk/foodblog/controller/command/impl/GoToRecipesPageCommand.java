@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static edu.radyuk.foodblog.controller.command.MessageKey.EMPTY_POSTS_TABLE;
-import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
-import static edu.radyuk.foodblog.controller.command.PagePath.RECIPES_PAGE;
+import static edu.radyuk.foodblog.controller.command.PagePath.*;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
 import static edu.radyuk.foodblog.controller.command.RoutingType.ERROR;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
@@ -45,8 +44,12 @@ public class GoToRecipesPageCommand implements ClientCommand {
         List<RecipePostDto> recipePosts;
         int pagesCount;
         try {
-            recipePosts = service.retrieveRecipePostsForPage(page, searchValue);
             pagesCount = service.retrievePagesNumber(searchValue);
+            if (page > pagesCount) {
+                logger.log(Level.ERROR, "Invalid page number");
+                return new CommandResponse(ERROR_404_PAGE, ERROR);
+            }
+            recipePosts = service.retrieveRecipePostsForPage(page, searchValue);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             return new CommandResponse(ERROR_500_PAGE, ERROR);
