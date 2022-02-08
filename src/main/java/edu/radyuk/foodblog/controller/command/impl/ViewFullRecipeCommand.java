@@ -34,7 +34,7 @@ public class ViewFullRecipeCommand implements ClientCommand {
         IdValidator idValidator = ValidatorProvider.getInstance().getIdValidator();
         if (!idValidator.isIdPositive(postIdParameter)) {
             logger.log(Level.ERROR, "Invalid post id");
-            return new CommandResponse(ERROR_404_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_404_PAGE, RoutingType.ERROR);
         }
         long postId = Long.parseLong(postIdParameter);
         RecipePostService recipePostService = ServiceProvider.getInstance().getRecipePostService();
@@ -43,12 +43,12 @@ public class ViewFullRecipeCommand implements ClientCommand {
             optionalRecipePostDto = recipePostService.retrieveRecipePostById(postId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         if (optionalRecipePostDto.isEmpty()) {
             logger.log(Level.ERROR, "There is no post with id {}", postId);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_404_PAGE, RoutingType.ERROR);
         }
 
         CommentService commentService = ServiceProvider.getInstance().getCommentService();
@@ -57,7 +57,7 @@ public class ViewFullRecipeCommand implements ClientCommand {
             comments = commentService.retrievePostComments(postId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         request.setAttribute(RECIPE_POST, optionalRecipePostDto.get());

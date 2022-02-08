@@ -11,5 +11,9 @@ public enum RoutingType {
     /**
      * Redirect routing type.
      */
-    REDIRECT
+    REDIRECT,
+    /**
+     * Error routing type.
+     */
+    ERROR
 }

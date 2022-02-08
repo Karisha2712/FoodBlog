@@ -19,11 +19,11 @@ public final class PagePath {
     /**
      * The constant ERROR_404_PAGE.
      */
-    public static final String ERROR_404_PAGE = "/error_pages/error_404_page.jsp";
+    public static final String ERROR_404_PAGE = "WEB-INF/error_pages/error_404_page.jsp";
     /**
      * The constant ERROR_500_PAGE.
      */
-    public static final String ERROR_500_PAGE = "/error_pages/error_500_page.jsp";
+    public static final String ERROR_500_PAGE = "WEB-INF/error_pages/error_500_page.jsp";
     /**
      * The constant ABOUT_US_PAGE.
      */

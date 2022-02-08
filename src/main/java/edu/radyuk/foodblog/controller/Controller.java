@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
+import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_404_PAGE;
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 /**
  * The type Controller.
@@ -47,9 +49,13 @@ public class Controller extends HttpServlet {
                 res.sendRedirect(req.getContextPath() + resultPage);
                 break;
             }
+            case ERROR: {
+                res.sendError(resultPage.equals(ERROR_404_PAGE) ? SC_NOT_FOUND : SC_INTERNAL_SERVER_ERROR);
+                break;
+            }
             default: {
                 logger.log(Level.ERROR, "Invalid routing type");
-                res.sendRedirect(ERROR_500_PAGE);
+                res.sendError(SC_INTERNAL_SERVER_ERROR);
             }
         }
     }

@@ -26,6 +26,8 @@ body {
     height: 3.2vw;
     background-color: black;
     border-radius: 1.6vw;
+    text-align: center;
+    text-decoration: none;
     border: none;
 }
 

@@ -59,7 +59,7 @@ public class AddRecipePostCommand implements ClientCommand {
             service.addNewRecipePost(recipeCategory, recipeText, dishName, user.getEntityId(), pictureParts);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
         return new CommandResponse(PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
     }

@@ -34,7 +34,7 @@ public class GoToProfilePageCommand implements ClientCommand {
         IdValidator idValidator = ValidatorProvider.getInstance().getIdValidator();
         if (!idValidator.isIdPositive(userIdParameter)) {
             logger.log(Level.ERROR, "Invalid user id");
-            return new CommandResponse(ERROR_404_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_404_PAGE, RoutingType.ERROR);
         }
         long userId = Long.parseLong(userIdParameter);
         RecipePostService recipePostService = ServiceProvider.getInstance().getRecipePostService();
@@ -43,7 +43,7 @@ public class GoToProfilePageCommand implements ClientCommand {
             recipePosts = recipePostService.retrieveRecipePostsByUserId(userId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         if (recipePosts.isEmpty()) {
@@ -58,10 +58,15 @@ public class GoToProfilePageCommand implements ClientCommand {
             optionalBloggerInfo = bloggerInfoService.retrieveBloggerInfoByUserId(userId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.ERROR);
         }
 
-        optionalBloggerInfo.ifPresent(bloggerInfo -> request.setAttribute(BLOGGER_INFO, bloggerInfo));
+        if (optionalBloggerInfo.isEmpty()) {
+            logger.log(Level.ERROR, "Invalid user");
+            return new CommandResponse(ERROR_404_PAGE, RoutingType.ERROR);
+        }
+
+        request.setAttribute(BLOGGER_INFO, optionalBloggerInfo.get());
 
         return new CommandResponse(PagePath.PROFILE_PAGE, RoutingType.FORWARD);
     }

@@ -28,11 +28,11 @@ public class SignUpCommand implements ClientCommand {
 
     @Override
     public CommandResponse execute(HttpServletRequest request) {
-        boolean isAdmin = Boolean.parseBoolean(request.getParameter(RequestParameter.IS_ADMIN));
+        String userRoleValue = request.getParameter(RequestParameter.IS_ADMIN);
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
         String email = request.getParameter(RequestParameter.EMAIL);
-        UserRole userRole = isAdmin ? UserRole.ADMIN : UserRole.BLOGGER;
+        UserRole userRole = userRoleValue == null ? UserRole.BLOGGER : UserRole.ADMIN;
 
         UserService userService = ServiceProvider.getInstance().getUserService();
         HttpSession session = request.getSession();
@@ -68,11 +68,12 @@ public class SignUpCommand implements ClientCommand {
         }
 
         User user;
+        UserStatus userStatus = userRole == UserRole.BLOGGER ? UserStatus.ACTIVE : UserStatus.AWAITING_CONFIRMATION;
         try {
-            user = userService.signUp(login, password, email, userRole, UserStatus.AWAITING_CONFIRMATION);
+            user = userService.signUp(login, password, email, userRole, userStatus);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         if (user.getUserRole() != UserRole.ADMIN) {
@@ -81,7 +82,7 @@ public class SignUpCommand implements ClientCommand {
                 bloggerInfoService.addDefaultBloggerInfo(user.getEntityId());
             } catch (ServiceException e) {
                 logger.log(Level.ERROR, e);
-                return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+                return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.ERROR);
             }
         }
 

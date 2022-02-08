@@ -1,6 +1,5 @@
 let href = new URL(window.location.href);
 let command = href.searchParams.get("command");
-console.log(sessionStorage.getItem("locale"));
 
 let id;
 switch (command) {
@@ -26,5 +25,7 @@ switch (command) {
         id = "home";
 }
 
-document.getElementById(id).classList.add("active");
+if (document.getElementById(id) != null) {
+    document.getElementById(id).classList.add("active");
+}
 

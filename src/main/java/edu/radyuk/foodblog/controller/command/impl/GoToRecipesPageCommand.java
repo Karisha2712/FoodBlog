@@ -19,8 +19,8 @@ import static edu.radyuk.foodblog.controller.command.MessageKey.EMPTY_POSTS_TABL
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_500_PAGE;
 import static edu.radyuk.foodblog.controller.command.PagePath.RECIPES_PAGE;
 import static edu.radyuk.foodblog.controller.command.RequestParameter.*;
+import static edu.radyuk.foodblog.controller.command.RoutingType.ERROR;
 import static edu.radyuk.foodblog.controller.command.RoutingType.FORWARD;
-import static edu.radyuk.foodblog.controller.command.RoutingType.REDIRECT;
 
 /**
  * The type Go to recipes page command.
@@ -36,7 +36,7 @@ public class GoToRecipesPageCommand implements ClientCommand {
         PageNumberValidator validator = ValidatorProvider.getInstance().getPageNumberValidator();
         if (!validator.isPageNumberValid(pageParameter)) {
             logger.log(Level.ERROR, "Invalid page number format");
-            return new CommandResponse(ERROR_500_PAGE, REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, ERROR);
         }
         int page = Integer.parseInt(pageParameter);
 
@@ -49,7 +49,7 @@ public class GoToRecipesPageCommand implements ClientCommand {
             pagesCount = service.retrievePagesNumber(searchValue);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, ERROR);
         }
 
         if (recipePosts.isEmpty()) {

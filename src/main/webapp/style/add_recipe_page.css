@@ -21,13 +21,6 @@
     text-align: start;
 }
 
-.dropdown-menu {
-    position: relative;
-    width: 100%;
-    background-color: #fff;
-    height: auto;
-}
-
-.dropdown-item {
+option.dropdown-item {
     color: black;
 }

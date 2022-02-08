@@ -22,28 +22,27 @@
     <title><fmt:message key="page.name.error" bundle="${rb}"/></title>
 </head>
 
-<jsp:include page="../WEB-INF/pages/template/header.jsp"/>
+<jsp:include page="../pages/template/header.jsp"/>
 
 <body>
 <div class="page-content d-flex flex-column">
     <h1 class="page-main-title">
-        500
+        404
     </h1>
     <h1 class="page-title">
         <fmt:message key="error.main.message" bundle="${rb}"/>
     </h1>
     <div class="sub-text">
-        <fmt:message key="error500.sub.message" bundle="${rb}"/>
+        <fmt:message key="error404.sub.message" bundle="${rb}"/>
     </div>
     <form action="${pageContext.request.contextPath}/controller?command=go_to_home_page" method="post">
         <button class="btn-primary">
             <fmt:message key="error.button.backHome" bundle="${rb}"/>
         </button>
     </form>
-
 </div>
 </body>
 
-<jsp:include page="../WEB-INF/pages/template/footer.jsp"/>
+<jsp:include page="../pages/template/footer.jsp"/>
 
 </html>

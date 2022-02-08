@@ -38,12 +38,12 @@ public class CommentCommand implements ClientCommand {
 
         if (!idValidator.isIdPositive(userIdParameter)) {
             logger.log(Level.ERROR, "Invalid user id");
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         if (!idValidator.isIdPositive(postIdParameter)) {
             logger.log(Level.ERROR, "Invalid post id");
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         long userId = Long.parseLong(userIdParameter);
@@ -53,7 +53,7 @@ public class CommentCommand implements ClientCommand {
             mark = Double.parseDouble(markText);
         } catch (NumberFormatException e) {
             logger.log(Level.ERROR, "Invalid mark", e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         if (!commentTextValidator.isCommentValid(commentText)) {
@@ -69,7 +69,7 @@ public class CommentCommand implements ClientCommand {
             commentService.overwriteRecipePostRating(postId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         return new CommandResponse(VIEW_FULL_RECIPE_REDIRECT + postId, RoutingType.REDIRECT);

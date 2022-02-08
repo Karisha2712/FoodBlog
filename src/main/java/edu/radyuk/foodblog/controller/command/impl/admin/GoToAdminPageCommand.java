@@ -36,7 +36,7 @@ public class GoToAdminPageCommand implements ClientCommand {
             unapprovedUsers = service.retrieveUnapprovedUsers();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         User user = (User) request.getSession().getAttribute(USER);

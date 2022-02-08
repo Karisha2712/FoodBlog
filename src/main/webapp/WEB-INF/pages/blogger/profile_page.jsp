@@ -55,18 +55,17 @@
         </div>
     </c:if>
 
-    <form class="page-head d-flex flex-row"
-          action="${pageContext.request.contextPath}/controller?command=go_to_add_new_post" method="post">
+    <div class="page-head d-flex flex-row">
     <span class="page-title">
         <fmt:message key="recipes.title" bundle="${rb}"/>
     </span>
         <c:if test="${sessionScope.user != null
      && requestScope.blogger_info != null && requestScope.blogger_info.userLogin == sessionScope.user.login}">
-            <button class="btn-primary" type="submit">
+           <a class="btn-primary" href="${pageContext.request.contextPath}/controller?command=go_to_add_new_post">
                 <fmt:message key="profile.new.recipe" bundle="${rb}"/>
-            </button>
+            </a>
         </c:if>
-    </form>
+    </div>
 
     <div class="page-content d-flex flex-row flex-wrap">
         <c:if test="${requestScope.no_posts != null}">

@@ -87,5 +87,5 @@
             </ul>
         </div>
     </div>
-    <script src="script/header.js"></script>
+    <script src="${pageContext.request.contextPath}/script/header.js"></script>
 </header>

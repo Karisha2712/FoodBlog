@@ -33,7 +33,7 @@ public class DeleteCommentCommand implements ClientCommand {
         if (!idValidator.isIdPositive(commentIdParameter)
                 || !idValidator.isIdPositive(postIdParameter)) {
             logger.log(Level.ERROR, "Invalid id");
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
         long commentId = Long.parseLong(commentIdParameter);
         long postId = Long.parseLong(postIdParameter);
@@ -44,7 +44,7 @@ public class DeleteCommentCommand implements ClientCommand {
             service.overwriteRecipePostRating(postId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         return new CommandResponse(VIEW_FULL_RECIPE_REDIRECT + postId, RoutingType.REDIRECT);

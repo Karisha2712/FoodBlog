@@ -37,15 +37,14 @@
 
     <img class="home-page-pic" src="images/main_page_2.png" alt="...">
 
-    <form class="CTA-block d-flex flex-column"
-          action="${pageContext.request.contextPath}/controller?command=go_to_recipes_page&page=1" method="post">
+    <div class="CTA-block d-flex flex-column">
         <div class="main-text">
             <fmt:message key="home.main_text" bundle="${rb}"/>
         </div>
-        <button class="btn-primary" type="submit">
+        <a class="btn-primary" href="${pageContext.request.contextPath}/controller?command=go_to_recipes_page&page=1">
             <fmt:message key="home.button.view_recipes" bundle="${rb}"/>
-        </button>
-    </form>
+        </a>
+    </div>
 </div>
 </body>
 

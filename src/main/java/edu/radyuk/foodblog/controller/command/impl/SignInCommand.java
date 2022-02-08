@@ -38,7 +38,7 @@ public class SignInCommand implements ClientCommand {
             optionalUser = userService.retrieveUserIfExists(password, email);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         if (optionalUser.isEmpty()) {
@@ -64,7 +64,7 @@ public class SignInCommand implements ClientCommand {
                     userAvatar = bloggerInfoService.retrievePicturePathByUserId(user.getEntityId());
                 } catch (ServiceException e) {
                     logger.log(Level.ERROR, e);
-                    return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+                    return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.ERROR);
                 }
                 session.setAttribute(USER_AVATAR, userAvatar);
                 return new CommandResponse(PagePath.PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
@@ -74,7 +74,7 @@ public class SignInCommand implements ClientCommand {
             }
             default: {
                 logger.log(Level.ERROR, "User has invalid role");
-                return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.REDIRECT);
+                return new CommandResponse(PagePath.ERROR_500_PAGE, RoutingType.ERROR);
             }
         }
     }

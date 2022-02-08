@@ -6,7 +6,7 @@ import edu.radyuk.foodblog.controller.command.CommandResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import static edu.radyuk.foodblog.controller.command.PagePath.ERROR_404_PAGE;
-import static edu.radyuk.foodblog.controller.command.RoutingType.REDIRECT;
+import static edu.radyuk.foodblog.controller.command.RoutingType.ERROR;
 
 /**
  * The type Invalid command.
@@ -14,6 +14,6 @@ import static edu.radyuk.foodblog.controller.command.RoutingType.REDIRECT;
 public class InvalidCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {
-        return new CommandResponse(ERROR_404_PAGE, REDIRECT);
+        return new CommandResponse(ERROR_404_PAGE, ERROR);
     }
 }

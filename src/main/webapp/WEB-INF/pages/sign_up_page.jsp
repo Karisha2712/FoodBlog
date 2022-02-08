@@ -36,9 +36,9 @@
         </h1>
         <div class="sub-text">
             <fmt:message key="sign_up.text" bundle="${rb}"/>
-            <a class="sign-in-link" href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page"><b>
+            <a class="sign-in-link" href="${pageContext.request.contextPath}/controller?command=go_to_sign_in_page"><strong>
                 <fmt:message key="sign_in.button" bundle="${rb}"/>
-            </b></a>
+            </strong></a>
         </div>
         <c:if test="${sessionScope.sign_up_error != null}">
             <div id="" class="alert alert-danger d-flex flex-row" role="alert">
@@ -67,8 +67,8 @@
                    placeholder=
                    <fmt:message key="input.password.placeholder" bundle="${rb}"/> required>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="is-admin" name="is-admin">
-                <label class="form-check-label" for="is-admin">
+                <input class="form-check-input" type="checkbox" id="is_admin" name="is_admin">
+                <label class="form-check-label" for="is_admin">
                     <fmt:message key="sign_up.choose_role" bundle="${rb}"/>
                 </label>
             </div>

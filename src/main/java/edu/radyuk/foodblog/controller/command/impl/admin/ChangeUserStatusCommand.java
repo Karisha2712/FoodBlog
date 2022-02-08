@@ -31,7 +31,7 @@ public class ChangeUserStatusCommand implements ClientCommand {
         IdValidator idValidator = ValidatorProvider.getInstance().getIdValidator();
         if (!idValidator.isIdPositive(userIdParameter)) {
             logger.log(Level.ERROR, "Invalid user id");
-            return new CommandResponse(ERROR_404_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_404_PAGE, RoutingType.ERROR);
         }
         long userId = Long.parseLong(userIdParameter);
 
@@ -40,7 +40,7 @@ public class ChangeUserStatusCommand implements ClientCommand {
             userStatus = UserStatus.valueOf(userStatusParameter);
         } catch (IllegalArgumentException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         userStatus = userStatus == UserStatus.ACTIVE ? UserStatus.BLOCKED : UserStatus.ACTIVE;
@@ -50,7 +50,7 @@ public class ChangeUserStatusCommand implements ClientCommand {
             service.refreshUserStatus(userId, userStatus);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
 
         return new CommandResponse(ADMIN_PAGE_REDIRECT, RoutingType.REDIRECT);

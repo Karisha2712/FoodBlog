@@ -27,7 +27,7 @@ public class DeleteRecipePostCommand implements ClientCommand {
         IdValidator idValidator = ValidatorProvider.getInstance().getIdValidator();
         if (!idValidator.isIdPositive(postIdParameter)) {
             logger.log(Level.ERROR, "Invalid post id");
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
         long postId = Long.parseLong(postIdParameter);
 
@@ -36,7 +36,7 @@ public class DeleteRecipePostCommand implements ClientCommand {
             service.deletePostById(postId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            return new CommandResponse(ERROR_500_PAGE, RoutingType.REDIRECT);
+            return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
         HttpSession session = request.getSession();
         String previousQuery = session.getAttribute(SessionAttribute.PREVIOUS_QUERY).toString();
