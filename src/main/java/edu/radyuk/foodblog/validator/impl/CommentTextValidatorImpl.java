@@ -11,7 +11,8 @@ public class CommentTextValidatorImpl implements CommentTextValidator {
 
     @Override
     public boolean isCommentValid(String text) {
-        return !text.isBlank()
+        return text != null &&
+                !text.isBlank()
                 && text.length() >= MIN_COMMENT_LENGTH
                 && text.length() <= MAX_COMMENT_LENGTH;
     }

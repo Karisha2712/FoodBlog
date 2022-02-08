@@ -24,7 +24,7 @@ import java.util.Optional;
  * The type Blogger info service.
  */
 public class BloggerInfoServiceImpl implements BloggerInfoService {
-    private static final String DEFAULT_AVATAR = "default_avatar_big.png";
+    private static final String DEFAULT_AVATAR = "default_avatar.png";
     private static final int DEFAULT_AGE = 0;
     private static final String DEFAULT_CITY = "City";
     private static final String DEFAULT_COUNTRY = "Country";

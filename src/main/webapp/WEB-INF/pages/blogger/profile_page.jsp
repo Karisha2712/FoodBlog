@@ -61,7 +61,7 @@
     </span>
         <c:if test="${sessionScope.user != null
      && requestScope.blogger_info != null && requestScope.blogger_info.userLogin == sessionScope.user.login}">
-           <a class="btn-primary" href="${pageContext.request.contextPath}/controller?command=go_to_add_new_post">
+            <a class="btn-primary" href="${pageContext.request.contextPath}/controller?command=go_to_add_new_post">
                 <fmt:message key="profile.new.recipe" bundle="${rb}"/>
             </a>
         </c:if>

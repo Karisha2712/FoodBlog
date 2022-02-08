@@ -3,6 +3,7 @@ package edu.radyuk.foodblog.controller.command.impl.blogger;
 import edu.radyuk.foodblog.controller.command.ClientCommand;
 import edu.radyuk.foodblog.controller.command.CommandResponse;
 import edu.radyuk.foodblog.controller.command.RoutingType;
+import edu.radyuk.foodblog.controller.command.SessionAttribute;
 import edu.radyuk.foodblog.entity.BloggerInfo;
 import edu.radyuk.foodblog.entity.User;
 import edu.radyuk.foodblog.exception.ServiceException;
@@ -66,6 +67,7 @@ public class EditBloggerInfoCommand implements ClientCommand {
             return new CommandResponse(ERROR_500_PAGE, RoutingType.ERROR);
         }
         session.setAttribute(BLOGGER_INFO, bloggerInfo);
+        session.setAttribute(SessionAttribute.USER_AVATAR, bloggerInfo.getAvatarPath());
         return new CommandResponse(PROFILE_PAGE_REDIRECT + user.getEntityId(), RoutingType.REDIRECT);
     }
 }

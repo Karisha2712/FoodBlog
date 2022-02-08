@@ -12,7 +12,7 @@ import static edu.radyuk.foodblog.controller.command.SessionAttribute.USER;
 /**
  * The type Logout command.
  */
-public class LogoutCommand implements ClientCommand {
+public class LogoutCommandCommand implements ClientCommand {
     @Override
     public CommandResponse execute(HttpServletRequest request) {
         request.getSession().removeAttribute(USER);
