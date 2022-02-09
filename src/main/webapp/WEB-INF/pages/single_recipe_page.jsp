@@ -64,7 +64,8 @@
 
     <div class="comments-block d-flex flex-column">
 
-        <c:if test="${requestScope.comments.size() != 0 or sessionScope.user != null}">
+        <c:if test="${requestScope.comments.size() != 0 or (sessionScope.user != null
+        && sessionScope.user.userRole ne UserRole.ADMIN)}">
             <div class="sub-title">
                 <fmt:message key="recipe.title.comment" bundle="${rb}"/>
             </div>

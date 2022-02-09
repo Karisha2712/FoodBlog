@@ -45,10 +45,6 @@ public class GoToRecipesPageCommand implements ClientCommand {
         int pagesCount;
         try {
             pagesCount = service.retrievePagesNumber(searchValue);
-            if (page > pagesCount) {
-                logger.log(Level.ERROR, "Invalid page number");
-                return new CommandResponse(ERROR_404_PAGE, ERROR);
-            }
             recipePosts = service.retrieveRecipePostsForPage(page, searchValue);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
